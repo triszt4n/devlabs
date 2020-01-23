@@ -28,7 +28,7 @@
                 <li class="nav-item">
                     <a class="nav-link" href="./devs.html">Developers</a>
                 </li>
-                <li class="nav-item active">
+                <li class="nav-item">
                     <a class="nav-link" href="./top.html">Top 3</a>
                 </li>
                 <li class="nav-item">
@@ -42,58 +42,53 @@
         <!-- Title -->
         <div class="row">
             <div class="col-12 text-center">
-                <h2 style="margin: 1em 0 0.5em 0;">Top 3 Sprints</h2>
-                <p>Introducing the three successful and most rewarding sprints.</p>
+                <h2 style="margin: 1em 0 1em 0;">View Developer</h2>
             </div>
         </div>
-        <!-- Top3 -->
+
+        <!-- Details of developer -->
+        <div style="float: right;">
+            <a href="./devs.edit.html" class="btn btn-primary"><i class="icon ion-md-create"></i></a>
+            <a href="#" class="btn btn-danger"><i class="icon ion-md-trash"></i></a>
+        </div>
+        <div class="row">
+            <h2 class="col-12">
+                Mark Fischbach
+            </h2>
+            <div style="margin-left: 20px;" class="col-12">
+                <i class="icon ion-md-at"></i>&nbsp;mark@coolmail.com
+            </div>
+            <div style="margin-left: 20px;" class="col-12">
+                <i class="icon ion-md-contact"></i>&nbsp;markiplier
+            </div>
+        </div>
+
+        <div style="margin: 40px 0 10px 0;" class="row">
+            <div class="col-12">
+                Roles in Sprints:
+            </div>
+        </div>
+        <!-- Memberships -->
         <table class="table">
             <thead>
                 <tr>
-                    <th class="d-none d-lg-block text-center" scope="col">Rank</th>
+                    <th class="text-center" scope="col">Roles</th>
                     <th scope="col">Title</th>
-                    <th class="d-none d-lg-block text-center" scope="col">Devs</th>
-                    <th scope="col">Reward</th>
+                    <th class="d-none d-lg-block" scope="col">Role</th>
                     <th class="text-right" scope="col">Actions</th>
                 </tr>
             </thead>
             <tbody>
                 <tr>
-                    <th class="d-none d-lg-block text-center" scope="row">1</th>
-                    <td>Row with customer.</td>
-                    <td class="d-none d-lg-block text-center">3</td>
-                    <td>$2500.00</td>
-                    <td class="text-right">
-                        <a href="./home.open.html" class="btn btn-info">
-                            <i class="icon ion-md-open"></i>
-                        </a>
-                        <a href="#" class="btn btn-danger">
-                            <i class="icon ion-md-trash"></i>
-                        </a>
-                    </td>
-                </tr>
-                <tr>
-                    <th class="d-none d-lg-block text-center" scope="row">2</th>
+                    <th class="text-center" scope="row">1</th>
                     <td>Adding some bugs to fix later, baking pizza.</td>
-                    <td class="d-none d-lg-block text-center">2</td>
-                    <td>$500.00</td>
+                    <td class="d-none d-lg-block">Pouring too much flour</td>
                     <td class="text-right">
                         <a href="./home.open.html" class="btn btn-info">
                             <i class="icon ion-md-open"></i>
                         </a>
-                        <a href="#" class="btn btn-danger">
-                            <i class="icon ion-md-trash"></i>
-                        </a>
-                    </td>
-                </tr>
-                <tr>
-                    <th class="d-none d-lg-block text-center" scope="row">3</th>
-                    <td>asdf</td>
-                    <td class="d-none d-lg-block text-center">24</td>
-                    <td>$0.00</td>
-                    <td class="text-right">
-                        <a href="./home.open.html" class="btn btn-info">
-                            <i class="icon ion-md-open"></i>
+                        <a href="./role.edit.html" class="btn btn-primary">
+                            <i class="icon ion-md-create"></i>
                         </a>
                         <a href="#" class="btn btn-danger">
                             <i class="icon ion-md-trash"></i>
@@ -102,6 +97,15 @@
                 </tr>
             </tbody>
         </table>
+
+        <!-- Button on the bottom -->
+        <div class="row">
+            <div class="col-12">
+                <a href="javascript:history.back()" class="btn btn-danger">
+                    <i class="icon ion-md-arrow-back"></i>&nbsp;Back
+                </a>
+            </div>
+        </div>
     </div>
 
     <!-- jQuery, Popper.js, Bootstrap JS -->

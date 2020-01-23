@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>DevLabs - Developers</title>
+    <title>DevLabs</title>
     <link rel="shortcut icon" type="image/x-icon" href="./img/favicon.ico" />
     <!-- Bootstrap css, Ionicons -->
     <link href="./css/bootstrap.css" rel="stylesheet">
@@ -25,7 +25,7 @@
                 <li class="nav-item">
                     <a class="nav-link" href="./home.html">Sprints</a>
                 </li>
-                <li class="nav-item active">
+                <li class="nav-item">
                     <a class="nav-link" href="./devs.html">Developers</a>
                 </li>
                 <li class="nav-item">
@@ -39,39 +39,232 @@
     </nav>
 
     <div class="container">
-        <!-- Cards -->
-        <div class="card">
-            <!-- Details of sprint -->
+        <!-- Title -->
+        <div class="row">
+            <div class="col-12 text-center">
+                <h2 style="margin: 1em 0 0.5em 0;">Developers</h2>
+            </div>
+        </div>
+
+        <!-- Card1 -->
+        <div class="card" style="margin-bottom: 20px;">
+            <!-- Details of developer -->
             <div class="card-header">
-                <div style="float: right;">
-                    <a href="#" class="btn btn-primary"><i class="icon ion-md-create"></i></a>
-                    <a href="#" class="btn btn-danger"><i class="icon ion-md-trash"></i></a>
+                <div style="float: right; padding-left: 3px;">
+                    <a href="./devs.open.html" class="btn btn-info">
+                        <i class="icon ion-md-person"></i>
+                    </a>
+                    <a href="./devs.edit.html" class="btn btn-primary">
+                        <i class="icon ion-md-create"></i>
+                    </a>
+                    <a href="#" class="btn btn-danger">
+                        <i class="icon ion-md-trash"></i>
+                    </a>
                 </div>
-                Title: Adding some bugs to fix later, baking pizza.
+                <div class="card-title lead">
+                    Mark Fischbach
+                </div>
+                <div class="row">
+                    <div class="col-12 col-lg-4 text-left">
+                        <i class="icon ion-md-at"></i>&nbsp;mark@coolmail.com
+                    </div>
+                    <div class="col-12 col-lg-4 text-left">
+                        <i class="icon ion-md-contact"></i>&nbsp;markiplier
+                    </div>
+                </div>
             </div>
 
-            <!-- Members of sprint -->
+            <div class="card-body">                
+                <div class="row">
+                    <div class="col-12">
+                        Roles in Sprints:
+                    </div>
+                </div>
+            </div>
+            <!-- Memberships -->
             <table class="card-table table">
                 <thead>
                     <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">Name</th>
+                        <th class="text-center" scope="col">Roles</th>
+                        <th scope="col">Title</th>
                         <th class="d-none d-lg-block" scope="col">Role</th>
+                        <th class="text-right" scope="col">Actions</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
-                        <th scope="row">1</th>
-                        <td>Mark Fischbach</td>
+                        <th class="text-center" scope="row">1</th>
+                        <td>Adding some bugs to fix later, baking pizza.</td>
                         <td class="d-none d-lg-block">Pouring too much flour</td>
+                        <td class="text-right">
+                            <a href="./home.open.html" class="btn btn-info">
+                                <i class="icon ion-md-open"></i>
+                            </a>
+                            <a href="./role.edit.html" class="btn btn-primary">
+                                <i class="icon ion-md-create"></i>
+                            </a>
+                            <a href="#" class="btn btn-danger">
+                                <i class="icon ion-md-trash"></i>
+                            </a>
+                        </td>
                     </tr>
                     <tr>
-                        <th scope="row">2</th>
-                        <td>Felix Kjellberg</td>
-                        <td class="d-none d-lg-block">Having a breakdown</td>
+                        <th class="text-center" scope="row">2</th>
+                        <td>Row with customer.</td>
+                        <td class="d-none d-lg-block">Sprint leader</td>
+                        <td class="text-right">
+                            <a href="./home.open.html" class="btn btn-info">
+                                <i class="icon ion-md-open"></i>
+                            </a>
+                            <a href="./role.edit.html" class="btn btn-primary">
+                                <i class="icon ion-md-create"></i>
+                            </a>
+                            <a href="#" class="btn btn-danger">
+                                <i class="icon ion-md-trash"></i>
+                            </a>
+                        </td>
                     </tr>
                 </tbody>
             </table>
+        </div>
+
+        <!-- Card2 -->
+        <div class="card" style="margin-bottom: 20px;">
+            <!-- Details of developer -->
+            <div class="card-header">
+                <div style="float: right; padding-left: 3px;">
+                    <a href="./devs.open.html" class="btn btn-info">
+                        <i class="icon ion-md-person"></i>
+                    </a>
+                    <a href="./devs.edit.html" class="btn btn-primary">
+                        <i class="icon ion-md-create"></i>
+                    </a>
+                    <a href="#" class="btn btn-danger">
+                        <i class="icon ion-md-trash"></i>
+                    </a>
+                </div>
+                <div class="card-title lead">
+                    Trisztan Piller
+                </div>
+                <div class="row">
+                    <div class="col-12 col-lg-4 text-left">
+                        <i class="icon ion-md-at"></i>&nbsp;trisztanpiller@gmail.com
+                    </div>
+                    <div class="col-12 col-lg-4 text-left">
+                        <i class="icon ion-md-contact"></i>&nbsp;trisztan
+                    </div>
+                </div>
+            </div>
+
+            <div class="card-body">                
+                <div class="row">
+                    <div class="col-12">
+                        Roles in Sprints:
+                    </div>
+                </div>
+            </div>
+            <!-- Memberships -->
+            <table class="card-table table">
+                <thead>
+                    <tr>
+                        <th class="text-center" scope="col">Roles</th>
+                        <th scope="col">Title</th>
+                        <th class="d-none d-lg-block" scope="col">Role</th>
+                        <th class="text-right" scope="col">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th class="text-center" scope="row">1</th>
+                        <td>Row with customer.</td>
+                        <td class="d-none d-lg-block">On holiday</td>
+                        <td class="text-right">
+                            <a href="./home.open.html" class="btn btn-info">
+                                <i class="icon ion-md-open"></i>
+                            </a>
+                            <a href="./role.edit.html" class="btn btn-primary">
+                                <i class="icon ion-md-create"></i>
+                            </a>
+                            <a href="#" class="btn btn-danger">
+                                <i class="icon ion-md-trash"></i>
+                            </a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Card3 -->
+        <div class="card" style="margin-bottom: 20px;">
+            <!-- Details of developer -->
+            <div class="card-header">
+                <div style="float: right; padding-left: 3px;">
+                    <a href="./devs.open.html" class="btn btn-info">
+                        <i class="icon ion-md-person"></i>
+                    </a>
+                    <a href="./devs.edit.html" class="btn btn-primary">
+                        <i class="icon ion-md-create"></i>
+                    </a>
+                    <a href="#" class="btn btn-danger">
+                        <i class="icon ion-md-trash"></i>
+                    </a>
+                </div>
+                <div class="card-title lead">
+                    John Doe
+                </div>
+                <div class="row">
+                    <div class="col-12 col-lg-4 text-left">
+                        <i class="icon ion-md-at"></i>&nbsp;johndoe@anonymous.darknet
+                    </div>
+                    <div class="col-12 col-lg-4 text-left">
+                        <i class="icon ion-md-contact"></i>&nbsp;johndoe
+                    </div>
+                </div>
+            </div>
+
+            <div class="card-body">                
+                <div class="row">
+                    <div class="col-12">
+                        Roles in Sprints:
+                    </div>
+                </div>
+            </div>
+            <!-- Memberships -->
+            <table class="card-table table">
+                <thead>
+                    <tr>
+                        <th class="text-center" scope="col">Roles</th>
+                        <th scope="col">Title</th>
+                        <th class="d-none d-lg-block" scope="col">Role</th>
+                        <th class="text-right" scope="col">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th class="text-center" scope="row">1</th>
+                        <td>Row with customer.</td>
+                        <td class="d-none d-lg-block">Senior frontend</td>
+                        <td class="text-right">
+                            <a href="./home.open.html" class="btn btn-info">
+                                <i class="icon ion-md-open"></i>
+                            </a>
+                            <a href="./role.edit.html" class="btn btn-primary">
+                                <i class="icon ion-md-create"></i>
+                            </a>
+                            <a href="#" class="btn btn-danger">
+                                <i class="icon ion-md-trash"></i>
+                            </a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Create new developer button -->
+        <div class="row justify-content-center" style="margin: 1rem 0 1rem 0;">
+            <a href="./devs.create.html" class="col-6 text-center btn btn-primary btn-block">
+                <i class="icon ion-md-add"></i>&nbsp;New Dev
+            </a>
         </div>
     </div>
 
