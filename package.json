@@ -1,0 +1,22 @@
+{
+  "name": "devlabs",
+  "version": "1.0.0",
+  "description": "DevLabs: Sprinteket adminisztrálhatunk a felületen, vannak sprintjeink, fejlesztőink, és ezeket össze kell kapcsolni (3. entitás: feladat).",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/triszt4n/devlabs.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/triszt4n/devlabs/issues"
+  },
+  "homepage": "https://github.com/triszt4n/devlabs#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
