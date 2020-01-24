@@ -48,8 +48,13 @@
 
         <!-- Details of developer -->
         <div style="float: right;">
-            <a href="./devs.edit.html" class="btn btn-primary"><i class="icon ion-md-create"></i></a>
-            <a href="#" class="btn btn-danger"><i class="icon ion-md-trash"></i></a>
+            <!-- if not admin, or admin but the one logged in: -->
+            <a href="./devs.edit.html" class="btn btn-primary">
+                <i class="icon ion-md-create"></i>
+            </a>
+            <a href="#" class="btn btn-danger">
+                <i class="icon ion-md-trash"></i>
+            </a>
         </div>
         <div class="row">
             <h2 class="col-12">
@@ -61,6 +66,11 @@
             <div style="margin-left: 20px;" class="col-12">
                 <i class="icon ion-md-contact"></i>&nbsp;markiplier
             </div>
+            <!-- ONLY IF ADMIN:
+            <div style="margin-left: 20px;" class="col-12">
+                <i class="icon ion-md-alert"></i>&nbsp;DevLabs Admin
+            </div>
+            -->
         </div>
 
         <div style="margin: 40px 0 10px 0;" class="row">
