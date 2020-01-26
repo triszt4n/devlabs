@@ -42,14 +42,13 @@
         <!-- Title -->
         <div class="row">
             <div class="col-12 text-center">
-                <h2 style="margin: 1em 0 1em 0;">View Developer</h2>
+                <h2 style="margin: 1em 0 1em 0;">Manage Sprint</h2>
             </div>
         </div>
 
-        <!-- Details of developer -->
-        <div style="float: right;">
-            <!-- if not admin, or admin but the one logged in: -->
-            <a href="./devs.edit.html" class="btn btn-primary">
+        <!-- Details of sprint -->
+        <div style="float: right; padding-left: 3px;">
+            <a href="./sprints.edit.html" class="btn btn-primary">
                 <i class="icon ion-md-create"></i>
             </a>
             <a href="#" class="btn btn-danger">
@@ -57,45 +56,62 @@
             </a>
         </div>
         <div class="row">
-            <h2 class="col-12">
-                Mark Fischbach
-            </h2>
+            <h4 class="col-12">
+                Adding some bugs to fix later, baking pizza.
+            </h4>
             <div style="margin-left: 20px;" class="col-12">
-                <i class="icon ion-md-at"></i>&nbsp;mark@coolmail.com
+                <i class="icon ion-md-cash"></i>&nbsp;$500.00
             </div>
             <div style="margin-left: 20px;" class="col-12">
-                <i class="icon ion-md-contact"></i>&nbsp;markiplier
+                <i class="icon ion-md-calendar"></i>&nbsp;2019.12.29 -
             </div>
-            <!-- ONLY IF ADMIN:
             <div style="margin-left: 20px;" class="col-12">
-                <i class="icon ion-md-alert"></i>&nbsp;DevLabs Admin
+                <i class="icon ion-md-pulse"></i>&nbsp;Ongoing
+                <!-- <i class="icon ion-md-checkmark"></i>&nbsp;Successful -->
+                <!-- <i class="icon ion-md-close"></i>&nbsp;Failed -->
             </div>
-            -->
         </div>
 
         <div style="margin: 40px 0 10px 0;" class="row">
             <div class="col-12">
-                Roles in Sprints:
+                Roles in Sprint:
             </div>
         </div>
-        <!-- Memberships -->
+
+        <!-- Members of the sprint -->
         <table class="table">
             <thead>
                 <tr>
-                    <th class="text-center" scope="col">Roles</th>
-                    <th scope="col">Title</th>
-                    <th class="d-none d-lg-block" scope="col">Role</th>
+                    <th class="d-none d-lg-block text-center" scope="col">#</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Role</th>
                     <th class="text-right" scope="col">Actions</th>
                 </tr>
             </thead>
             <tbody>
                 <tr>
-                    <th class="text-center" scope="row">1</th>
-                    <td>Adding some bugs to fix later, baking pizza.</td>
-                    <td class="d-none d-lg-block">Pouring too much flour</td>
+                    <th class="d-none d-lg-block text-center" scope="row">1</th>
+                    <td>Mark Fischbach</td>
+                    <td>Pouring too much flour</td>
                     <td class="text-right">
-                        <a href="./sprints.open.html" class="btn btn-info">
-                            <i class="icon ion-md-open"></i>
+                        <a href="./devs.manage.html" class="btn btn-info">
+                            <i class="icon ion-md-person"></i>
+                        </a>
+                        <a href="./role.edit.html" class="btn btn-primary">
+                            <i class="icon ion-md-create"></i>
+                        </a>
+                        <a href="#" class="btn btn-danger">
+                            <i class="icon ion-md-trash"></i>
+                        </a>
+                    </td>
+                </tr>
+                <tr>
+                    <th class="d-none d-lg-block text-center" scope="row">2</th>
+                    <td>Felix Kjellberg</td>
+                    <td>Having a breakdown</td>
+                    <td class="text-right">
+                        <a href="./devs.manage.html" class="btn btn-info">
+                            <i class="icon ion-md-person"></i>
                         </a>
                         <a href="./role.edit.html" class="btn btn-primary">
                             <i class="icon ion-md-create"></i>
@@ -110,9 +126,14 @@
 
         <!-- Button on the bottom -->
         <div class="row">
-            <div class="col-12">
+            <div class="col-6 col-lg-3">
                 <a href="javascript:history.back()" class="btn btn-danger">
                     <i class="icon ion-md-arrow-back"></i>&nbsp;Back
+                </a>
+            </div>
+            <div class="col-6">
+                <a href="./role.create.html" class="btn btn-primary btn-block">
+                    <i class="icon ion-md-person-add"></i>&nbsp;New Role
                 </a>
             </div>
         </div>

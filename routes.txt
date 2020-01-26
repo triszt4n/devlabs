@@ -1,0 +1,27 @@
+GET /   index.html
+POST /  {username, pw} --> redirect /sprints
+
+GET /register   register.html
+POST /register  {username, pw, name?, email?}
+
+GET /sprints    sprints.html
+GET /sprints/:sprintID  sprints.manage.html
+GET /sprints/edit/:sprintID sprints.edit.html
+POST /sprints/edit/:sprintID    {sprintID, title, reward, startDT, isEnded, endDT, isSuccess}
+GET /sprints/new    sprints.create.html
+POST /sprints/new   {title, reward, startDT, isEnded, endDT, isSuccess}
+DELETE /sprints/delete/:sprintID    {sprintID}
+
+GET /role/edit/:roleID  role.edit.html
+POST /role/edit/:roleID   {roleID, role}
+GET /role/new   role.create.html
+POST /role/new  {sprintID, devID, role}
+DELETE /role/delete/:roleID {roleID}
+
+GET /devs   devs.html
+GET /devs/:devID    dev.manage.html
+GET /devs/edit/:devID   devs.edit.html
+POST /devs/edit/:devID    {devID, name, email, username}
+GET /devs/new   devs.create.html
+POST /devs/new  {name, email, username}
+DELETE /devs/delete/:devID  {devID}
