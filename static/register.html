@@ -30,7 +30,11 @@
                     <small><br />
                         (Or get Administrator rights if Username already in database.)
                     </small>
-                </p>                
+                </p>
+                <!-- if err == "missing_input" -->
+                <!-- <p style="color: red;">Please fill in all the queries.</p> -->
+                <!-- if err == "already_exists" -->
+                <!-- <p style="color: red;">Username already exists.</p> -->
             </div>
         </div>
 
@@ -45,19 +49,9 @@
                         <label for="password">Password:</label>
                         <input type="password" class="form-control" id="password">
                     </div>
-                    <p>
-                        Optional data:
-                        <small><br />
-                            (Will get overwritten if Username already in database.)
-                        </small>
-                    </p>
-                    <div class="form-group">
-                        <label for="name">Name:</label>
-                        <input type="text" class="form-control" id="name">
-                    </div>
-                    <div class="form-group">
-                        <label for="email">Email address:</label>
-                        <input type="text" class="form-control" id="email">
+                    <div class="small" style="text-align: justify; margin-bottom: 20px;">
+                        Hint: You can set your name and e-mail address after logging in
+                        by clicking on Profile in the navigation bar.
                     </div>
                     <a href="./" style="float: right;" class="btn btn-success">
                         <i class="icon ion-md-checkmark"></i>&nbsp;Register
@@ -67,7 +61,7 @@
                     </a>
                 </form>
             </div>
-        </div>        
+        </div>
     </div>
 
     <!-- jQuery, Popper.js, Bootstrap JS, enddate script -->
