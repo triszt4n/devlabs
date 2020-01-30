@@ -20,42 +20,23 @@
     <div class="container">
         <div class="row">
             <div class="col-12 text-center">
-                <h2 style="margin: 1em 0 0.5em 0;">Welcome</h2>
-                <img src="./img/devlabs-icon.svg" style="height: 6em; margin: 0 0 1em 0;">              
-                <p>Enter your username and password</p>
-                <!-- if err == "no_match" -->
-                <p style="color: red;">Username and password didn't match.</p>
+                <h4 style="margin: 1em 0 0.5em 0;">Enter new password</h4>
+                <small>You asked for a new password before. Enter your custom new password.</small>
+                <!-- if err == "missing_input" -->
+                <p style="color: red;">Please fill in the query.</p>
             </div>
         </div>
         <div class="row justify-content-center">
             <div class="col-lg-6">
                 <form>
                     <div class="form-group">
-                        <label for="user">Username:</label>
-                        <input class="form-control" type="text" id="user">
-                    </div>
-                    <div class="form-group">
                         <label for="pass">Password:</label>
                         <input class="form-control" type="password" id="pass">
                     </div>
+                    <a class="btn btn-success" style="float: right;" href="./sprints.html">
+                        <i class="icon ion-md-checkmark"></i>&nbsp;Save
+                    </a>
                 </form>
-            </div>
-        </div>
-        <div class="row justify-content-center">
-            <div class="col-lg-6">
-                <a class="btn btn-primary" href="./newpw.html">
-                    <i class="icon ion-md-log-in"></i>&nbsp;Log in
-                </a>
-                <a class="btn btn-primary" style="float: right;" href="./register.html">
-                    <i class="icon ion-md-person-add"></i>&nbsp;Register
-                </a>
-            </div>
-        </div>
-        <div class="row justify-content-center" style="margin-top: 10px;">
-            <div class="col-lg-6">
-                <a class="btn btn-info" href="./forgotten.html">
-                    <i class="icon ion-md-help"></i>&nbsp;Forgot password
-                </a>
             </div>
         </div>
     </div>
