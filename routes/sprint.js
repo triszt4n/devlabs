@@ -12,4 +12,39 @@ const deleteRoleMW = require("../middlewares/role/deleteRole");
 
 module.exports = function(app) {
 
+    var objectRepository = {
+    };
+
+    app.get('/sprints',
+        authMW(objectRepository),
+        getSprintListMW(objectRepository),
+        renderMW(objectRepository, "sprints")
+    );
+
+    app.get('/sprints/:sprintID',
+        authMW(objectRepository),
+        getSprintMW(objectRepository),
+        getSprintRoleListMW(objectRepository),
+        renderMW(objectRepository, 'sprint_manage')
+    );
+
+    app.use('/sprints/edit/:sprintID',
+        authMW(objectRepository),
+        getSprintMW(objectRepository),
+        editSprintMW(objectRepository),
+        renderMW(objectRepository, 'sprint_edit')
+    );
+
+    app.use('/sprints/new',
+        authMW(objectRepository),
+        saveSprintMW(objectRepository),
+        renderMW(objectRepository, 'sprint_new')
+    );
+
+    app.use('/sprints/delete/:sprintID',
+        authMW(objectRepository),
+        getSprintRoleListMW(objectRepository),
+        deleteSprintMW(objectRepository)
+    );
+
 };

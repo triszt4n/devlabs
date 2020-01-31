@@ -9,8 +9,38 @@ const editDevMW = require("../middlewares/dev/editDev");
 const getDevByIDMW = require("../middlewares/dev/getDevByID");
 
 const getDevRoleListMW = require("../middlewares/role/getDevRoleList");
-const deleteRoleMW = require("../middlewares/role/deleteRole");
 
 module.exports = function(app) {
+
+    var objectRepository = {
+    };
+
+    app.get('/profile',
+        authMW(objectRepository),
+        retrieveIDMW(objectRepository),
+        getDevByIDMW(objectRepository),
+        getDevRoleListMW(objectRepository),
+        renderMW(objectRepository, 'profile')
+    );
+
+    app.use('/profile/edit',
+        authMW(objectRepository),
+        retrieveIDMW(objectRepository),
+        getDevByIDMW(objectRepository),
+        editDevMW(objectRepository),
+        renderMW(objectRepository, 'dev_edit')
+    );
+
+    app.use('/profile/delete/',
+        authMW(objectRepository),
+        retrieveIDMW(objectRepository),
+        getDevRoleListMW(objectRepository),
+        deleteDevMW(objectRepository),
+        function(req, res, next) {
+            req.session.destroy();
+            res.redirect("/");            
+            res.end();
+        }
+    );
 
 };

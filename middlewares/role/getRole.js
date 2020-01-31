@@ -1,5 +1,5 @@
 /**
- * DESCRIPTION
+ * get role from db with roleID
  */
 module.exports = function (objectRepository) {
 

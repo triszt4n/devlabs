@@ -9,7 +9,7 @@ app.use(bodyParser.json());
 app.use(express.static('static'));
 
 app.use(session({
-    secret: 'keyboard cat',
+    secret: 'rip keyboard cat',
     resave: false,
     saveUninitialized: true,
 }));
@@ -18,6 +18,7 @@ require("./routes/dev")(app);
 require("./routes/main")(app);
 require("./routes/role")(app);
 require("./routes/sprint")(app);
+require("./routes/profile")(app);
 
 //TRY HERE:
 /*app.use('/shoes', function (req, res, next) {

@@ -3,18 +3,15 @@ const checkRegisterMW = require("../middlewares/auth/checkRegister");
 const registerMW = require("../middlewares/auth/register");
 const logoutMW = require("../middlewares/auth/logout");
 const checkNewPwMW = require("../middlewares/auth/checkNewPw");
+const forgottenPwMW = require("../middlewares/auth/forgottenPw");
 
 const renderMW = require("../middlewares/misc/render");
 
 const getDevByUsernameMW = require("../middlewares/dev/getDevByUsername");
-var DevModel = {}, SprintModel = {}, RoleModel = {};
 
 module.exports = function(app) {
 
     var objectRepository = {
-        DevModel: DevModel,
-        SprintModel: SprintModel,
-        RoleModel: RoleModel
     };
 
     app.use('/',
@@ -32,10 +29,13 @@ module.exports = function(app) {
     );
 
     app.get('/logout',
-        logoutMW(objectRepository),
-        function(req, res, next) {
-            res.redirect('/');
-        }
+        logoutMW(objectRepository)
+    );
+
+    app.use('/forgotten',
+        getDevByUsernameMW(objectRepository),
+        forgottenPwMW(objectRepository),
+        renderMW(objectRepository, 'forgotten')
     );
 
 };

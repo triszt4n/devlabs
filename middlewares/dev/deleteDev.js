@@ -1,7 +1,6 @@
 /**
  * delete developer with devID from db
- * call deleteRoleMW(roleID) for every roleID in res.locals.roleIDList
- * available objects so far: roleIDList
+ * call deleteRoleMW(roleID) for every roleID in res.locals.roleList
  */
 module.exports = function (objectRepository) {
 

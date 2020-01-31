@@ -1,5 +1,5 @@
 /**
- * DESCRIPTION
+ * get sprint's attributes from db with sprintID
  */
 module.exports = function (objectRepository) {
 
