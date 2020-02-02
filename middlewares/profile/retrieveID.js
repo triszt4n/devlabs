@@ -1,6 +1,6 @@
 /**
- * retrieve devID from session's devID, save into req.query
- * for further use.
+ * retrieve devID from session's devID, save into req.query for further use.
+ * quite silly middleware. 
  */
 module.exports = function (objectRepository) {
 

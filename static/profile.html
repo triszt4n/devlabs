@@ -51,30 +51,36 @@
 
         <!-- Details of developer -->
         <div style="float: right;">
-            <a href="./devs.edit.html" class="btn btn-primary">
-                <i class="icon ion-md-create"></i>
-            </a>
+            <button class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+                <i class="icon ion-md-options"></i>
+            </button>
+            <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+                <a href="./devs.edit.html" class="dropdown-item">
+                    <i class="icon ion-md-create"></i>&nbsp;Edit
+                </a>
+                <a href="./profile.pw.html" class="dropdown-item">
+                    <i class="icon ion-md-key"></i>&nbsp;Change password
+                </a>
+                <div class="dropdown-divider"></div>
+                <a href="./" class="dropdown-item">
+                    <i class="icon ion-md-log-out"></i>&nbsp;Give up Admin rights
+                </a>
+                <div class="dropdown-divider"></div>
+                <a href="./" class="dropdown-item">
+                    <i class="icon ion-md-trash"></i>&nbsp;Delete me
+                </a>
+            </div>
         </div>
         <div class="row">
             <div class="col-12">
-                <!-- if there's no name, show username as name -->
-                <span class="h2">
-                    Trisztan Piller
-                </span>    
-                <!-- if there's no name, show this as well -->
-                <!-- <small>
-                    (name not set)
-                </small> -->
-            </div>
-            <div style="margin-left: 20px; margin-top: 10px;" class="col-12">
-                <i class="icon ion-md-at"></i>&nbsp;trisztanpiller@gmail.com
-            </div>
-            <div style="margin-left: 20px;" class="col-12">
-                <i class="icon ion-md-contact"></i>&nbsp;trisztan
-            </div>
-            <div style="margin-left: 20px;" class="col-12">
-                <i class="icon ion-md-alert"></i>&nbsp;DevLabs Admin
-            </div>
+                <h2>Trisztan Piller</h2>
+                <div style="margin-left: 20px; margin-top: 10px;">
+                    <i class="icon ion-md-at"></i>&nbsp;trisztanpiller@gmail.com
+                </div>
+                <div style="margin-left: 20px; margin-bottom: 10px;">
+                    <i class="icon ion-md-alert"></i>&nbsp;DevLabs Admin
+                </div>
+            </div>          
         </div>
 
         <div style="margin: 40px 0 10px 0;" class="row">
@@ -111,9 +117,6 @@
             <div class="col-12">
                 <a href="javascript:history.back()" class="btn btn-danger">
                     <i class="icon ion-md-arrow-back"></i>&nbsp;Back
-                </a>
-                <a href="./" class="btn btn-danger" style="float: right;">
-                    <i class="icon ion-md-trash"></i>&nbsp;Delete me
                 </a>
             </div>
         </div>

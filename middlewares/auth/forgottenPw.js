@@ -1,8 +1,8 @@
 /**
- * if res.locals.devID is undefined or the developer is not admin
+ * if res.locals.devID is undefined or the developer found is not admin
  * then don't do anything, else:
- * change password in db to an 8-character random key, and set the
- * freshwp attribute to true.
+ * change password in db to an 8-character random key, "send it to them"
+ * and set the freshwp attribute to true.
  */
 module.exports = function (objectRepository) {
 

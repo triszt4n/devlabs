@@ -1,6 +1,6 @@
 /**
- * registers the developer as admin and with the attributes from body,
- * then redirect to /
+ * change isAdmin attribute of developer to false, and delete password,
+ * end session and redirect to /
  */
 module.exports = function (objectRepository) {
 

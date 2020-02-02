@@ -33,7 +33,7 @@ module.exports = function(app) {
         renderMW(objectRepository, 'role_new')
     );
 
-    app.use('/role/delete/:roleID',
+    app.use('/role/delete/:sprintID/:roleID',
         authMW(objectRepository),
         deleteRoleMW(objectRepository)
     );

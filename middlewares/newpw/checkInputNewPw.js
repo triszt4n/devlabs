@@ -1,6 +1,6 @@
 /**
  * checks, if the body passes acceptable new password
- * if error: redirect to /newpw and set locals.err = "missing_input"
+ * if error: redirect to /newpw?err=missing_input
  */
 module.exports = function (objectRepository) {
 

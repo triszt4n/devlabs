@@ -46,7 +46,7 @@
         <div class="row justify-content-center">
             <div class="col-lg-6">
                 <h4 style="margin: 1em 0 0.5em 0;">
-                    Edit Developer
+                    New Developer
                 </h4>
             </div>
         </div>
@@ -59,26 +59,30 @@
                         Please fill in all queries.
                     </p> -->
                     <div class="form-group">
-                        <label for="email">Email address:</label>
-                        <input type="text" class="form-control" id="email">
-                        <!-- if message == collision -->
+                        <label for="oldpass">Current password:</label>
+                        <input type="password" class="form-control" id="oldpass">
+                        <!-- if message == wrong_pw -->
                         <!-- <p style="color: red;">
-                            Account already exists.
-                        </p> -->
-                        <!-- if message == wrong_format -->
-                        <!-- <p style="color: red;">
-                            Not an email address.
+                            Wrong password!
                         </p> -->
                     </div>
                     <div class="form-group">
-                        <label for="name">Name:</label>
-                        <input type="text" class="form-control" id="name">
+                        <label for="newpass1">New password:</label>
+                        <input type="password" class="form-control" id="newpass1">
+                    </div>
+                    <div class="form-group">
+                        <label for="newpass2">Confirm new password:</label>
+                        <input type="password" class="form-control" id="newpass2">
+                        <!-- if message == no_match -->
+                        <!-- <p style="color: red;">
+                            Couldn't confirm new password.
+                        </p> -->
                     </div>
         
-                    <a href="./devs.html" style="float: right;" class="btn btn-success">
+                    <a href="./profile.html" style="float: right;" class="btn btn-success">
                         <i class="icon ion-md-checkmark"></i>&nbsp;Save
                     </a>
-                    <a href="javascript:history.back()" class="btn btn-danger">
+                    <a href="./profile.html" class="btn btn-danger">
                         <i class="icon ion-md-arrow-back"></i>&nbsp;Back
                     </a>
                 </form>

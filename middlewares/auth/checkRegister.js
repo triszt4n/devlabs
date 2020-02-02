@@ -1,8 +1,8 @@
 /**
  * checks, if registering is possible, errors may be:
- * missing input: redirect to /register and set locals.err = "missing_input"
- * found username in db: redirect to /register and set locals.err = "already_exists"
- * (note to myself: lowercasify username)
+ * missing input: redirect to /register?err=missing_data
+ * found email in db: redirect to /register?err=collision
+ * wrong email format: redirect to /register?err=wrong_format
  */
 module.exports = function (objectRepository) {
 

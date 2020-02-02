@@ -1,8 +1,9 @@
 /**
  * if developer is logged in according to session then next(), else:
- * check if username and pw from body is matching, if not: redirect / 
- * and set locals.err = "no_match", else: session.devID = res.devID and next()
- * (note to myself: lowercasify username)
+ * check if email and pw from body is matching and has admin rights, 
+ * if not matching: redirect /?err=no_match,
+ * if not admin: redirect /?err=not_registered
+ * else: session.devID = res.devID and next()
  */
 module.exports = function (objectRepository) {
 

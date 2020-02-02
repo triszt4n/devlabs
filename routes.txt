@@ -1,151 +1,124 @@
-middleware/misc
-    renderMW
-middleware/profile
-    checkDevLoggedInMW
-    retrieveIDMW
-middleware/auth
-    authMW
-    checkLoginMW
-    forgottenPwMW
-    checkRegisterMW
-    checkNewPwMW
-    registerMW
-    logoutMW
-middleware/sprint
-    getSprintListMW
-    getSprintMW
-    editSprintMW
-    saveSprintMW
-    deleteSprintMW
-middleware/dev
-    getDevListMW
-    getDevByIDMW
-    getDevByUsernameMW
-    editDevMW
-    saveDevMW
-    deleteDevMW
-middleware/role
-    getSprintRoleListMW
-    getDevRoleListMW
-    getRoleMW
-    editRoleMW
-    saveRoleMW
-    deleteRoleMW
-
-Number of mw's: 27
-
 GET, POST /
-    getDevByUsernameMW
-    checkLoginMW (
-        ha már session szerint be van jelentkezve, next(), else:
-        hiba esetén, redirect / és locals.err = "no_match", else:
-        session.devID = res.devID, next()
-    )
-    checkNewPwMW (
-        redirect /sprints
-                 /newpw és locals.err = ""
-    )
-    renderMW(index.html)
+    getDevByEmailMW
+    checkLoginMW
+    checkNewPwMW
+    renderMW(/)
 GET, POST /register
-    getDevByUsernameMW
-    checkRegisterMW (
-        redirect /register és locals.err = "missing_input"
-                 /register és locals.err = "already_exists"
-    )
-    registerMW (itt redirect / locals.err = "")
-    renderMW(register.html)
+    getDevByEmailMW
+    checkRegisterMW
+    registerMW
+    renderMW(register)
 GET /logout
-    logoutMW (redirect / és locals.err = "")
+    logoutMW
 GET, POST /forgotten
-    getDevByUsernameMW (ha van post)
-    forgottenPwMW (ha van post)
-    renderMW(forgotten.html)
+    getDevByEmailMW
+    forgottenPwMW
+    renderMW(forgotten)
 
 GET, POST /newpw
     authMW
-    checkInputNewPwMW (hiba: redirect /newpw és locals.err = "missing_input")
-    saveNewPwMW (redirect /sprints)
-    renderMW(newpw.html)
+    checkInputNewPwMW
+    saveNewPwMW
+    renderMW(newpw)
 
 GET /sprints
     authMW
-    getSprintListMW (benne getSprintRoleListMW(sprintID) minden sprintre)
-    renderMW(sprints.html)
+    getSprintListMW
+    renderMW(sprints)
 GET /sprints/:sprintID
     authMW
-    getSprintMW(sprintID)
-    getSprintRoleListMW(sprintID)
-    renderMW(sprints.manage.html)
-GET, POST /sprints/edit/:sprintID {sprintID, title, reward, startDT, isEnded, endDT, isSuccess}
+    getSprintMW
+    getSprintRoleListMW
+    renderMW(sprint_manage)
+GET, POST /sprints/edit/:sprintID
     authMW
-    getSprintMW(sprintID)
-    editSprintMW (vagy redirect, vagy next, ha nincs bemenet)
-    renderMW(sprints.edit.html)    
-GET, POST /sprints/new {title, reward, startDT, isEnded, endDT, isSuccess}
+    getSprintMW
+    editSprintMW
+    renderMW(sprint_edit)    
+GET, POST /sprints/new
     authMW
-    saveSprintMW (vagy redirect, vagy next, ha nincs bemenet)
-    renderMW(sprints.create.html)
-DELETE /sprints/delete/:sprintID
+    saveSprintMW
+    renderMW(sprint_create)
+POST /sprints/delete/:sprintID
     authMW
-    getSprintRoleListMW(sprintID)
-    deleteSprintMW(sprintID) (benne deleteRoleMW(roleID) minden role-ra)
+    getSprintRoleListMW
+    deleteSprintMW (benne deleteRoleMW minden role-ra)
 
-GET, POST /role/edit/:roleID {role}
+GET /top
     authMW
-    getRoleMW(roleID)
-    editRoleMW (vagy redirect, vagy next, ha nincs bemenet)
-    getSprintMW(sprintID)
-    getDevByIDMW(devID)
-    renderMW(role.edit.html)
-GET, POST /role/new/:sprintID {sprintID, devID, role}
+    getTopMW
+    renderMW(top.html)
+
+GET, POST /role/edit/:roleID
     authMW
-    saveRoleMW (vagy redirect, vagy next, ha nincs bemenet)
-    getSprintMW(sprintID)
+    getRoleMW
+    editRoleMW
+    getSprintMW
+    getDevByIDMW
+    renderMW(role_edit)
+GET, POST /role/new/:sprintID
+    authMW
+    saveRoleMW
+    getSprintMW
     getDevListMW
-    renderMW(role.create.html)
-DELETE /role/delete/:roleID
+    renderMW(role_create)
+POST /role/delete/:sprintID/:roleID
     authMW
-    deleteRoleMW(roleID)
+    deleteRoleMW
 
 GET /devs
     authMW
-    getDevListMW (benne getDevRoleListMW(devID) minden developerre)
-    renderMW(devs.html)
+    getDevListMW (benne getDevRoleListMW minden developerre)
+    renderMW(devs)
 GET /devs/:devID
     authMW
-    checkDevLoggedInMW(devID) (redirect /profile, ha a bejelentkezett dev manage-elésére ment)
-    getDevByIDMW(devID)
-    getDevRoleListMW(devID)
-    renderMW(dev.manage.html)
-GET, POST /devs/edit/:devID {devID, name, email, username}
+    checkDevLoggedInMW
+    getDevByIDMW
+    getDevRoleListMW
+    renderMW(dev_manage)
+GET, POST /devs/edit/:devID
     authMW
-    getDevByIDMW(devID)
-    editDevMW (vagy redirect, vagy next, ha nincs bemenet)
-    renderMW(devs.edit.html)
-GET, POST /devs/new {name, email, username}
+    getDevByIDMW
+    editDevMW (ne legyen redirect a végén, csak next)
+    manuálisan: redirect("/devs/:devID") (persze, csak ha POST)
+    renderMW(dev_edit)
+GET, POST /devs/new
     authMW
-    saveDevMW (vagy redirect, vagy next, ha nincs bemenet)
-    renderMW(devs.create.html)
-DELETE /devs/delete/:devID
+    saveDevMW
+    renderMW(devs_create)
+POST /devs/delete/:devID
     authMW
-    getDevRoleListMW(devID)
-    deleteDevMW(devID) (benne deleteRoleMW(roleID) minden role-ra)
+    getDevRoleListMW
+    deleteDevMW (benne deleteRoleMW minden role-ra, ne legyen redirect a végén, csak next)
+    manuálisan: redirect("/devs")
 
 GET /profile
     authMW
     retrieveIDMW
-    getDevByIDMW(devID)
-    getDevRoleListMW(devID)
-    renderMW(profile.html)
-GET, POST /profile/edit/ {devID, name, email, username}
+    getDevByIDMW
+    getDevRoleListMW
+    renderMW(profile)
+GET, POST /profile/edit/
     authMW
     retrieveIDMW
-    getDevByIDMW(devID)
-    editDevMW (vagy redirect, vagy next, ha nincs bemenet)
-    renderMW(devs.edit.html)
-DELETE /profile/delete/
+    getDevByIDMW
+    editDevMW (ne legyen redirect a végén, csak next)
+    manuálisan: redirect("/profile") (persze, csak ha POST)
+    renderMW(dev_edit)
+GET, POST /profile/pw
     authMW
     retrieveIDMW
-    getDevRoleListMW(devID)
-    deleteDevMW(devID) (benne deleteRoleMW(roleID) minden role-ra)
-    manuálisan: redirect("/") és locals.err = "" és session.destroy()
+    checkChangePwMW
+    changePwMW
+    renderMW(profile_pw)
+POST /profile/deregister/
+    authMW
+    retrieveIDMW
+    deregisterDevMW
+    logoutMW
+POST /profile/delete/
+    authMW
+    retrieveIDMW
+    getDevRoleListMW
+    deleteDevMW (benne deleteRoleMW minden role-ra, ne legyen redirect a végén, csak next)
+    logoutMW

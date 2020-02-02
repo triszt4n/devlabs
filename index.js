@@ -30,6 +30,7 @@ require("./routes/profile")(app);
 
 //The 404 Route:
 app.get('*', function(req, res){
+    console.log("req:"+req.path.split('/')[1]);
     res.status(404).redirect("/notfound.html");
 });
 

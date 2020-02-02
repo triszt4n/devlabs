@@ -1,7 +1,9 @@
 /**
  * create a new sprint with given data from body
  * if no data passed from body, move on.
- * if no title included, call it Untitled etc.
+ * (note: if title not specified, Untitled is default,
+ * if reward not specified, 0.00 is default,
+ * dates may be NULL)
  */
 module.exports = function (objectRepository) {
 

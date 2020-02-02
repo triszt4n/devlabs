@@ -34,6 +34,14 @@ module.exports = function(app) {
         authMW(objectRepository),
         getDevByIDMW(objectRepository),
         editDevMW(objectRepository),
+        (req, res, next) => {
+            if (typeof req.body.email !== 'undefined') {
+                res.redirect('/devs/'+req.params.devID);
+            }
+            else {
+                next();
+            }
+        },
         renderMW(objectRepository, 'dev_edit')
     );
 
@@ -46,7 +54,10 @@ module.exports = function(app) {
     app.use('/devs/delete/:devID',
         authMW(objectRepository),
         getDevRoleListMW(objectRepository),
-        deleteDevMW(objectRepository)
+        deleteDevMW(objectRepository),
+        (req, res, next) => {
+            res.redirect('/devs');
+        }
     );
 
 };

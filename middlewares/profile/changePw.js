@@ -1,6 +1,6 @@
 /**
- * registers the developer as admin and with the attributes from body,
- * then redirect to /
+ * changes developer's password to the body.newpass1,
+ * then redirect to /profile
  */
 module.exports = function (objectRepository) {
 

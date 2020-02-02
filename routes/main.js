@@ -6,8 +6,10 @@ const checkNewPwMW = require("../middlewares/auth/checkNewPw");
 const forgottenPwMW = require("../middlewares/auth/forgottenPw");
 
 const renderMW = require("../middlewares/misc/render");
+const authMW = require("../middlewares/auth/auth");
+const getTopMW = require("../middlewares/sprint/getTop");
 
-const getDevByUsernameMW = require("../middlewares/dev/getDevByUsername");
+const getDevByEmailMW = require("../middlewares/dev/getDevByEmail");
 
 module.exports = function(app) {
 
@@ -15,14 +17,14 @@ module.exports = function(app) {
     };
 
     app.use('/',
-        getDevByUsernameMW(objectRepository),
+        getDevByEmailMW(objectRepository),
         checkLoginMW(objectRepository),
         checkNewPwMW(objectRepository),
         renderMW(objectRepository, 'login')
     );
 
     app.use('/register',
-        getDevByUsernameMW(objectRepository),
+        getDevByEmailMW(objectRepository),
         checkRegisterMW(objectRepository),
         registerMW(objectRepository),
         renderMW(objectRepository, 'register')
@@ -33,9 +35,15 @@ module.exports = function(app) {
     );
 
     app.use('/forgotten',
-        getDevByUsernameMW(objectRepository),
+        getDevByEmailMW(objectRepository),
         forgottenPwMW(objectRepository),
         renderMW(objectRepository, 'forgotten')
+    );
+
+    app.get('/top',
+        authMW(objectRepository),
+        getTopMW(objectRepository),
+        renderMW(objectRepository, 'top')
     );
 
 };

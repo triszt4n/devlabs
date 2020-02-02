@@ -28,30 +28,38 @@
                 <p>
                     You will be added as a Developer with Administrator rights.
                     <small><br />
-                        (Or get Administrator rights if Username already in database.)
+                        (Or get Administrator rights if Email address already in database.)
                     </small>
                 </p>
-                <!-- if err == "missing_input" -->
-                <!-- <p style="color: red;">Please fill in all the queries.</p> -->
-                <!-- if err == "already_exists" -->
-                <!-- <p style="color: red;">Username already exists.</p> -->
             </div>
         </div>
 
         <div class="row justify-content-center">
             <div class="col-lg-6">
                 <form>
+                    <!-- if message == missing_data -->
+                    <!-- <p style="color: red;">
+                        Please fill in all queries.
+                    </p> -->
                     <div class="form-group">
-                        <label for="username">Username:</label>
-                        <input type="text" class="form-control" id="username">
-                    </div>
+                        <label for="email">Email address:</label>
+                        <input type="text" class="form-control" id="email">
+                        <!-- if message == collision -->
+                        <!-- <p style="color: red;">
+                            Account already exists.
+                        </p> -->
+                        <!-- if message == wrong_format -->
+                        <!-- <p style="color: red;">
+                            Not an email address.
+                        </p> -->
+                    </div>                    
                     <div class="form-group">
                         <label for="password">Password:</label>
                         <input type="password" class="form-control" id="password">
                     </div>
-                    <div class="small" style="text-align: justify; margin-bottom: 20px;">
-                        Hint: You can set your name and e-mail address after logging in
-                        by clicking on Profile in the navigation bar.
+                    <div class="form-group">
+                        <label for="username">Name:</label>
+                        <input type="text" class="form-control" id="username">
                     </div>
                     <a href="./" style="float: right;" class="btn btn-success">
                         <i class="icon ion-md-checkmark"></i>&nbsp;Register
