@@ -1,5 +1,5 @@
 /**
- * checks the login credentials, redirects with errormessage if there's problem.
+ * delete developer with devID from db
  */
 module.exports = function (objectRepository) {
 

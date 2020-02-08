@@ -1,124 +1,97 @@
 GET, POST /
-    getDevByEmailMW
+    checkSessionMW
+    getDeveloperByEmailMW
     checkLoginMW
-    checkNewPwMW
-    renderMW(/)
+    loginMW
+    renderMW(login)
 GET, POST /register
-    getDevByEmailMW
+    checkSessionMW
+    getDeveloperByEmailMW
     checkRegisterMW
     registerMW
     renderMW(register)
 GET /logout
     logoutMW
 GET, POST /forgotten
-    getDevByEmailMW
-    forgottenPwMW
+    checkSessionMW
+    getDeveloperByEmailMW
+    resetPwMW
     renderMW(forgotten)
 
-GET, POST /newpw
+GET /projects[/all]
     authMW
-    checkInputNewPwMW
-    saveNewPwMW
-    renderMW(newpw)
+    getProjectListMW (if /all passed, return every project, otherwise, only Dashboard)
+    renderMW(projects)
+GET /projects/:projID
+    authMW
+    getProjectMW
+    getDeveloperListMW
+    getMemberListMW
+    getMilestoneListMW
+    checkIfLeaderMW
+    renderMW(project_inspect)
+GET, POST /projects/edit/:projID
+    authMW
+    editProjectMW (can res.end)
+    getProjectMW
+    renderMW(project_editnew)
+GET, POST /projects/new
+    authMW
+    newProjectMW (can res.end)
+    renderMW(project_editnew)
+POST /projects/delete/:projID
+    authMW
+    deleteProjectMW
+POST /projects/invite/:projID
+    authMW
+    inviteMemberMW (posting devID)
+POST /projects/kick/:memshipID
+    authMW
+    kickMemberMW
+GET /projects/top
+    authMW
+    getTopProjectListMW
+    renderMW(top)
 
-GET /sprints
+GET, POST /milestone/edit/:msID
     authMW
-    getSprintListMW
-    renderMW(sprints)
-GET /sprints/:sprintID
+    editMilestoneMW (can res.end)
+    getMilestoneMW
+    renderMW(milestone_editnew)
+GET, POST /milestone/new/:projID
     authMW
-    getSprintMW
-    getSprintRoleListMW
-    renderMW(sprint_manage)
-GET, POST /sprints/edit/:sprintID
+    newMilestoneMW (can res.end)
+    getProjectMW
+    renderMW(milestone_editnew)
+POST /milestone/delete/:msID
     authMW
-    getSprintMW
-    editSprintMW
-    renderMW(sprint_edit)    
-GET, POST /sprints/new
-    authMW
-    saveSprintMW
-    renderMW(sprint_create)
-POST /sprints/delete/:sprintID
-    authMW
-    getSprintRoleListMW
-    deleteSprintMW (benne deleteRoleMW minden role-ra)
+    deleteMilestoneMW
 
-GET /top
+GET /developers
     authMW
-    getTopMW
-    renderMW(top.html)
+    getDeveloperListMW
+    renderMW(developers)
+GET /developers/:devID
+    authMW
+    getDeveloperByIDMW
+    getMembershipListMW
+    renderMW(developer_inspect)
 
-GET, POST /role/edit/:roleID
+GET, POST /account/edit
     authMW
-    getRoleMW
-    editRoleMW
-    getSprintMW
-    getDevByIDMW
-    renderMW(role_edit)
-GET, POST /role/new/:sprintID
+    editAccountMW (can res.end)
+    getDeveloperByIDMW
+    renderMW(account_edit)
+POST /account/delete
     authMW
-    saveRoleMW
-    getSprintMW
-    getDevListMW
-    renderMW(role_create)
-POST /role/delete/:sprintID/:roleID
-    authMW
-    deleteRoleMW
-
-GET /devs
-    authMW
-    getDevListMW (benne getDevRoleListMW minden developerre)
-    renderMW(devs)
-GET /devs/:devID
-    authMW
-    checkDevLoggedInMW
-    getDevByIDMW
-    getDevRoleListMW
-    renderMW(dev_manage)
-GET, POST /devs/edit/:devID
-    authMW
-    getDevByIDMW
-    editDevMW (ne legyen redirect a végén, csak next)
-    manuálisan: redirect("/devs/:devID") (persze, csak ha POST)
-    renderMW(dev_edit)
-GET, POST /devs/new
-    authMW
-    saveDevMW
-    renderMW(devs_create)
-POST /devs/delete/:devID
-    authMW
-    getDevRoleListMW
-    deleteDevMW (benne deleteRoleMW minden role-ra, ne legyen redirect a végén, csak next)
-    manuálisan: redirect("/devs")
-
-GET /profile
-    authMW
-    retrieveIDMW
-    getDevByIDMW
-    getDevRoleListMW
-    renderMW(profile)
-GET, POST /profile/edit/
-    authMW
-    retrieveIDMW
-    getDevByIDMW
-    editDevMW (ne legyen redirect a végén, csak next)
-    manuálisan: redirect("/profile") (persze, csak ha POST)
-    renderMW(dev_edit)
-GET, POST /profile/pw
-    authMW
-    retrieveIDMW
-    checkChangePwMW
-    changePwMW
-    renderMW(profile_pw)
-POST /profile/deregister/
-    authMW
-    retrieveIDMW
-    deregisterDevMW
+    deleteAccountMW
+    removeRelationsMW
     logoutMW
-POST /profile/delete/
+GET /account
     authMW
-    retrieveIDMW
-    getDevRoleListMW
-    deleteDevMW (benne deleteRoleMW minden role-ra, ne legyen redirect a végén, csak next)
-    logoutMW
+    redirectWithUserIDMW (/developers/:userID)
+GET, POST /account/pw
+    authMW
+    checkPasswordsMW
+    changePasswordMW
+    renderMW(account_pw)

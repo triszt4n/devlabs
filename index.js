@@ -1,11 +1,17 @@
 const express = require('express');
-const session = require('express-session');
-const bodyParser = require('body-parser');
-
 const app = express();
 
-app.use(bodyParser.urlencoded());
+const session = require('express-session');
+const bodyParser = require('body-parser');
+const timeout = require('express-timeout-handler');
+
+app.set('view engine', 'ejs');
+
 app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({
+    extended: true
+}));
+
 app.use(express.static('static'));
 
 app.use(session({
@@ -14,27 +20,36 @@ app.use(session({
     saveUninitialized: true,
 }));
 
-require("./routes/dev")(app);
-require("./routes/main")(app);
-require("./routes/role")(app);
-require("./routes/sprint")(app);
-require("./routes/profile")(app);
+var options = {
+    timeout: 10000,
+    onTimeout: function(req, res) {
+        res.locals.message = "Service unavailable. Please retry.";
+        res.status(503).render("error", res.locals);
+    }
+};
+app.use(timeout.handler(options));
 
-//TRY HERE:
-/*app.use('/shoes', function (req, res, next) {
-    console.log('Order: ' + req.query.order);
-    console.log('Shoe type: ' + req.query.shoe.type);
-    res.end();
-});*/
-//---------
+//Importing all application routes:
+require("./routes/account")(app);
+require("./routes/developers")(app);
+require("./routes/milestone")(app);
+require("./routes/projects")(app);
+require("./routes/default")(app);
+
+//Error handling:
+app.use((err, req, res, next) => {
+    console.error(err.stack);
+    res.locals.message = "Internal server error. Seek contact for help.";
+    res.status(500).render("error", res.locals);
+});
 
 //The 404 Route:
-app.get('*', function(req, res){
-    console.log("req:"+req.path.split('/')[1]);
-    res.status(404).redirect("/notfound.html");
+app.get('*', (req, res) => {
+    res.locals.message = "You lost there, buddy? Page not found.";
+    res.status(404).render("error", res.locals);
 });
 
 const port = 3000;
-app.listen(port, function () {
+app.listen(port, () => {
     console.log(`Listening on: http://localhost:${port}/`);
 });

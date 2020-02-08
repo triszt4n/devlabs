@@ -1,5 +1,6 @@
 /**
- * checks the login credentials, redirects with errormessage if there's problem.
+ * edit task's attribute with given data from body
+ * if no data passed from body, move on.
  */
 module.exports = function (objectRepository) {
 

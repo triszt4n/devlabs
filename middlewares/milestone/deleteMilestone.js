@@ -1,5 +1,6 @@
 /**
- * checks the login credentials, redirects with errormessage if there's problem.
+ * delete task with taskID from db
+ * redirect to /sprints/:sprintID in the end
  */
 module.exports = function (objectRepository) {
 

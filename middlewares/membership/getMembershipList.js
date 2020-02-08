@@ -1,5 +1,5 @@
 /**
- * checks the login credentials, redirects with errormessage if there's problem.
+ * DESC
  */
 module.exports = function (objectRepository) {
 

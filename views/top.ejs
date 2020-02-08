@@ -1,0 +1,54 @@
+<%- include('includes/header') %>
+<%- include('includes/navbar', {needFull: true}) %>
+
+<div class="container">
+    <div class="row">
+        <div class="col-12 text-center" style="margin: 0 0 2em 0;">
+            <h2 style="margin: 1em 0 0.5em 0;">Top 3 Projects</h2>
+            <p>Introducing the three most rewarding successful Projects.</p>
+        </div>
+    </div>
+
+    <table class="table">
+        <tbody>
+            <% trophyColors = ["#ffd700", "c0c0c0", "#cd7f32"]; %>
+            <% tops.forEach( function(project, index) { %>
+            <tr>
+                <td>
+                    <div class="row p-1">
+                        <div class="col-11 col-lg-5">
+                            <ion-icon name="trophy" style="color: <%= trophyColors[index] %>;"></ion-icon>&nbsp;
+                            <%= project.title %>
+                        </div>
+                        <div class="col-1 col-lg-1 order-lg-last text-right">
+                            <a href="/projects/<%= project.projID %>" class="btn btn-info btn-sm">
+                                <ion-icon name="search" style="font-size: 12px;"></ion-icon>
+                            </a>
+                        </div>
+                        <div class="col-6 col-lg-3">
+                            <ion-icon name="shield-checkmark-outline"></ion-icon>&nbsp;<%= project.leaderName %>
+                        </div>
+                        <div class="col-6 col-lg-3 text-lg-right">
+                            <ion-icon name="cash-outline"></ion-icon>&nbsp;<%= project.reward %>
+                        </div>
+                    </div>
+                    <div class="row p-3">
+                        <div class="col-12 col-lg-5">
+                            <ion-icon name="calendar-outline"></ion-icon>&nbsp;<%= project.startDate %> -
+                            <%= project.endDate %>
+                        </div>
+                        <div class="col-6 col-lg-3">
+                            <ion-icon name="timer-outline"></ion-icon>&nbsp;<%= project.runTime %>
+                        </div>
+                        <div class="col-6 col-lg-3 text-lg-right">
+                            #<ion-icon name="people-outline"></ion-icon>:&nbsp;<%= project.numOfDevs %>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <% }); %>
+        </tbody>
+    </table>
+</div>
+
+<%- include('includes/footer') %>

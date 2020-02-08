@@ -1,0 +1,90 @@
+<%- include('includes/header') %>
+<%- include('includes/navbar', {needFull: true}) %>
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-12 text-center">
+            <h2 style="margin: 1em 0 0.5em 0;">
+                <div>
+                    <%= showAll?"":"Your " %>Projects
+                </div>
+                <a href="/projects<%= showAll?"":"/all" %>" class="btn btn-link">
+                    <%= showAll?"Back to my Projects":"View all" %>
+                </a>
+            </h2>
+        </div>
+    </div>
+    <% projects.forEach( function(project) { %>
+    <div class="card" style="margin-bottom: 20px;">
+        <div class="card-header">
+            <div style="float: right; padding-left: 3px;">
+                <a href="/projects/<%= project.projID %>" class="btn btn-info">
+                    <ion-icon name="search-outline"></ion-icon>
+                </a>
+            </div>
+            <div class="card-title">
+                <%= project.title %>
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-12 col-lg-6">
+                    <ion-icon name="shield-checkmark-outline"></ion-icon>&nbsp;Leader: <%= project.leaderName %>
+                </div>
+                <div class="col-12 col-lg-6 text-lg-right">
+                    <ion-icon name="calendar-outline"></ion-icon>&nbsp;<%= project.startDate %> -
+                    <%= project.endDate %>
+                </div>
+                <div class="col-6">
+                    <ion-icon name="people-outline"></ion-icon>&nbsp;Members: <%= project.numOfDevs %>
+                </div>
+                <div class="col-12 col-lg-6 text-lg-right">
+                    <ion-icon name="cash-outline"></ion-icon>&nbsp;$<%= project.reward %>
+                </div>
+                <div class="col-12 text-right">
+                    <% if (project.endDate === "") { %>
+                    <ion-icon name="pulse-outline"></ion-icon>&nbsp;Ongoing
+                    <% } else { %>
+                    <% if (project.isSuccess) { %>
+                    <ion-icon name="checkmark-outline"></ion-icon>&nbsp;Successful
+                    <% } else { %>
+                    <ion-icon name="close-outline"></ion-icon>&nbsp;Failed
+                    <% }} %>
+                </div>
+                <div class="col-12" style="margin-top: 10px;">
+                    Milestones:
+                </div>
+            </div>
+        </div>
+        <table class="card-table table">
+            <thead>
+                <tr>
+                    <th class="d-none d-lg-block text-center" scope="col">#</th>
+                    <th scope="col">Description</th>
+                    <th class="d-none d-lg-block" scope="col">Added by</th>
+                    <th class="text-right" scope="col">Added on</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% project.milestones.forEach( function(milestone, index) { %>
+                <tr>
+                    <th class="d-none d-lg-block text-center" scope="row"><%= project.milestones.length - index %>
+                    </th>
+                    <td><%= milestone.desc %></td>
+                    <td class="d-none d-lg-block"><%= milestone.addedBy %></td>
+                    <td class="text-right"><%= milestone.addedDate %></td>
+                </tr>
+                <% }); %>
+            </tbody>
+        </table>
+    </div>
+    <% }); %>
+
+    <div class="row justify-content-center" style="margin: 1rem 0 1rem 0;">
+        <a href="/projects/new" class="col-6 text-center btn btn-primary btn-block">
+            <ion-icon name="add-outline"></ion-icon>&nbsp;Start Project
+        </a>
+    </div>
+</div>
+
+<%- include('includes/footer') %>

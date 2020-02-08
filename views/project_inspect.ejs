@@ -1,0 +1,191 @@
+<%- include('includes/header') %>
+<%- include('includes/navbar', {needFull: true}) %>
+
+<div class="container">
+    <div class="row">
+        <div class="col-12 text-center">
+            <h2 style="margin: 1em 0 1em 0;">View project</h2>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-12">
+            <h4>
+                <% if (leaderID === userID) { %>
+                <div style="float: right; padding-left: 3px;">
+                    <button class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+                        <ion-icon name="options-outline"></ion-icon>
+                    </button>
+                    <div class="dropdown-menu dropdown-menu-right">
+                        <a href="/projects/edit/<%= projID %>" class="dropdown-item">
+                            <ion-icon name="create-outline"></ion-icon>&nbsp;Edit Project
+                        </a>
+                        <a href="/projects/delete/<%= projID %>" class="dropdown-item">
+                            <ion-icon name="trash-outline"></ion-icon>&nbsp;Delete Project
+                        </a>
+                    </div>
+                </div>
+                <% } %>
+                <%= title %>
+            </h4>
+        </div>
+    </div>
+
+    <div class="row ml-lg-3">
+        <div class="col-12 col-lg-4">
+            <div>
+                <ion-icon name="shield-checkmark-outline"></ion-icon>&nbsp;Leader: <%= leaderName %>
+            </div>
+            <% if (startDate !== "" || endDate !== "") { %>
+            <div>
+                <ion-icon name="calendar-outline"></ion-icon>&nbsp;<%= startDate %> - <%= endDate %>
+            </div>
+            <% } %>
+            <div>
+                <ion-icon name="people-outline"></ion-icon>&nbsp;Members: <%= numOfDevs %>
+            </div>
+            <div>
+                <ion-icon name="cash-outline"></ion-icon>&nbsp;$<%= reward %>
+            </div>
+            <div>
+                <% if (endDate === "") { %>
+                <ion-icon name="pulse-outline"></ion-icon>&nbsp;Ongoing
+                <% } else { %>
+                <% if (isSuccess) { %>
+                <ion-icon name="checkmark-outline"></ion-icon>&nbsp;Successful
+                <% } else { %>
+                <ion-icon name="close-outline"></ion-icon>&nbsp;Failed
+                <% }} %>
+            </div>
+        </div>
+        <div class="col-12 col-lg-8">
+            <u>Description:</u><br />
+            <%= desc %>
+        </div>
+    </div>
+    
+
+    <div class="card" style="margin: 20px 0 0 0">
+        <div class="card-header">
+            <div class="card-title">
+                Members
+            </div>
+        </div>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th class="d-none d-lg-block text-center" scope="col">#</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Email address</th>
+                    <th class="text-right" scope="col">Invited on</th>
+                    <th class="text-right" scope="col"> </th>
+                </tr>
+            </thead>
+            <tbody>
+                <% members.forEach( function(member, index) { %>
+                <tr>
+                    <th class="d-none d-lg-block text-center" scope="row"><%= index + 1 %></th>
+                    <td><%= member.name %></td>
+                    <td><%= member.email %></td>
+                    <td class="text-right"><%= member.joinDate %></td>
+                    <td class="text-right">
+                        <% if (leaderID === userID) { %>
+                        <button class="btn btn-primary dropdown-toggle" data-toggle="dropdown"></button>
+                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="btnGroupDrop1">
+                            <a href="/developers/<%= member.devID %>" class="dropdown-item">
+                                <ion-icon name="person-outline"></ion-icon>&nbsp;View Developer
+                            </a>
+                            <div class="dropdown-divider"></div>
+                            <a href="/projects/kick/<%= member.memshipID %>" class="dropdown-item">
+                                <ion-icon name="person-remove-outline"></ion-icon>&nbsp;Kick Member
+                            </a>
+                        </div>
+                        <% } %>
+                    </td>
+                </tr>
+                <% }); %>
+            </tbody>
+        </table>
+        <% if (leaderID === userID) { %>
+        <div class="card-body">
+            <form class="row" method="POST" action="/projects/invite/<%= projID %>">
+                <div class="form-group col-10">
+                    <label for="email" class="col-form-label-sm">Invite Developer to contribute</label>
+                    <select class="form-control" id="email" name="devID">
+                        <% nonMembers.forEach( function(dev) { %>
+                        <option value="<%= dev.devID %>"><%= dev.email %></option>
+                        <% }); %>
+                    </select>
+                </div>
+                <div class="col-2" style="margin-top: 36px;">
+                    <button type="submit" class="btn btn-primary btn-block">
+                        <ion-icon name="person-add-outline"></ion-icon>&nbsp;Invite
+                    </button>
+                </div>
+            </form>
+        </div>
+        <% } %>
+    </div>
+
+
+
+    <div class="card" style="margin: 20px 0 0 0">
+        <div class="card-header">
+            <div class="card-title">
+                Milestones
+            </div>
+        </div>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th class="d-none d-lg-block text-center" scope="col">#</th>
+                    <th scope="col">Description</th>
+                    <th scope="col">Added by</th>
+                    <th class="text-right" scope="col">Added on</th>
+                    <th class="text-right" scope="col"> </th>
+                </tr>
+            </thead>
+            <tbody>
+                <% milestones.forEach( function(milestone, index) { %>
+                <tr>
+                    <th class="d-none d-lg-block text-center" scope="row"><%= milestones.length - index %></th>
+                    <td><%= milestone.desc %></td>
+                    <td><%= milestone.addedBy %></td>
+                    <td class="text-right"><%= milestone.addedDate %></td>
+                    <td class="text-right">
+                        <% if (milestones.devID === userID || leaderID === userID) { %>
+                        <button class="btn btn-primary dropdown-toggle" data-toggle="dropdown"></button>
+                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="btnGroupDrop1">
+                            <a href="/milestone/edit/<%= milestone.msID %>" class="dropdown-item">
+                                <ion-icon name="create-outline"></ion-icon>&nbsp;Edit Milestone
+                            </a>
+                            <div class="dropdown-divider"></div>
+                            <a href="/milestone/delete/<%= milestone.msID %>" class="dropdown-item">
+                                <ion-icon name="trash-outline"></ion-icon>&nbsp;Delete Milestone
+                            </a>
+                        </div>
+                        <% } %>
+                    </td>
+                </tr>
+                <% }); %>
+            </tbody>
+        </table>
+        <% if (leaderID === userID) { %>
+        <div class="card-body">
+            <div class="row justify-content-center">
+                <div class="col-10">
+                    <a href="/milestone/new/<%= projID %>" class="btn btn-primary btn-block">
+                        <ion-icon name="golf-outline"></ion-icon>&nbsp;New Milestone
+                    </a>
+                </div>
+            </div>
+        </div>
+        <% } %>
+    </div>
+
+    <a href="javascript:history.back()" class="btn btn-danger" style="margin-top: 20px;">
+        <ion-icon name="arrow-back-outline"></ion-icon>&nbsp;Back
+    </a>
+</div>
+
+<%- include('includes/footer') %>

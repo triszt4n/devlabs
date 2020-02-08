@@ -1,5 +1,6 @@
 /**
- * checks the login credentials, redirects with errormessage if there's problem.
+ * changes developer's password to the body.newpass1,
+ * then redirect to /
  */
 module.exports = function (objectRepository) {
 

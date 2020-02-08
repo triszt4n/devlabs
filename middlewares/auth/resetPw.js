@@ -1,5 +1,6 @@
 /**
- * checks the login credentials, redirects with errormessage if there's problem.
+ * change user's password in db to an 8-character random key, "send it to them".
+ * finally redirect to /
  */
 module.exports = function (objectRepository) {
 

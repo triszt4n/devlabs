@@ -1,6 +1,6 @@
 /**
- * registers the developer as admin and with the attributes from body,
- * then redirect to /
+ * completes registration of developer/user with data passed by posting,
+ * and redirect to /
  */
 module.exports = function (objectRepository) {
 

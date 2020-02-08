@@ -1,0 +1,31 @@
+<%- include('includes/header') %>
+<%- include('includes/navbar', {needFull: true}) %>
+
+<div class="container">
+    <div class="row" style="margin: 1em 0;">
+        <div class="col-12 col-lg-3 h4">
+            <%= (typeof desc !== 'undefined') ? "Edit Milestone" : "New Milestone" %>
+        </div>
+        <div class="col-12 col-lg-9 text-right lead">
+            <%= title %>
+        </div>
+    </div>
+
+    <form method="POST">
+        <div class="form-group">
+            <label for="desc">Description</label>
+            <input type="text" class="form-control" id="desc" value="<%= (typeof desc !== 'undefined') ? desc : '' %>"
+                name="desc">
+        </div>
+        <div style="margin-top: 30px;">
+            <button type="submit" style="float: right;" class="btn btn-success">
+                <ion-icon name="checkmark-outline"></ion-icon>&nbsp;Save
+            </button>
+            <a href="javascript:history.back()" class="btn btn-danger">
+                <ion-icon name="arrow-back-outline"></ion-icon>&nbsp;Back
+            </a>
+        </div>
+    </form>
+</div>
+
+<%- include('includes/footer') %>

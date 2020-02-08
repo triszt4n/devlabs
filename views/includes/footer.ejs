@@ -1,0 +1,31 @@
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+
+<% if (typeof needDateTime !== 'undefined' && needDateTime) { %>
+    <script src="/js/jquery.datetimepicker.full.min.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            $('#isEnded').change(function () {
+                if ($(this).is(":checked")) {
+                    $('#endDate').removeAttr('disabled');
+                    $('#isSuccess').removeAttr('disabled');
+                    $('#enddateOption').show();
+                } else {
+                    $('#endDate').attr('disabled', 'disabled');
+                    $('#isSuccess').attr('disabled', 'disabled');
+                    $('#enddateOption').hide();
+                }
+            });
+        });
+        $(function () {
+            $('#startDate').datetimepicker();
+        });
+        $(function () {
+            $('#endDate').datetimepicker();
+        });
+    </script>
+<% } %>
+
+</body>
+</html>

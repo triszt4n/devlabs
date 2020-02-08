@@ -1,0 +1,52 @@
+<nav class="navbar navbar-expand-md navbar-dark bg-dark">
+    <div class="container">
+        <a class="navbar-brand" href="/">
+            <img src="/img/devlabs-icon.svg" height="22" class="d-inline-block" alt="">&nbsp;DevLabs
+        </a>
+        <% if (needFull) { %>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor02"
+            aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarColor02">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item <%= (typeof activeBase !== 'undefined' && activeBase === 'projects')?'active':'' %>">
+                    <a class="nav-link" href="/projects">Dashboard</a>
+                </li>
+                <li class="nav-item <%= (typeof activeBase !== 'undefined' && activeBase === 'developers')?'active':'' %>">
+                    <a class="nav-link" href="/developers">Developers</a>
+                </li>
+                <li class="nav-item <%= (typeof activeBase !== 'undefined' && activeBase === 'top')?'active':'' %>">
+                    <a class="nav-link" href="/top">Top 3</a>
+                </li>
+            </ul>
+            <ul class="navbar-nav mr-right">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="" id="navbarDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        My Account
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                        <a href="/account" class="dropdown-item">
+                            <ion-icon name="person-outline"></ion-icon>&nbsp;See Profile
+                        </a>
+                        <a href="/account/edit" class="dropdown-item">
+                            <ion-icon name="create-outline"></ion-icon>&nbsp;Edit Profile
+                        </a>
+                        <a href="/account/pw" class="dropdown-item">
+                            <ion-icon name="key-outline"></ion-icon>&nbsp;Change password
+                        </a>
+                        <div class="dropdown-divider"></div>
+                        <a href="/account/delete" class="dropdown-item">
+                            <ion-icon name="trash-outline"></ion-icon>&nbsp;Delete account
+                        </a>
+                        <div class="dropdown-divider"></div>
+                        <a href="/logout" class="dropdown-item">
+                            <ion-icon name="log-out-outline"></ion-icon>&nbsp;Log out
+                        </a>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <% } %> 
+    </div>
+</nav>
