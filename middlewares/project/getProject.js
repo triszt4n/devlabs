@@ -1,6 +1,8 @@
 /**
  * get sprint's attributes from db with sprintID
  */
+const moment = require('moment');
+
 module.exports = function (objectRepository) {
 
     return function (req, res, next) {
@@ -11,8 +13,8 @@ module.exports = function (objectRepository) {
             numOfDevs: 21,
             title: "Title2",
             reward: 1900,
-            startDate: "2019/06/15 13:00",
-            endDate: "2019/06/30 17:00",
+            startDate: new Date("2019-06-15 13:00:00"),
+            endDate: new Date("2019-06-30 17:00:00"),
             isEnded: true,
             isSuccess: true,
             desc: "Lorem ipsum",
@@ -60,6 +62,8 @@ module.exports = function (objectRepository) {
             ]
         };
         res.locals = project;
+        res.locals.startDateString = moment(res.locals.startDate).format("YYYY/MM/DD HH:mm");
+        res.locals.endDateString = moment(res.locals.endDate).format("YYYY/MM/DD HH:mm");
 
         return next();
     };

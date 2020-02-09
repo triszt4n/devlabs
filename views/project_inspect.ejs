@@ -36,9 +36,9 @@
             <div>
                 <ion-icon name="shield-checkmark-outline"></ion-icon>&nbsp;Leader: <%= leaderName %>
             </div>
-            <% if (startDate !== "" || endDate !== "") { %>
+            <% if (startDateString !== "" || endDateString !== "") { %>
             <div>
-                <ion-icon name="calendar-outline"></ion-icon>&nbsp;<%= startDate %> - <%= endDate %>
+                <ion-icon name="calendar-outline"></ion-icon>&nbsp;<%= startDateString %> - <%= endDateString %>
             </div>
             <% } %>
             <div>
@@ -48,7 +48,7 @@
                 <ion-icon name="cash-outline"></ion-icon>&nbsp;$<%= reward %>
             </div>
             <div>
-                <% if (endDate === "") { %>
+                <% if (endDateString === "") { %>
                 <ion-icon name="pulse-outline"></ion-icon>&nbsp;Ongoing
                 <% } else { %>
                 <% if (isSuccess) { %>

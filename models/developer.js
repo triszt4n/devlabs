@@ -3,8 +3,8 @@ const db = require('../config/db');
 
 const Developer = db.model('Developer', {
     email: String,
-    name: String,
     pw: String,
+    name: String,
     phone: String
 });
 

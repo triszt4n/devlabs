@@ -3,28 +3,28 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
 
 <% if (typeof needDateTime !== 'undefined' && needDateTime) { %>
-    <script src="/js/jquery.datetimepicker.full.min.js"></script>
-    <script type="text/javascript">
-        $(function () {
-            $('#isEnded').change(function () {
-                if ($(this).is(":checked")) {
-                    $('#endDate').removeAttr('disabled');
-                    $('#isSuccess').removeAttr('disabled');
-                    $('#enddateOption').show();
-                } else {
-                    $('#endDate').attr('disabled', 'disabled');
-                    $('#isSuccess').attr('disabled', 'disabled');
-                    $('#enddateOption').hide();
-                }
-            });
+<script src="/js/jquery.datetimepicker.full.min.js"></script>
+<script type="text/javascript">
+    $(function () {
+        $('#isEnded').change(function () {
+            if ($(this).is(":checked")) {
+                $('#endDate').removeAttr('disabled');
+                $('#isSuccess').removeAttr('disabled');
+                $('#endDateOption').show();
+            } else {
+                $('#endDate').attr('disabled', 'disabled');
+                $('#isSuccess').attr('disabled', 'disabled');
+                $('#endDateOption').hide();
+            }
         });
-        $(function () {
-            $('#startDate').datetimepicker();
-        });
-        $(function () {
-            $('#endDate').datetimepicker();
-        });
-    </script>
+    });
+    $(function () {
+        $('#startDate').datetimepicker();
+    });
+    $(function () {
+        $('#endDate').datetimepicker();
+    });
+</script>
 <% } %>
 
 </body>

@@ -10,25 +10,25 @@
         </div>
     </div>
 
-    <form method="POST">
+    <form method="POST" autocomplete="off">
         <div class="form-group">
-            <label for="title">Title:</label>
+            <label for="title">Title</label>
             <input type="text" class="form-control" id="title" name="title" value="<%= title %>">
         </div>
         <div class="form-group">
-            <label for="reward">Reward:</label>
-            <input type="number" class="form-control" id="reward" name="reward" value="<%= reward %>">
+            <label for="reward">Reward</label>
+            <input type="number" class="form-control" id="reward" name="reward" value="<%= typeof reward !== 'undefined'? reward : '' %>">
         </div>
         <div class="form-group">
-            <label for="desc">Description:</label>
+            <label for="desc">Description</label>
             <textarea class="form-control" id="desc" name="desc" rows="3"><%= desc %></textarea>
         </div>
 
         <div class="row">
-            <%# Input of startDate #%>
+            <%# Input of startDateString #%>
             <div class="form-group col-lg-6" style="margin-top: 32.5px;">
-                <label for="startDate">Starting date:</label>
-                <input type="text" class="form-control" id="startDate" name="startDate" value="<%= startDate %>" />
+                <label for="startDateString">Starting date</label>
+                <input type="text" class="form-control" id="startDateString" name="startDateString" value="<%= startDateString %>" />
             </div>
 
             <%# Complicated thingy %>
@@ -36,19 +36,21 @@
                 <%# First checkbox %>
                 <div class="form-check" style="margin-bottom: 10px;">
                     <input type="checkbox" class="magic-checkbox" id="isEnded" name="isEnded"
-                        <%= isEnded?"checked":"" %>>
+                        <%= isEnded ? "checked" : "" %>>
                     <label class="form-check-label" for="isEnded">Declare date of ending</label>
                 </div>
+                
                 <%# div for jQuery %>
-                <div id='enddateOption' style='<%= isEnded?"":"display:none;" %> margin-bottom: 10px;'>
-                    <label for="endDate">Ending date:</label>
-                    <%# input of endDate %> 
-                    <input <%= isEnded?"":"disabled='disabled'" %> type="text" class="form-control" id="endDate"
-                        name="endDate" value="<%= endDate %>">
+                <div id='endDateOption' style='<%= isEnded ? "" : "display:none;" %> margin-bottom: 10px;'>
+                    <label for="endDateString">Ending date</label>
+                    <%# input of endDateString %>
+                    <input <%= isEnded ? "" : "disabled='disabled'" %> type="text" class="form-control"
+                        id="endDateString" name="endDateString" value="<%= endDateString %>">
+                    
                     <%# Second checkbox %> 
                     <div class="form-check" style="margin-top: 10px;">
-                        <input <%= isEnded?"":"disabled='disabled'" %> type="checkbox" class="magic-checkbox"
-                            id="isSuccess" name="isSuccess" <%= isSuccess?"checked":"" %>>
+                        <input <%= isEnded ? "" : "disabled='disabled'" %> type="checkbox" class="magic-checkbox"
+                            id="isSuccess" name="isSuccess" <%= isSuccess ? "checked" : "" %>>
                         <label class="form-check-label" for="isSuccess">Declare as successful Project</label>
                     </div>
                 </div>

@@ -5,17 +5,19 @@
  * if reward not specified, 0.00 is default,
  * dates may be NULL)
  */
+const moment = require('moment');
+
 module.exports = function (objectRepository) {
     return function (req, res, next) {
-        if (typeof req.body.title === 'undefined') {
-            res.locals.title = "";
-            res.locals.reward = "";
-            res.locals.startDate = "";
-            res.locals.endDate = "";
-            res.locals.isEnded = false;
-            res.locals.isSuccess = false;
+        //GET branch:
+        if (req.method === "GET") {
+            return next();
         }
 
-        return next();
-    };  
+        //POST branch:
+        let startDateMoment = moment(req.body.startDate);
+        let startDate = startDateMoment.isValid()? startDateMoment.toDate() : res.locals.startDate;
+
+        return res.redirect(`/projects/${req.params.projID}`);
+    };
 };

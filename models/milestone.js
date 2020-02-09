@@ -3,7 +3,10 @@ const db = require('../config/db');
 
 const Milestone = db.model('Milestone', {
     desc: String,
-    addedDate: String,
+    addedDate: {
+        type: Date,
+        default: Date.now
+    },
     projID: {
         type: Schema.Types.ObjectId,
         ref: 'Project'

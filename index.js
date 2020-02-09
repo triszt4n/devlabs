@@ -3,31 +3,24 @@ const app = express();
 
 const session = require('express-session');
 const bodyParser = require('body-parser');
-const timeout = require('express-timeout-handler');
 
 app.set('view engine', 'ejs');
 
+//BodyParser:
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
     extended: true
 }));
 
+//Static middleware:
 app.use(express.static('static'));
 
+//Session:
 app.use(session({
     secret: 'rip keyboard cat',
     resave: false,
     saveUninitialized: true,
 }));
-
-var options = {
-    timeout: 10000,
-    onTimeout: function(req, res) {
-        res.locals.message = "Service unavailable. Please retry.";
-        res.status(503).render("error", res.locals);
-    }
-};
-app.use(timeout.handler(options));
 
 //Importing all application routes:
 require("./routes/account")(app);
