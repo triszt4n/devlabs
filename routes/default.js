@@ -8,11 +8,11 @@ const registerMW = require("../middlewares/auth/register");
 const resetPwMW = require("../middlewares/auth/resetPw");
 const getDeveloperByEmailMW = require("../middlewares/developer/getDeveloperByEmail");
 
-const DevModel = require("../models/developer");
+const DeveloperModel = require("../models/developer");
 
 module.exports = function (app) {
     var objectRepository = {
-        DevModel: DevModel
+        DeveloperModel: DeveloperModel
     };
 
     app.get("/error",

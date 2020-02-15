@@ -10,9 +10,9 @@ module.exports = function (objectRepository) {
             return next();
         }
 
-        var DevModel = requireOption(objectRepository, 'DevModel');
+        var DeveloperModel = requireOption(objectRepository, 'DeveloperModel');
 
-        DevModel.findOne({
+        DeveloperModel.findOne({
             email: req.body.email
         }, (err, result) => {
             if (err) {

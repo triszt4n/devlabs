@@ -4,12 +4,12 @@ const getMembershipListMW = require("../middlewares/membership/getMembershipList
 const getDeveloperByIDMW = require("../middlewares/developer/getDeveloperByID");
 const getDeveloperListMW = require("../middlewares/developer/getDeveloperList");
 
-const DevModel = require("../models/developer");
+const DeveloperModel = require("../models/developer");
 const MembershipModel = require("../models/membership");
 
 module.exports = function (app) {
     var objectRepository = {
-        DevModel: DevModel,
+        DeveloperModel: DeveloperModel,
         MembershipModel: MembershipModel
     };
 

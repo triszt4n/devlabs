@@ -1,7 +1,7 @@
 {
   "name": "devlabs",
   "version": "1.0.0",
-  "description": "DevLabs: Sprinteket adminisztrálhatunk a felületen, vannak sprintjeink, fejlesztőink, és ezeket össze kell kapcsolni (3. entitás: szerep).",
+  "description": "DevLabs: Administration site for project management.",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -16,5 +16,8 @@
     "express-session": "^1.17.0",
     "moment": "^2.24.0",
     "mongoose": "^5.8.11"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.2"
   }
 }

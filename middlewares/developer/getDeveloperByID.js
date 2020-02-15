@@ -6,10 +6,10 @@ const requireOption = require('../default/requireOption');
 
 module.exports = function (objectRepository) {
     return function (req, res, next) {
-        const DevModel = requireOption(objectRepository, 'DevModel');
+        const DeveloperModel = requireOption(objectRepository, 'DeveloperModel');
         let devID = (typeof req.params.devID === 'undefined')? req.session.userID : req.params.devID;
 
-        DevModel.findOne({
+        DeveloperModel.findOne({
             _id: devID
         }, (err, result) => {
             if (err) {

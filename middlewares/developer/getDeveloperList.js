@@ -1,15 +1,14 @@
 /**
- * return the developers' as list of objects including all attributes
- * (excluding password, freshpw)
+ * return the developers as list of objects including all attributes
  * (needed by /devs)
  */
 const requireOption = require('../default/requireOption');
 
 module.exports = function (objectRepository) {
     return function (req, res, next) {
-        var DevModel = requireOption(objectRepository, 'DevModel');
+        var DeveloperModel = requireOption(objectRepository, 'DeveloperModel');
 
-        DevModel.find({}, (err, result) => {
+        DeveloperModel.find({}, (err, result) => {
             if (err) {
                 console.log(err);
                 return next(err);

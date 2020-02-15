@@ -2,7 +2,6 @@ const renderMW = require("../middlewares/default/render");
 const authMW = require("../middlewares/auth/auth");
 const getProjectListMW = require("../middlewares/project/getProjectList");
 const getProjectMW = require("../middlewares/project/getProject");
-const checkIfLeaderMW = require("../middlewares/project/checkIfLeader");
 const editProjectMW = require("../middlewares/project/editProject");
 const newProjectMW = require("../middlewares/project/newProject");
 const deleteProjectMW = require("../middlewares/project/deleteProject");
@@ -13,14 +12,14 @@ const getMemberListMW = require("../middlewares/membership/getMemberList");
 const getDeveloperListMW = require("../middlewares/developer/getDeveloperList");
 const getMilestoneListMW = require("../middlewares/milestone/getMilestoneList");
 
-const DevModel = require("../models/developer");
+const DeveloperModel = require("../models/developer");
 const ProjectModel = require("../models/project");
 const MilestoneModel = require("../models/milestone");
 const MembershipModel = require("../models/membership");
 
 module.exports = function (app) {
     var objectRepository = {
-        DevModel: DevModel,
+        DeveloperModel: DeveloperModel,
         ProjectModel: ProjectModel,
         MilestoneModel: MilestoneModel,
         MembershipModel: MembershipModel
@@ -72,7 +71,6 @@ module.exports = function (app) {
         getDeveloperListMW(objectRepository),
         getMemberListMW(objectRepository),
         getMilestoneListMW(objectRepository),
-        checkIfLeaderMW(objectRepository),
         renderMW(objectRepository, "project_inspect")
     );
 };

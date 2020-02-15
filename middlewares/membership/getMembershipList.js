@@ -8,7 +8,7 @@ module.exports = function (objectRepository) {
         const MembershipModel = requireOption(objectRepository, 'MembershipModel');
 
         MembershipModel.find({
-            _devID: req.params.devID
+            _dev: req.params.devID
         }, (err, result) => {
             if (err) {
                 return next(err);

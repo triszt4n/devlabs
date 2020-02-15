@@ -11,8 +11,8 @@ module.exports = function (objectRepository) {
         }
 
         //Defining new Dev:
-        var DevModel = requireOption(objectRepository, 'DevModel');
-        var dev = new DevModel();
+        var DeveloperModel = requireOption(objectRepository, 'DeveloperModel');
+        var dev = new DeveloperModel();
 
         dev.name = (req.body.name !== "")? req.body.name : req.body.email.split("@")[0];
         dev.email = req.body.email;

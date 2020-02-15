@@ -8,7 +8,11 @@ const Project = db.model('Project', {
     isSuccess: Boolean,
     reward: Number,
     desc: String,
-    _leaderID: {
+    numOfDevs: {
+        type: Number,
+        default: 1
+    },
+    _leader: {
         type: Schema.Types.ObjectId,
         ref: 'Developer'
     }

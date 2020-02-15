@@ -1,80 +1,45 @@
 /**
  * return the projects' attributes as list of objects including all attributes
- * (needed by /projects)
+ * note: this became a whole microservice
  */
 const requireOption = require('../default/requireOption');
+const async = require('async');
 
 module.exports = function (objectRepository) {
     return function (req, res, next) {
         const ProjectModel = requireOption(objectRepository, 'ProjectModel');
+        const MilestoneModel = requireOption(objectRepository, 'MilestoneModel');
 
-        let conditionObject = (req.path.indexOf("/all") > 0)? { _leaderID: req.session.userID } : {};
+        let conditionObject = (req.path.indexOf("/all") > 0) ? {
+            _leader: req.session.userID
+        } : {};
 
-        ProjectModel.find(conditionObject, (err, result) => {
+        ProjectModel.find(conditionObject).populate('_leaderID').exec((err, projres) => {
             if (err) {
                 return next(err);
             }
+            let projects = projres;
 
-            res.locals.projects = result;
-            return next();
+            //Getting milestones for all projects:
+            async.each(projects, (project, callback) => {
+                MilestoneModel.find({
+                    _projID: project._id
+                }).sort('-addedDate').limit(5).exec((err, msres) => {
+                    if (err) {
+                        return callback(err);
+                    }
+
+                    project.milestones = msres;
+                    return callback();
+                });
+            }, (err) => {
+                if (err) {
+                    return next(err);
+                }
+
+                res.locals.projects = projects;
+                return next();
+            });
         });
-
-        let projects = [
-            {
-                projID: 1,
-                leaderID: 123,
-                leaderName: "Pistika",
-                numOfDevs: 12,
-                title: "Title1",
-                reward: 900,
-                startDate: "2019/06/15 13:00",
-                endDate: "2019/06/30 17:00",
-                isSuccess: true,
-                desc: "Lorem ipsum",
-                milestones: [
-                    {
-                        devID: 123,
-                        addedBy: "Name1",
-                        addedDate: "2019/06/16 10:00",
-                        desc: "Asd"
-                    },
-                    {
-                        devID: 123,
-                        addedBy: "Name2",
-                        addedDate: "2019/06/20 10:00",
-                        desc: "Asd"
-                    }
-                ]
-            },
-            {
-                projID: 2,
-                leaderID: 123,
-                leaderName: "Pista",
-                numOfDevs: 21,
-                title: "Title2",
-                reward: 1900,
-                startDate: "2019/06/15 13:00",
-                endDate: "2019/06/30 17:00",
-                isSuccess: false,
-                desc: "Lorem ipsum",
-                milestones: [
-                    {
-                        devID: 123,
-                        addedBy: "Name1",
-                        addedDate: "2019/06/16 10:00",
-                        desc: "Asd"
-                    },
-                    {
-                        devID: 123,
-                        addedBy: "Name2",
-                        addedDate: "2019/06/20 10:00",
-                        desc: "Asd"
-                    }
-                ]
-            }
-        ];
-        res.locals.projects = projects;
-
-        return next();
-    };  
+    };
 };

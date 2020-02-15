@@ -2,10 +2,31 @@
  * get sprint's attributes from db with sprintID
  */
 const moment = require('moment');
+const requireOption = require('../default/requireOption');
 
 module.exports = function (objectRepository) {
 
     return function (req, res, next) {
+
+        const ProjectModel = requireOption(objectRepository, 'ProjectModel');
+
+        ProjectModel.findOne({
+            _id: req.params.projID
+        }, (err, result) => {
+            if (err) {
+                return next(err);
+            }
+
+            if (result === null) {
+                console.log("Project not found.");
+                req.session.message = "The page you're looking for is not found.";
+                return res.redirect("/error");
+            }
+
+            res.locals.project = result;
+            return next();
+        });
+
         let project = {
             projID: 2,
             leaderID: 123,
@@ -61,7 +82,7 @@ module.exports = function (objectRepository) {
                 }
             ]
         };
-        res.locals = project;
+        res.locals.project = project;
         res.locals.startDateString = moment(res.locals.startDate).format("YYYY/MM/DD HH:mm");
         res.locals.endDateString = moment(res.locals.endDate).format("YYYY/MM/DD HH:mm");
 

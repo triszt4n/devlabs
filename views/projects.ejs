@@ -18,7 +18,7 @@
     <div class="card" style="margin-bottom: 20px;">
         <div class="card-header">
             <div style="float: right; padding-left: 3px;">
-                <a href="/projects/<%= project.projID %>" class="btn btn-info">
+                <a href="/projects/<%= project._leader._id %>" class="btn btn-info">
                     <ion-icon name="search-outline"></ion-icon>
                 </a>
             </div>
@@ -29,7 +29,7 @@
         <div class="card-body">
             <div class="row">
                 <div class="col-12 col-lg-6">
-                    <ion-icon name="shield-checkmark-outline"></ion-icon>&nbsp;Leader: <%= project.leaderName %>
+                    <ion-icon name="shield-checkmark-outline"></ion-icon>&nbsp;Leader: <%= project._leader.name %>
                 </div>
                 <div class="col-12 col-lg-6 text-lg-right">
                     <ion-icon name="calendar-outline"></ion-icon>&nbsp;<%= project.startDate %> -

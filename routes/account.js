@@ -11,13 +11,13 @@ const redirectWithUserIDMW = require("../middlewares/account/redirectWithUserID"
 const getDeveloperByEmailMW = require("../middlewares/developer/getDeveloperByEmail");
 const checkEditAccountMW = require("../middlewares/account/checkEditAccount");
 
-const DevModel = require("../models/developer");
+const DeveloperModel = require("../models/developer");
 const MilestoneModel = require("../models/milestone");
 const MembershipModel = require("../models/membership");
 
 module.exports = function (app) {
     var objectRepository = {
-        DevModel: DevModel,
+        DeveloperModel: DeveloperModel,
         MilestoneModel: MilestoneModel,
         MembershipModel: MembershipModel
     };
