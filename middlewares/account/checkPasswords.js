@@ -22,6 +22,11 @@ module.exports = function (objectRepository) {
             return res.redirect("/account/pw");
         }
 
+        if (req.body.newpw1.length < 6) {
+            req.session.message = "Password too short.";
+            return res.redirect("/account/pw");
+        }
+
         return next();
     };  
 };

@@ -10,6 +10,7 @@ const inviteMemberMW = require("../middlewares/membership/inviteMember");
 const kickMemberMW = require("../middlewares/membership/kickMember");
 const getMemberListMW = require("../middlewares/membership/getMemberList");
 const getDeveloperListMW = require("../middlewares/developer/getDeveloperList");
+const trimDeveloperListMW = require("../middlewares/developer/trimDeveloperList");
 const getMilestoneListMW = require("../middlewares/milestone/getMilestoneList");
 
 const DeveloperModel = require("../models/developer");
@@ -69,6 +70,7 @@ module.exports = function (app) {
         authMW(objectRepository),
         getProjectMW(objectRepository),
         getDeveloperListMW(objectRepository),
+        trimDeveloperListMW(objectRepository),
         getMemberListMW(objectRepository),
         getMilestoneListMW(objectRepository),
         renderMW(objectRepository, "project_inspect")

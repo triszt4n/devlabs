@@ -15,7 +15,7 @@ npm i
 
 ## Running
 ```bash
-nodemon ./index.js
+nodemon
 ```
 or
 ```bash

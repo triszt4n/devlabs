@@ -17,9 +17,11 @@
         <div style="margin-left: 20px; margin-top: 10px;" class="col-12">
             <ion-icon name="at-outline"></ion-icon>&nbsp;<%= dev.email %>
         </div>
-        <div style="margin-left: 20px;" class="col-12">
-            <ion-icon name="call-outline"></ion-icon>&nbsp;<%= dev.phone %>
-        </div>
+        <% if (dev.phone !== "") { %>
+            <div style="margin-left: 20px;" class="col-12">
+                <ion-icon name="call-outline"></ion-icon>&nbsp;<%= dev.phone %>
+            </div>
+        <% } %>
     </div>
     <div style="margin: 40px 0 10px 0;" class="row">
         <div class="col-12">
@@ -32,6 +34,7 @@
                 <th class="text-center" scope="col">#</th>
                 <th scope="col">Project</th>
                 <th class="d-none d-lg-block" scope="col">Leader</th>
+                <th scope="col">Rank</th>
                 <th class="text-right" scope="col">Joined on</th>
                 <th class="text-right" scope="col"> </th>
             </tr>
@@ -40,17 +43,18 @@
             <% dev.memberships.forEach( function(membership, index) { %>
             <tr>
                 <th class="text-center" scope="row"><%= dev.memberships.length - index %></th>
-                <td><%= membership.title %></td>
-                <td class="d-none d-lg-block"><%= membership.leaderName %></td>
-                <td class="text-right"><%= membership.addedDate %></td>
+                <td><%= membership._proj.title %></td>
+                <td class="d-none d-lg-block"><%= membership._proj._leader.name %></td>
+                <td><%= membership.rank %></td>
+                <td class="text-right"><%= membership.creationDate %></td>
                 <td class="text-right">
                     <button class="btn btn-primary dropdown-toggle" data-toggle="dropdown"></button>
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="btnGroupDrop1">
-                        <a href="/projects/<%= membership.projID %>" class="dropdown-item">
+                        <a href="/projects/<%= membership._proj._id %>" class="dropdown-item">
                             <ion-icon name="search-outline"></ion-icon>&nbsp;View Project
                         </a>
                         <div class="dropdown-divider"></div>
-                        <a href="/projects/kick/<%= membership.memshipID %>" class="dropdown-item">
+                        <a href="/projects/kick/<%= membership._id %>" class="dropdown-item">
                             <ion-icon name="walk-outline"></ion-icon>&nbsp;Quit Project
                         </a>
                     </div>

@@ -13,6 +13,10 @@ const Membership = db.model('Membership', {
     creationDate: {
         type: Date,
         default: Date.now
+    },
+    rank: {
+        type: String,
+        default: "Newcomer"
     }
 });
 

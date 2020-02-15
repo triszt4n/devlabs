@@ -17,9 +17,11 @@
                     <p class="card-subtitle ml-3 mb-2 text-muted">
                         <ion-icon name="at-outline"></ion-icon>&nbsp;<%= dev.email %>
                     </p>
-                    <p class="card-subtitle ml-3 text-muted">
-                        <ion-icon name="call-outline"></ion-icon>&nbsp;<%= dev.phone %>
-                    </p>
+                    <% if (dev.phone !== "") { %>
+                        <p class="card-subtitle ml-3 text-muted">
+                            <ion-icon name="call-outline"></ion-icon>&nbsp;<%= dev.phone %>
+                        </p>
+                    <% } %>
                     <p style="margin-top: 20px; float: right;">
                         <a href="/developers/<%= dev._id %>" class="card-link">
                             <ion-icon name="person"></ion-icon>&nbsp;Details

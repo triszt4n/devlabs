@@ -11,22 +11,22 @@
     <div class="row">
         <div class="col-12">
             <h4>
-                <% if (leaderID === userID) { %>
+                <% if (project._leader === userID) { %>
                 <div style="float: right; padding-left: 3px;">
                     <button class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
                         <ion-icon name="options-outline"></ion-icon>
                     </button>
                     <div class="dropdown-menu dropdown-menu-right">
-                        <a href="/projects/edit/<%= projID %>" class="dropdown-item">
+                        <a href="/projects/edit/<%= project._id %>" class="dropdown-item">
                             <ion-icon name="create-outline"></ion-icon>&nbsp;Edit Project
                         </a>
-                        <a href="/projects/delete/<%= projID %>" class="dropdown-item">
+                        <a href="/projects/delete/<%= project._id %>" class="dropdown-item">
                             <ion-icon name="trash-outline"></ion-icon>&nbsp;Delete Project
                         </a>
                     </div>
                 </div>
                 <% } %>
-                <%= title %>
+                <%= project.title %>
             </h4>
         </div>
     </div>
@@ -34,36 +34,37 @@
     <div class="row ml-lg-3">
         <div class="col-12 col-lg-4">
             <div>
-                <ion-icon name="shield-checkmark-outline"></ion-icon>&nbsp;Leader: <%= leaderName %>
+                <ion-icon name="shield-checkmark-outline"></ion-icon>&nbsp;Leader: <%= project._leader.name %>
             </div>
-            <% if (startDateString !== "" || endDateString !== "") { %>
+            <% if (project.startDateString !== "" || project.endDateString !== "") { %>
             <div>
-                <ion-icon name="calendar-outline"></ion-icon>&nbsp;<%= startDateString %> - <%= endDateString %>
+                <ion-icon name="calendar-outline"></ion-icon>&nbsp;<%= project.startDateString %> -
+                <%= project.endDateString %>
             </div>
             <% } %>
             <div>
-                <ion-icon name="people-outline"></ion-icon>&nbsp;Members: <%= numOfDevs %>
+                <ion-icon name="people-outline"></ion-icon>&nbsp;Members: <%= project.numOfDevs %>
             </div>
             <div>
-                <ion-icon name="cash-outline"></ion-icon>&nbsp;$<%= reward %>
+                <ion-icon name="cash-outline"></ion-icon>&nbsp;$<%= project.reward %>
             </div>
             <div>
-                <% if (endDateString === "") { %>
-                <ion-icon name="pulse-outline"></ion-icon>&nbsp;Ongoing
+                <% if (project.endDateString === "") { %>
+                    <ion-icon name="pulse-outline"></ion-icon>&nbsp;Ongoing
                 <% } else { %>
-                <% if (isSuccess) { %>
-                <ion-icon name="checkmark-outline"></ion-icon>&nbsp;Successful
-                <% } else { %>
-                <ion-icon name="close-outline"></ion-icon>&nbsp;Failed
+                    <% if (project.isSuccess) { %>
+                        <ion-icon name="checkmark-outline"></ion-icon>&nbsp;Successful
+                    <% } else { %>
+                        <ion-icon name="close-outline"></ion-icon>&nbsp;Failed
                 <% }} %>
             </div>
         </div>
         <div class="col-12 col-lg-8">
             <u>Description:</u><br />
-            <%= desc %>
+            <%= project.desc %>
         </div>
     </div>
-    
+
 
     <div class="card" style="margin: 20px 0 0 0">
         <div class="card-header">
@@ -77,19 +78,21 @@
                     <th class="d-none d-lg-block text-center" scope="col">#</th>
                     <th scope="col">Name</th>
                     <th scope="col">Email address</th>
+                    <th scope="col">Rank</th>
                     <th class="text-right" scope="col">Invited on</th>
                     <th class="text-right" scope="col"> </th>
                 </tr>
             </thead>
             <tbody>
-                <% members.forEach( function(member, index) { %>
+                <% project.members.forEach( function(member, index) { %>
                 <tr>
-                    <th class="d-none d-lg-block text-center" scope="row"><%= index + 1 %></th>
+                    <th class="d-none d-lg-block text-center" scope="row"><%= project.members.length - index %></th>
                     <td><%= member.name %></td>
                     <td><%= member.email %></td>
-                    <td class="text-right"><%= member.joinDate %></td>
+                    <td><%= member.rank %></td>
+                    <td class="text-right"><%= member.joinDateString %></td>
                     <td class="text-right">
-                        <% if (leaderID === userID) { %>
+                        <% if (project._leader._id === userID) { %>
                         <button class="btn btn-primary dropdown-toggle" data-toggle="dropdown"></button>
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="btnGroupDrop1">
                             <a href="/developers/<%= member.devID %>" class="dropdown-item">
@@ -106,14 +109,14 @@
                 <% }); %>
             </tbody>
         </table>
-        <% if (leaderID === userID) { %>
+        <% if (project._leader._id === userID) { %>
         <div class="card-body">
-            <form class="row" method="POST" action="/projects/invite/<%= projID %>">
+            <form class="row" method="POST" action="/projects/invite/<%= project._id %>">
                 <div class="form-group col-10">
                     <label for="email" class="col-form-label-sm">Invite Developer to contribute</label>
                     <select class="form-control" id="email" name="devID">
-                        <% nonMembers.forEach( function(dev) { %>
-                        <option value="<%= dev.devID %>"><%= dev.email %></option>
+                        <% project.nonMembers.forEach( function(dev) { %>
+                            <option value="<%= dev._id %>"><%= dev.email %></option>
                         <% }); %>
                     </select>
                 </div>
@@ -146,21 +149,21 @@
                 </tr>
             </thead>
             <tbody>
-                <% milestones.forEach( function(milestone, index) { %>
+                <% project.milestones.forEach( function(milestone, index) { %>
                 <tr>
-                    <th class="d-none d-lg-block text-center" scope="row"><%= milestones.length - index %></th>
+                    <th class="d-none d-lg-block text-center" scope="row"><%= project.milestones.length - index %></th>
                     <td><%= milestone.desc %></td>
                     <td><%= milestone.addedBy %></td>
                     <td class="text-right"><%= milestone.addedDate %></td>
                     <td class="text-right">
-                        <% if (milestones.devID === userID || leaderID === userID) { %>
+                        <% if (milestones._dev === userID || project._leader._id === userID) { %>
                         <button class="btn btn-primary dropdown-toggle" data-toggle="dropdown"></button>
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="btnGroupDrop1">
-                            <a href="/milestone/edit/<%= milestone.msID %>" class="dropdown-item">
+                            <a href="/milestone/edit/<%= milestone._id %>" class="dropdown-item">
                                 <ion-icon name="create-outline"></ion-icon>&nbsp;Edit Milestone
                             </a>
                             <div class="dropdown-divider"></div>
-                            <a href="/milestone/delete/<%= milestone.msID %>" class="dropdown-item">
+                            <a href="/milestone/delete/<%= milestone._id %>" class="dropdown-item">
                                 <ion-icon name="trash-outline"></ion-icon>&nbsp;Delete Milestone
                             </a>
                         </div>
@@ -170,11 +173,11 @@
                 <% }); %>
             </tbody>
         </table>
-        <% if (leaderID === userID) { %>
+        <% if (project._leader._id === userID) { %>
         <div class="card-body">
             <div class="row justify-content-center">
                 <div class="col-10">
-                    <a href="/milestone/new/<%= projID %>" class="btn btn-primary btn-block">
+                    <a href="/milestone/new/<%= project._id %>" class="btn btn-primary btn-block">
                         <ion-icon name="golf-outline"></ion-icon>&nbsp;New Milestone
                     </a>
                 </div>

@@ -3,8 +3,8 @@ const db = require('../config/db');
 
 const Project = db.model('Project', {
     title: String,
-    startDate: String,
-    endDate: String,
+    startDate: Date,
+    endDate: Date,
     isSuccess: Boolean,
     reward: Number,
     desc: String,

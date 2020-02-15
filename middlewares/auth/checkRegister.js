@@ -23,6 +23,11 @@ module.exports = function (objectRepository) {
             return res.redirect("/register");
         } //Lesson learnt: handshake method would be more reliable.
 
+        if (req.body.pw.length < 6) {
+            req.session.message = "Password too short.";
+            return res.redirect("/register");
+        }
+
         return next();
     };  
 };

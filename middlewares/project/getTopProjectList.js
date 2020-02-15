@@ -3,44 +3,42 @@
  * title, number of developers engaged in sprint, reward, sprintID
  * (needed by /projects)
  */
+const moment = require('moment');
+const requireOption = require("../default/requireOption");
+
 module.exports = function (objectRepository) {
-
     return function (req, res, next) {
-        projects = [
-            {
-                projID: 2,
-                leaderName: "Pista",
-                numOfDevs: 21,
-                title: "Title2",
-                reward: 1900000,
-                startDate: "2019/06/15 13:00",
-                endDate: "2019/06/30 17:00",
-                runTime: "15 days"
-            },
-            {
-                projID: 1,
-                leaderName: "János",
-                numOfDevs: 1,
-                title: "Title1",
-                reward: 300000,
-                startDate: "2018/06/15 03:00",
-                endDate: "2019/07/30 05:00",
-                runTime: "13 months"
-            },
-            {
-                projID: 3,
-                leaderName: "Károly",
-                numOfDevs: 10,
-                title: "Title3",
-                reward: 200000,
-                startDate: "2016/01/10 21:00",
-                endDate: "2019/08/30 00:00",
-                runTime: "3.63 years"
-            }
-        ];
-        res.locals.tops = projects;
+        const ProjectModel = requireOption(objectRepository, 'ProjectModel');
 
-        return next();
+        ProjectModel.find({
+            isSuccess: true
+        }).populate('_leaderID').sort('-reward').limit(3).exec((err, projRes) => {
+            if (err) {
+                return next(err);
+            }
+
+            projRes.forEach(project => {
+                project.startDateString = moment(project.startDate).format("YYYY/MM/DD HH:mm");
+                project.endDateString = moment(project.endDate).format("YYYY/MM/DD HH:mm");
+                project.runTime = getRunTimeString(project.endDate, project.startDate);
+            });
+
+            res.locals.tops = projRes;
+            return next();
+        });
     };
-  
 };
+
+function getRunTimeString(endDate, startDate) {
+    //get difference in days:
+    let diff = Math.abs(endDate - startDate) / (1000 * 3600 * 24);
+    if (diff < 60) {
+        return diff.toFixed(0).toString() + " days";
+    } else if (diff < 24*30) {
+        diff /= 24*30;
+        return "~" + diff.toFixed(1).toString() + " months";
+    } else {
+        diff /= 24*365;
+        return "~" + diff.toFixed(2).toString() + " years";
+    }
+}

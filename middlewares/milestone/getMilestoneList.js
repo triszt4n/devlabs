@@ -9,7 +9,7 @@ module.exports = function (objectRepository) {
         const MilestoneModel = requireOption(objectRepository, 'MilestoneModel');
         MilestoneModel.find({
             _proj: req.params.projID
-        }).sort('-addedDate').exec((err, msres) => {
+        }).populate('_dev').sort('-addedDate').exec((err, msres) => {
             if (err) {
                 return next(err);
             }

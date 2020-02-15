@@ -6,6 +6,9 @@
         <div class="col-12 text-center" style="margin: 0 0 2em 0;">
             <h2 style="margin: 1em 0 0.5em 0;">Top 3 Projects</h2>
             <p>Introducing the three most rewarding successful Projects.</p>
+            <% if (tops.length === 0) { %>
+                <h5 class="text-muted" style="margin: 2em 0 1em 0;">Nothing to find here yet</h5>
+            <% } %>
         </div>
     </div>
 
