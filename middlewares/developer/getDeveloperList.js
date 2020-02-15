@@ -3,26 +3,20 @@
  * (excluding password, freshpw)
  * (needed by /devs)
  */
+const requireOption = require('../default/requireOption');
+
 module.exports = function (objectRepository) {
-
     return function (req, res, next) {
-        devs = [
-            {
-                devID: 456,
-                name: "Joska",
-                email: "fgh",
-                phone: "+1 600 800 0191"
-            },
-            {
-                devID: 123,
-                name: "Pista",
-                email: "asd",
-                phone: "+1 666 420 6969"
-            }
-        ];
-        res.locals.devs = devs;
+        var DevModel = requireOption(objectRepository, 'DevModel');
 
-        return next();
+        DevModel.find({}, (err, result) => {
+            if (err) {
+                console.log(err);
+                return next(err);
+            }
+
+            res.locals.devs = result;
+            return next();
+        });
     };
-  
 };

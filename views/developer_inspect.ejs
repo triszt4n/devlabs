@@ -11,14 +11,14 @@
     <div class="row">
         <div class="col-12">
             <span class="h2">
-                <%= name %>
+                <%= dev.name %>
             </span>
         </div>
         <div style="margin-left: 20px; margin-top: 10px;" class="col-12">
-            <ion-icon name="at-outline"></ion-icon>&nbsp;<%= email %>
+            <ion-icon name="at-outline"></ion-icon>&nbsp;<%= dev.email %>
         </div>
         <div style="margin-left: 20px;" class="col-12">
-            <ion-icon name="call-outline"></ion-icon>&nbsp;<%= phone %>
+            <ion-icon name="call-outline"></ion-icon>&nbsp;<%= dev.phone %>
         </div>
     </div>
     <div style="margin: 40px 0 10px 0;" class="row">
@@ -37,9 +37,9 @@
             </tr>
         </thead>
         <tbody>
-            <% memberships.forEach( function(membership, index) { %>
+            <% dev.memberships.forEach( function(membership, index) { %>
             <tr>
-                <th class="text-center" scope="row"><%= memberships.length - index %></th>
+                <th class="text-center" scope="row"><%= dev.memberships.length - index %></th>
                 <td><%= membership.title %></td>
                 <td class="d-none d-lg-block"><%= membership.leaderName %></td>
                 <td class="text-right"><%= membership.addedDate %></td>

@@ -8,14 +8,30 @@ const removeRelationsMW = require("../middlewares/account/removeRelations");
 const checkPasswordsMW = require("../middlewares/account/checkPasswords");
 const changePasswordMW = require("../middlewares/account/changePassword");
 const redirectWithUserIDMW = require("../middlewares/account/redirectWithUserID");
+const getDeveloperByEmailMW = require("../middlewares/developer/getDeveloperByEmail");
+const checkEditAccountMW = require("../middlewares/account/checkEditAccount");
+
+const DevModel = require("../models/developer");
+const MilestoneModel = require("../models/milestone");
+const MembershipModel = require("../models/membership");
 
 module.exports = function (app) {
-    var objectRepository = {};
+    var objectRepository = {
+        DevModel: DevModel,
+        MilestoneModel: MilestoneModel,
+        MembershipModel: MembershipModel
+    };
 
     app.use("/account/edit",
         authMW(objectRepository),
-        editAccountMW(objectRepository),
+        getDeveloperByEmailMW(objectRepository),
+        checkEditAccountMW(objectRepository),
+        (req, res, next) => {
+            req.params.devID = req.session.userID;
+            next();
+        },
         getDeveloperByIDMW(objectRepository),
+        editAccountMW(objectRepository),
         renderMW(objectRepository, "account_edit")
     );
 
@@ -33,6 +49,7 @@ module.exports = function (app) {
 
     app.use("/account/pw",
         authMW(objectRepository),
+        getDeveloperByIDMW(objectRepository),
         checkPasswordsMW(objectRepository),
         changePasswordMW(objectRepository),
         renderMW(objectRepository, "account_pw")

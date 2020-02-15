@@ -8,7 +8,7 @@ module.exports = function (objectRepository) {
             return next();
         }
 
-        req.session.userID = 123; //res.locals.devID;
+        req.session.userID = res.locals.dev._id;
         return res.redirect("/projects");
     };  
 };

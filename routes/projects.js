@@ -13,8 +13,18 @@ const getMemberListMW = require("../middlewares/membership/getMemberList");
 const getDeveloperListMW = require("../middlewares/developer/getDeveloperList");
 const getMilestoneListMW = require("../middlewares/milestone/getMilestoneList");
 
+const DevModel = require("../models/developer");
+const ProjectModel = require("../models/project");
+const MilestoneModel = require("../models/milestone");
+const MembershipModel = require("../models/membership");
+
 module.exports = function (app) {
-    var objectRepository = {};
+    var objectRepository = {
+        DevModel: DevModel,
+        ProjectModel: ProjectModel,
+        MilestoneModel: MilestoneModel,
+        MembershipModel: MembershipModel
+    };
 
     app.use("/projects/edit/:projID",
         authMW(objectRepository),

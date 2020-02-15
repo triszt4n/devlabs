@@ -19,18 +19,18 @@
                 <% } %>
                 <div class="form-group">
                     <label for="email">Email address*</label>
-                    <input type="text" class="form-control" id="email" name="email" value="<%= email %>">
+                    <input type="text" class="form-control" id="email" name="email" value="<%= typeof dev.email !== 'undefined'? dev.email : '' %>">
                     <small id="email" class="form-text text-muted">
                         *required
                     </small>
                 </div>
                 <div class="form-group">
                     <label for="name">Name</label>
-                    <input type="text" class="form-control" id="name" name="name" value="<%= name %>">
+                    <input type="text" class="form-control" id="name" name="name" value="<%= typeof dev.name !== 'undefined'? dev.name : '' %>">
                 </div>
                 <div class="form-group">
                     <label for="phone">Phone number</label>
-                    <input type="text" class="form-control" id="phone" name="phone" value="<%= phone %>">
+                    <input type="text" class="form-control" id="phone" name="phone" value="<%= typeof dev.phone !== 'undefined'? dev.phone : '' %>">
                 </div> 
                 <button type="submit" style="float: right;" class="btn btn-success">
                     <ion-icon name="checkmark-outline"></ion-icon>&nbsp;Save

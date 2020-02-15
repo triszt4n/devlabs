@@ -6,6 +6,7 @@
  * dates may be NULL)
  */
 const moment = require('moment');
+const requireOption = require('../default/requireOption');
 
 module.exports = function (objectRepository) {
     return function (req, res, next) {
@@ -24,9 +25,29 @@ module.exports = function (objectRepository) {
         }
 
         //POST branch:
-        let startDateMoment = moment(req.body.startDate);
-        let startDate = (startDateMoment.isValid() && req.body.startDate !== "")? startDateMoment.toDate() : new Date();
+        //Defining new Project:
+        var ProjectModel = requireOption(objectRepository, 'ProjectModel');
+        var project = new ProjectModel();
 
-        return next();
+        let startDateMoment = moment(req.body.startDate);
+        if (typeof req.body.isEnded !== 'undefined' && req.body.isEnded) {
+            let endDateMoment = moment(req.body.endDate);
+            project.endDate = (startDateMoment.isValid() && req.body.endDate !== "")? endDateMoment.toDate() : new Date();
+        }
+        project.startDate = (startDateMoment.isValid() && req.body.startDate !== "")? startDateMoment.toDate() : new Date();
+        project.title = req.body.title;
+        project.desc = req.body.desc;
+        project.reward = (req.body.reward === "")? 0 : parseFloat(req.body.reward);
+        project.isSuccess = (typeof req.body.isSuccess === 'undefined' || req.body.isSuccess === false)? false : true;
+        project._leaderID = req.session.userID;
+
+        project.save((err, result) => {
+            if (err) {
+                req.session.message = "An error occured while creating item. Try again.";
+                console.log(err);
+                return res.redirect("/projects/new");
+            }
+            return res.redirect(`/projects/${result._id}`);
+        });
     };  
 };

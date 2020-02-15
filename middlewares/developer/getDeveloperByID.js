@@ -1,35 +1,29 @@
 /**
- * return developer's attributes (except pw)
+ * return developer's attributes
  * get ID from req.query, else move on.
  */
+const requireOption = require('../default/requireOption');
+
 module.exports = function (objectRepository) {
-
     return function (req, res, next) {
-        dev = {
-            devID: 123,
-            name: "Pista",
-            email: "asd",
-            phone: "+1 666 420 6969",
-            memberships: [
-                {
-                    memshipID: 123,
-                    projID: 123,
-                    title: "Title123",
-                    addedDate: "2020/01/01 00:00",
-                    leaderName: "Mr. Bond"
-                },
-                {
-                    memshipID: 456,
-                    projID: 1,
-                    title: "Title1",
-                    addedDate: "2019/01/01 00:00",
-                    leaderName: "Dr. Bond"
-                }
-            ]
-        };
-        res.locals = dev;
+        const DevModel = requireOption(objectRepository, 'DevModel');
+        let devID = (typeof req.params.devID === 'undefined')? req.session.userID : req.params.devID;
 
-        return next();
+        DevModel.findOne({
+            _id: devID
+        }, (err, result) => {
+            if (err) {
+                return next(err);
+            }
+
+            if (result === null) {
+                console.log("Developer not found.");
+                req.session.message = "The page you're looking for is not found.";
+                return res.redirect("/error");
+            }
+
+            res.locals.dev = result;
+            return next();
+        });
     };
-  
 };

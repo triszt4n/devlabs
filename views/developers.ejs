@@ -9,7 +9,7 @@
     </div>
     <div class="card-columns">
         <% devs.forEach( function(dev, index) { %>
-        <a href="/developers/<%= dev.devID %>" class="custom-card">
+        <a href="/developers/<%= dev._id %>" class="custom-card">
             <div class="card">
                 <%# <img class="card-img-top" src="#" alt="Card image cap"> %>
                 <div class="card-body">
@@ -21,7 +21,7 @@
                         <ion-icon name="call-outline"></ion-icon>&nbsp;<%= dev.phone %>
                     </p>
                     <p style="margin-top: 20px; float: right;">
-                        <a href="/developers/<%= dev.devID %>" class="card-link">
+                        <a href="/developers/<%= dev._id %>" class="card-link">
                             <ion-icon name="person"></ion-icon>&nbsp;Details
                         </a>
                     </p>

@@ -6,8 +6,14 @@ const editMilestoneMW = require("../middlewares/milestone/editMilestone");
 const newMilestoneMW = require("../middlewares/milestone/newMilestone");
 const deleteMilestoneMW = require("../middlewares/milestone/deleteMilestone");
 
+const ProjectModel = require("../models/project");
+const MilestoneModel = require("../models/milestone");
+
 module.exports = function (app) {
-    var objectRepository = {};
+    var objectRepository = {
+        ProjectModel: ProjectModel,
+        MilestoneModel: MilestoneModel
+    };
 
     app.use("/milestone/edit/:msID",
         authMW(objectRepository),

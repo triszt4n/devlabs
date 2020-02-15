@@ -2,8 +2,23 @@
  * return the projects' attributes as list of objects including all attributes
  * (needed by /projects)
  */
+const requireOption = require('../default/requireOption');
+
 module.exports = function (objectRepository) {
     return function (req, res, next) {
+        const ProjectModel = requireOption(objectRepository, 'ProjectModel');
+
+        let conditionObject = (req.path.indexOf("/all") > 0)? { _leaderID: req.session.userID } : {};
+
+        ProjectModel.find(conditionObject, (err, result) => {
+            if (err) {
+                return next(err);
+            }
+
+            res.locals.projects = result;
+            return next();
+        });
+
         let projects = [
             {
                 projID: 1,

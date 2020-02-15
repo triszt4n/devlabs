@@ -8,8 +8,16 @@ const registerMW = require("../middlewares/auth/register");
 const resetPwMW = require("../middlewares/auth/resetPw");
 const getDeveloperByEmailMW = require("../middlewares/developer/getDeveloperByEmail");
 
+const DevModel = require("../models/developer");
+
 module.exports = function (app) {
-    var objectRepository = {};
+    var objectRepository = {
+        DevModel: DevModel
+    };
+
+    app.get("/error",
+        renderMW(objectRepository, "error")
+    );
 
     app.use("/register",
         checkSessionMW(objectRepository),

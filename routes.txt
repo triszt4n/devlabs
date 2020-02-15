@@ -79,8 +79,10 @@ GET /developers/:devID
 
 GET, POST /account/edit
     authMW
-    editAccountMW (can res.end)
+    getDeveloperByEmailMW
+    checkEditAccountMW
     getDeveloperByIDMW
+    editAccountMW (can res.end)
     renderMW(account_edit)
 POST /account/delete
     authMW

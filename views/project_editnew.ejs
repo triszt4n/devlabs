@@ -7,6 +7,11 @@
             <h4 style="margin: 1em 0 0.5em 0;">
                 <%= (title !== "")?"Edit Sprint":"New Sprint"%>
             </h4>
+            <% if (typeof message !== 'undefined') { %>
+                <p style="color: red;">
+                    <%= message %>
+                </p>
+            <% } %>
         </div>
     </div>
 

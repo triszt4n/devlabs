@@ -2,11 +2,11 @@ const Schema = require('mongoose').Schema;
 const db = require('../config/db');
 
 const Membership = db.model('Membership', {
-    projID: {
+    _projID: {
         type: Schema.Types.ObjectId,
         ref: 'Project'
     },
-    devID: {
+    _devID: {
         type: Schema.Types.ObjectId,
         ref: 'Developer'
     },

@@ -7,11 +7,11 @@ const Milestone = db.model('Milestone', {
         type: Date,
         default: Date.now
     },
-    projID: {
+    _projID: {
         type: Schema.Types.ObjectId,
         ref: 'Project'
     },
-    devID: {
+    _devID: {
         type: Schema.Types.ObjectId,
         ref: 'Developer'
     }

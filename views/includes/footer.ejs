@@ -8,21 +8,21 @@
     $(function () {
         $('#isEnded').change(function () {
             if ($(this).is(":checked")) {
-                $('#endDate').removeAttr('disabled');
+                $('#endDateString').removeAttr('disabled');
                 $('#isSuccess').removeAttr('disabled');
                 $('#endDateOption').show();
             } else {
-                $('#endDate').attr('disabled', 'disabled');
+                $('#endDateString').attr('disabled', 'disabled');
                 $('#isSuccess').attr('disabled', 'disabled');
                 $('#endDateOption').hide();
             }
         });
     });
     $(function () {
-        $('#startDate').datetimepicker();
+        $('#startDateString').datetimepicker();
     });
     $(function () {
-        $('#endDate').datetimepicker();
+        $('#endDateString').datetimepicker();
     });
 </script>
 <% } %>

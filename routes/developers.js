@@ -4,8 +4,14 @@ const getMembershipListMW = require("../middlewares/membership/getMembershipList
 const getDeveloperByIDMW = require("../middlewares/developer/getDeveloperByID");
 const getDeveloperListMW = require("../middlewares/developer/getDeveloperList");
 
+const DevModel = require("../models/developer");
+const MembershipModel = require("../models/membership");
+
 module.exports = function (app) {
-    var objectRepository = {};
+    var objectRepository = {
+        DevModel: DevModel,
+        MembershipModel: MembershipModel
+    };
 
     app.get("/developers",
         authMW(objectRepository),

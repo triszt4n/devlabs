@@ -32,14 +32,14 @@ require("./routes/default")(app);
 //Error handling:
 app.use((err, req, res, next) => {
     console.error(err.stack);
-    res.locals.message = "Internal server error. Seek contact for help.";
-    res.status(500).render("error", res.locals);
+    req.session.message = "Internal server error. Seek contact for help.";
+    return res.status(500).redirect("/error");
 });
 
 //The 404 Route:
 app.get('*', (req, res) => {
-    res.locals.message = "You lost there, buddy? Page not found.";
-    res.status(404).render("error", res.locals);
+    req.session.message = "The page you're looking for is not found.";
+    return res.status(400).redirect("/error");
 });
 
 const port = 3000;

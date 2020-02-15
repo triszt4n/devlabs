@@ -1,15 +1,27 @@
 /**
- * edit developer with devID with passed data, then redirect to /account.
+ * edit account with passed data, then redirect to /account.
  * if problem occurs, pass a message to session.
  */
 module.exports = function (objectRepository) {
-
     return function (req, res, next) {
-        return next();
+        if (req.method === "GET") {
+            return next();
+        }
 
-        // missing input: /devs/edit/:devID and message = "Please fill in all queries."
-        // found email in db: /devs/edit/:devID and message = "Account already exists."
-        // wrong email format: /devs/edit/:devID and message = "Not an email address."
+        let dev = res.locals.dev;
+        dev.email = req.body.email;
+        dev.name = (req.body.name !== "")? req.body.name : req.body.email.split("@")[0];
+        dev.phone = req.body.phone;
+
+        dev.save((err) => {
+            if (err) {
+                console.error(err);
+                req.session.message = "An error occured during applying changes. Try again.";
+                return res.redirect("/account/edit");
+            }
+
+            return res.redirect("/account");
+        });
     };
   
 };
