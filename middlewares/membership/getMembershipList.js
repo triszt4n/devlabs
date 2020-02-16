@@ -3,6 +3,7 @@
  */
 const requireOption = require('../default/requireOption');
 const async = require('async');
+const moment = require('moment');
 
 module.exports = function (objectRepository) {
     return function (req, res, next) {
@@ -11,12 +12,13 @@ module.exports = function (objectRepository) {
 
         MembershipModel.find({
             _dev: req.params.devID
-        }).populate('_proj').sort('-creationDate').exec((err, memshipRes) => {
+        }).populate('_proj').sort('-joinDate').exec((err, memshipRes) => {
             if (err) {
                 return next(err);
             }
 
             async.each(memshipRes, (memship, callback) => {
+                memship.joinDateString = moment(memship.joinDate).format("YYYY/MM/DD");
                 ProjectModel.populate(memship._proj, '_leader', (err) => {
                     if (err) {
                         return callback(err);

@@ -12,6 +12,9 @@ const getMemberListMW = require("../middlewares/membership/getMemberList");
 const getDeveloperListMW = require("../middlewares/developer/getDeveloperList");
 const trimDeveloperListMW = require("../middlewares/developer/trimDeveloperList");
 const getMilestoneListMW = require("../middlewares/milestone/getMilestoneList");
+const editMembershipMW = require("../middlewares/membership/editMembership");
+const getMembershipMW = require("../middlewares/membership/getMembership");
+const handOverLeadershipMW = require("../middlewares/membership/handOverLeadership");
 
 const DeveloperModel = require("../models/developer");
 const ProjectModel = require("../models/project");
@@ -28,14 +31,15 @@ module.exports = function (app) {
 
     app.use("/projects/edit/:projID",
         authMW(objectRepository),
-        editProjectMW(objectRepository),
         getProjectMW(objectRepository),
+        editProjectMW(objectRepository),
         renderMW(objectRepository, "project_editnew")
     );
 
     app.use("/projects/new",
         authMW(objectRepository),
         newProjectMW(objectRepository),
+        inviteMemberMW(objectRepository),
         renderMW(objectRepository, "project_editnew")
     );
 
@@ -49,9 +53,23 @@ module.exports = function (app) {
         inviteMemberMW(objectRepository)
     );
 
-    app.post("/projects/kick/:memshipID",
+    app.get("/projects/kick/:memshipID",
         authMW(objectRepository),
+        getMembershipMW(objectRepository),
         kickMemberMW(objectRepository)
+    );
+
+    app.get("/projects/handover/:memshipID",
+        authMW(objectRepository),
+        getMembershipMW(objectRepository),
+        handOverLeadershipMW(objectRepository)
+    );
+
+    app.use("/projects/editrank/:memshipID",
+        authMW(objectRepository),
+        getMembershipMW(objectRepository),
+        editMembershipMW(objectRepository),
+        renderMW(objectRepository, "membership_rankedit")
     );
     
     app.get("/top",
@@ -60,9 +78,9 @@ module.exports = function (app) {
         renderMW(objectRepository, "top")
     );
 
-    app.get("/projects(/all)?",
+    app.get("/projects",
         authMW(objectRepository),
-        getProjectListMW(objectRepository), //(if /all passed, return every project, otherwise, only Dashboard)
+        getProjectListMW(objectRepository),
         renderMW(objectRepository, "projects")
     );
 
@@ -70,8 +88,8 @@ module.exports = function (app) {
         authMW(objectRepository),
         getProjectMW(objectRepository),
         getDeveloperListMW(objectRepository),
-        trimDeveloperListMW(objectRepository),
         getMemberListMW(objectRepository),
+        trimDeveloperListMW(objectRepository),
         getMilestoneListMW(objectRepository),
         renderMW(objectRepository, "project_inspect")
     );

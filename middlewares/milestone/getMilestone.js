@@ -1,17 +1,23 @@
 /**
  * get task from db with taskID
  */
+const requireOption = require('../default/requireOption');
+const moment = require('moment');
+
 module.exports = function (objectRepository) {
     return function (req, res, next) {
-        milestone = {
-            devID: 123,
-            projID: 1,
-            title: "Title lorem ipsum",
-            msID: 123,
-            desc: "Team attended workshop at IBM"
-        }
-        res.locals = milestone;
+        const MilestoneModel = requireOption(objectRepository, 'MilestoneModel');
+        
+        MilestoneModel.findOne({
+            _id: req.params.msID
+        }).populate('_proj').exec((err, msres) => {
+            if (err) {
+                return next(err);
+            }
 
-        return next();
-    };
+            res.locals.milestone = msres;
+            res.locals.milestone.addedDateString = moment(msres.addedDate).format("YYYY/MM/DD HH:mm");
+            return next();
+        });
+    };  
 };

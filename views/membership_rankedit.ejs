@@ -1,0 +1,40 @@
+<%- include('includes/header') %>
+<%- include('includes/navbar', {needFull: true}) %>
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-lg-6">
+            <h4 style="margin: 1em 0 1em 0;">
+                Change Rank of Member
+            </h4>
+        </div>
+    </div>
+    <div class="row justify-content-center">
+        <div class="col-lg-6">
+            <form method="POST">
+                <% if (typeof message !== 'undefined') { %>
+                <p style="color: red;">
+                    <%= message %>
+                </p>
+                <% } %>
+                <div class="form-group">
+                    <label for="name">Member's name</label>
+                    <input readonly type="text" class="form-control" id="name" name="name"
+                        value="<%= membership._dev.name %>">
+                </div>
+                <div class="form-group">
+                    <label for="rank">Rank</label>
+                    <input type="text" class="form-control" id="rank" name="rank" value="<%= membership.rank %>">
+                </div>
+                <button type="submit" style="float: right;" class="btn btn-success">
+                    <ion-icon name="checkmark-outline"></ion-icon>&nbsp;Save
+                </button>
+                <a href="/projects/<%= membership._proj._id %>" class="btn btn-danger">
+                    <ion-icon name="arrow-back-outline"></ion-icon>&nbsp;Back
+                </a>
+            </form>
+        </div>
+    </div>
+</div>
+
+<%- include('includes/footer') %>

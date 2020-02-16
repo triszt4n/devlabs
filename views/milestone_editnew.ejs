@@ -4,18 +4,29 @@
 <div class="container">
     <div class="row" style="margin: 1em 0;">
         <div class="col-12 col-lg-3 h4">
-            <%= (typeof desc !== 'undefined') ? "Edit Milestone" : "New Milestone" %>
+            <%= (typeof milestone !== 'undefined') ? "Edit Milestone" : "New Milestone" %>
         </div>
         <div class="col-12 col-lg-9 text-right lead">
-            <%= title %>
+            <%= (typeof milestone !== 'undefined') ? milestone._proj.title : '' %>
         </div>
+        <p style="color: red;">
+            <%= (typeof message !== 'undefined') ? message : "" %>
+        </p>
     </div>
 
     <form method="POST">
+        <% if ((typeof milestone !== 'undefined')) { %>
+            <div class="form-group">
+                <label for="desc">Added on</label>
+                <input type="text" readonly class="form-control-plaintext" id="addedDateString"
+                    value="<%= milestone.addedDateString %>"
+                    name="addedDateString">
+            </div>
+        <% } %>        
         <div class="form-group">
             <label for="desc">Description</label>
-            <input type="text" class="form-control" id="desc" value="<%= (typeof desc !== 'undefined') ? desc : '' %>"
-                name="desc">
+            <input type="text" class="form-control" id="desc"
+                value="<%= (typeof milestone !== 'undefined') ? milestone.desc : '' %>" name="desc">
         </div>
         <div style="margin-top: 30px;">
             <button type="submit" style="float: right;" class="btn btn-success">

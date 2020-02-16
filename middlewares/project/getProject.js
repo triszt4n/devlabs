@@ -18,14 +18,23 @@ module.exports = function (objectRepository) {
             }
 
             if (result === null) {
-                console.log("Project not found.");
+                console.log("Can't find project by ID.");
                 req.session.message = "The page you're looking for is not found.";
                 return res.redirect("/error");
             }
 
             res.locals.project = result;
             res.locals.project.startDateString = moment(result.startDate).format("YYYY/MM/DD HH:mm");
-            res.locals.project.endDateString = moment(result.endDate).format("YYYY/MM/DD HH:mm");
+            if (typeof result.endDate !== "undefined") {
+                res.locals.project.endDateString = moment(result.endDate).format("YYYY/MM/DD HH:mm");
+                res.locals.project.isEnded = true;
+            } 
+            else {
+                res.locals.project.endDateString = "";
+                res.locals.project.isEnded = false;
+            }
+
+            res.locals.iAmLeader = (result._leader._id == req.session.userID);
             return next();
         });
     };  

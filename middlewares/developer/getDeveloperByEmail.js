@@ -19,9 +19,8 @@ module.exports = function (objectRepository) {
                 console.log(err);
                 return next(err);
             }
-
+            
             res.locals.dev = result;
-            //console.log("res: ", result);
             return next();
         });
     };

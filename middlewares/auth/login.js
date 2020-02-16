@@ -9,6 +9,6 @@ module.exports = function (objectRepository) {
         }
 
         req.session.userID = res.locals.dev._id;
-        return res.redirect("/projects");
+        return res.redirect("/account");
     };  
 };

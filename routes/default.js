@@ -15,10 +15,6 @@ module.exports = function (app) {
         DeveloperModel: DeveloperModel
     };
 
-    app.get("/error",
-        renderMW(objectRepository, "error")
-    );
-
     app.use("/register",
         checkSessionMW(objectRepository),
         getDeveloperByEmailMW(objectRepository),
@@ -43,5 +39,15 @@ module.exports = function (app) {
         checkLoginMW(objectRepository),
         loginMW(objectRepository),
         renderMW(objectRepository, "login")
+    );
+
+    app.get("/error",
+        (req, res, next) => {
+            if (typeof req.session.message === 'undefined') {
+                return res.redirect('/');
+            }
+            return next();
+        },
+        renderMW(objectRepository, "error")
     );
 };

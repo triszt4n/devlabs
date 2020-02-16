@@ -4,9 +4,21 @@
  */
 module.exports = function (objectRepository) {
     return function (req, res, next) {
-        let nonMembers = res.locals.devs.filter(item => 
-            res.locals.project.members.indexOf(item._id) === -1
-        );
+        let nonMembers = [];
+        res.locals.devs.forEach(dev => {
+            let alreadyMember = false;
+
+            for (member of res.locals.project.members) {
+                if (dev._id.equals(member._dev._id)) {
+                    alreadyMember = true;
+                    break;
+                }
+            }
+
+            if (!alreadyMember) {
+                nonMembers.push(dev);
+            }
+        });
         res.locals.project.nonMembers = nonMembers;
 
         return next();

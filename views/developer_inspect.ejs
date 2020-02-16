@@ -33,9 +33,9 @@
             <tr>
                 <th class="text-center" scope="col">#</th>
                 <th scope="col">Project</th>
-                <th class="d-none d-lg-block" scope="col">Leader</th>
+                <th scope="col">Leader</th>
                 <th scope="col">Rank</th>
-                <th class="text-right" scope="col">Joined on</th>
+                <th class="d-none d-lg-block text-right" scope="col">Joined on</th>
                 <th class="text-right" scope="col"> </th>
             </tr>
         </thead>
@@ -44,19 +44,22 @@
             <tr>
                 <th class="text-center" scope="row"><%= dev.memberships.length - index %></th>
                 <td><%= membership._proj.title %></td>
-                <td class="d-none d-lg-block"><%= membership._proj._leader.name %></td>
+                <td><%= membership._proj._leader.name %></td>
                 <td><%= membership.rank %></td>
-                <td class="text-right"><%= membership.creationDate %></td>
+                <td class="d-none d-lg-block text-right"><%= membership.joinDateString %></td>
                 <td class="text-right">
                     <button class="btn btn-primary dropdown-toggle" data-toggle="dropdown"></button>
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="btnGroupDrop1">
                         <a href="/projects/<%= membership._proj._id %>" class="dropdown-item">
                             <ion-icon name="search-outline"></ion-icon>&nbsp;View Project
                         </a>
-                        <div class="dropdown-divider"></div>
-                        <a href="/projects/kick/<%= membership._id %>" class="dropdown-item">
-                            <ion-icon name="walk-outline"></ion-icon>&nbsp;Quit Project
-                        </a>
+                        <%# User can quit projects that they are not leader of: %> 
+                        <% if (dev._id == userID && membership._proj._leader._id != userID) { %>
+                            <div class="dropdown-divider"></div>
+                            <a href="/projects/kick/<%= membership._id %>" class="dropdown-item">
+                                <ion-icon name="walk-outline"></ion-icon>&nbsp;Quit Project
+                            </a>
+                        <% } %>                        
                     </div>
                 </td>
             </tr>

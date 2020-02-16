@@ -10,7 +10,7 @@ const Membership = db.model('Membership', {
         type: Schema.Types.ObjectId,
         ref: 'Developer'
     },
-    creationDate: {
+    joinDate: {
         type: Date,
         default: Date.now
     },

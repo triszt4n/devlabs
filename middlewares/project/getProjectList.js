@@ -1,6 +1,5 @@
 /**
  * return the projects' attributes as list of objects including all attributes
- * note: this became a whole microservice
  */
 const requireOption = require('../default/requireOption');
 const async = require('async');
@@ -10,12 +9,10 @@ module.exports = function (objectRepository) {
     return function (req, res, next) {
         const ProjectModel = requireOption(objectRepository, 'ProjectModel');
         const MilestoneModel = requireOption(objectRepository, 'MilestoneModel');
+        const MembershipModel = requireOption(objectRepository, 'MembershipModel');
 
-        let conditionObject = (req.path.indexOf("/all") > 0) ? {
-            _leader: req.session.userID
-        } : {};
-
-        ProjectModel.find(conditionObject).populate('_leaderID').exec((err, projres) => {
+        //Getting all the projects:
+        ProjectModel.find({}).populate('_leader').sort('-startDate').exec((err, projres) => {
             if (err) {
                 return next(err);
             }
@@ -24,7 +21,8 @@ module.exports = function (objectRepository) {
             //Getting milestones for all projects:
             async.each(projects, (project, callback) => {
                 project.startDateString = moment(project.startDate).format("YYYY/MM/DD HH:mm");
-                project.endDateString = moment(project.endDate).format("YYYY/MM/DD HH:mm");
+                if (typeof project.endDate !== "undefined")
+                    project.endDateString = moment(project.endDate).format("YYYY/MM/DD HH:mm");
 
                 MilestoneModel.find({
                     _projID: project._id
@@ -40,7 +38,6 @@ module.exports = function (objectRepository) {
                 if (err) {
                     return next(err);
                 }
-
                 res.locals.projects = projects;
                 return next();
             });

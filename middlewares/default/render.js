@@ -12,7 +12,6 @@ module.exports = function (objectRepository, viewName) {
         if (typeof req.session.userID !== 'undefined') {
             res.locals.userID = req.session.userID;
         }
-        res.locals.showAll = (req.path.indexOf("/all") !== -1)? true : false;
         res.locals.activeBase = req.path.split('/')[1];
 
         //Final rendering:

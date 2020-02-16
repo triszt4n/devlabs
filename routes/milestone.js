@@ -17,15 +17,15 @@ module.exports = function (app) {
 
     app.use("/milestone/edit/:msID",
         authMW(objectRepository),
-        editMilestoneMW(objectRepository),
         getMilestoneMW(objectRepository),
+        editMilestoneMW(objectRepository),
         renderMW(objectRepository, "milestone_editnew")
     );
 
     app.use("/milestone/new/:projID",
         authMW(objectRepository),
-        newMilestoneMW(objectRepository),
         getProjectMW(objectRepository),
+        newMilestoneMW(objectRepository),
         renderMW(objectRepository, "milestone_editnew")
     );
 

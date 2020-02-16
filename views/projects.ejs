@@ -5,20 +5,16 @@
     <div class="row justify-content-center">
         <div class="col-12 text-center">
             <h2 style="margin: 1em 0 0.5em 0;">
-                <div>
-                    <%= showAll?"":"Your " %>Projects
-                </div>
-                <a href="/projects<%= showAll?"":"/all" %>" class="btn btn-link">
-                    <%= showAll?"Back to my Projects":"View all" %>
-                </a>
+                Projects
             </h2>
         </div>
     </div>
+
     <% projects.forEach( function(project) { %>
     <div class="card" style="margin-bottom: 20px;">
         <div class="card-header">
             <div style="float: right; padding-left: 3px;">
-                <a href="/projects/<%= project._leader._id %>" class="btn btn-info">
+                <a href="/projects/<%= project._id %>" class="btn btn-info">
                     <ion-icon name="search-outline"></ion-icon>
                 </a>
             </div>
@@ -26,23 +22,22 @@
                 <%= project.title %>
             </div>
         </div>
+
+        <%# Details of project %> 
         <div class="card-body">
             <div class="row">
+                <div class="col-12 col-lg-5">
+                    <ion-icon name="shield-checkmark-outline"></ion-icon>&nbsp;<%= project._leader.name %>
+                </div>
+                <div class="col-12 col-lg-7 text-lg-right">
+                    <ion-icon name="calendar-outline"></ion-icon>&nbsp;<%= project.startDateString %> -
+                    <%= project.endDateString %>
+                </div>
                 <div class="col-12 col-lg-6">
-                    <ion-icon name="shield-checkmark-outline"></ion-icon>&nbsp;Leader: <%= project._leader.name %>
-                </div>
-                <div class="col-12 col-lg-6 text-lg-right">
-                    <ion-icon name="calendar-outline"></ion-icon>&nbsp;<%= project.startDate %> -
-                    <%= project.endDate %>
-                </div>
-                <div class="col-6">
-                    <ion-icon name="people-outline"></ion-icon>&nbsp;Members: <%= project.numOfDevs %>
-                </div>
-                <div class="col-12 col-lg-6 text-lg-right">
                     <ion-icon name="cash-outline"></ion-icon>&nbsp;$<%= project.reward %>
                 </div>
-                <div class="col-12 text-right">
-                    <% if (project.endDate === "") { %>
+                <div class="col-12 col-lg-6 text-lg-right">
+                    <% if (typeof project.endDateString === "undefined") { %>
                     <ion-icon name="pulse-outline"></ion-icon>&nbsp;Ongoing
                     <% } else { %>
                     <% if (project.isSuccess) { %>
@@ -52,31 +47,35 @@
                     <% }} %>
                 </div>
                 <div class="col-12" style="margin-top: 10px;">
-                    Milestones:
+                    Milestones: (<%= project.milestones.length %>)
                 </div>
             </div>
         </div>
-        <table class="card-table table">
-            <thead>
-                <tr>
-                    <th class="d-none d-lg-block text-center" scope="col">#</th>
-                    <th scope="col">Description</th>
-                    <th class="d-none d-lg-block" scope="col">Added by</th>
-                    <th class="text-right" scope="col">Added on</th>
-                </tr>
-            </thead>
-            <tbody>
-                <% project.milestones.forEach( function(milestone, index) { %>
-                <tr>
-                    <th class="d-none d-lg-block text-center" scope="row"><%= project.milestones.length - index %>
-                    </th>
-                    <td><%= milestone.desc %></td>
-                    <td class="d-none d-lg-block"><%= milestone.addedBy %></td>
-                    <td class="text-right"><%= milestone.addedDate %></td>
-                </tr>
-                <% }); %>
-            </tbody>
-        </table>
+
+        <%# Last 5 Milestones %> 
+        <% if (project.milestones.length > 0) { %>
+            <table class="card-table table">
+                <thead>
+                    <tr>
+                        <th class="d-none d-lg-block text-center" scope="col">#</th>
+                        <th scope="col">Description</th>
+                        <th class="d-none d-lg-block" scope="col">Added by</th>
+                        <th class="text-right" scope="col">Added on</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% project.milestones.forEach( function(milestone, index) { %>
+                    <tr>
+                        <th class="d-none d-lg-block text-center" scope="row"><%= project.milestones.length - index %>
+                        </th>
+                        <td><%= milestone.desc %></td>
+                        <td class="d-none d-lg-block"><%= milestone.addedBy %></td>
+                        <td class="text-right"><%= milestone.addedDate %></td>
+                    </tr>
+                    <% }); %>
+                </tbody>
+            </table>
+        <% } %>        
     </div>
     <% }); %>
 

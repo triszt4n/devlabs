@@ -9,6 +9,11 @@ module.exports = function (objectRepository) {
         }
 
         let dev = res.locals.dev;
+        if (dev === null) {
+            req.session.message = "Account does not exist.";
+            return res.redirect("/forgotten");
+        }
+
         dev.pw = generateRandomString(10);
 
         dev.save((err) => {

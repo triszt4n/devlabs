@@ -12,7 +12,7 @@ module.exports = function (objectRepository) {
     return function (req, res, next) {
         //GET branch:
         if (req.method === "GET") {
-            res.locals = {
+            res.locals.project = {
                 title: "",
                 startDateString: "",
                 endDateString: "",
@@ -47,7 +47,15 @@ module.exports = function (objectRepository) {
                 console.log(err);
                 return res.redirect("/projects/new");
             }
-            return res.redirect(`/projects/${result._id}`);
+            
+            //passing these for "inviting" the creator:
+            res.locals = new Object({
+                invitation: {
+                    projID: result._id,
+                    devID: req.session.userID
+                }
+            });
+            return next();
         });
     };  
 };
