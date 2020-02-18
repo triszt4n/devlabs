@@ -12,7 +12,7 @@ module.exports = function (objectRepository) {
         const MembershipModel = requireOption(objectRepository, 'MembershipModel');
 
         //Getting all the projects:
-        ProjectModel.find({}).populate('_leader').sort('-startDate').exec((err, projres) => {
+        ProjectModel.find({}).populate('_owner').sort('-startDate').exec((err, projres) => {
             if (err) {
                 return next(err);
             }
@@ -25,12 +25,16 @@ module.exports = function (objectRepository) {
                     project.endDateString = moment(project.endDate).format("YYYY/MM/DD HH:mm");
 
                 MilestoneModel.find({
-                    _projID: project._id
-                }).sort('-addedDate').limit(5).exec((err, msres) => {
+                    _proj: project._id
+                }).populate('_dev').sort('-addedDate').limit(5).exec((err, msres) => {
                     if (err) {
                         return callback(err);
                     }
 
+                    msres.forEach(ms => {
+                        ms.addedDateString = moment(ms.addedDate).format("YYYY/MM/DD HH:mm");
+                    });
+                    
                     project.milestones = msres;
                     return callback();
                 });

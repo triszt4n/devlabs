@@ -27,7 +27,7 @@
         <div class="card-body">
             <div class="row">
                 <div class="col-12 col-lg-5">
-                    <ion-icon name="shield-checkmark-outline"></ion-icon>&nbsp;<%= project._leader.name %>
+                    <ion-icon name="shield-checkmark-outline"></ion-icon>&nbsp;<%= project._owner.name %>
                 </div>
                 <div class="col-12 col-lg-7 text-lg-right">
                     <ion-icon name="calendar-outline"></ion-icon>&nbsp;<%= project.startDateString %> -
@@ -69,8 +69,8 @@
                         <th class="d-none d-lg-block text-center" scope="row"><%= project.milestones.length - index %>
                         </th>
                         <td><%= milestone.desc %></td>
-                        <td class="d-none d-lg-block"><%= milestone.addedBy %></td>
-                        <td class="text-right"><%= milestone.addedDate %></td>
+                        <td class="d-none d-lg-block"><%= (milestone._dev == null)? '[deleted]': milestone._dev.name %></td>
+                        <td class="text-right"><%= milestone.addedDateString %></td>
                     </tr>
                     <% }); %>
                 </tbody>

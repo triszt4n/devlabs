@@ -11,10 +11,10 @@ const kickMemberMW = require("../middlewares/membership/kickMember");
 const getMemberListMW = require("../middlewares/membership/getMemberList");
 const getDeveloperListMW = require("../middlewares/developer/getDeveloperList");
 const trimDeveloperListMW = require("../middlewares/developer/trimDeveloperList");
-const getMilestoneListMW = require("../middlewares/milestone/getMilestoneList");
+const getMilestoneListByProjIDMW = require("../middlewares/milestone/getMilestoneListByProjID");
 const editMembershipMW = require("../middlewares/membership/editMembership");
 const getMembershipMW = require("../middlewares/membership/getMembership");
-const handOverLeadershipMW = require("../middlewares/membership/handOverLeadership");
+const handOverOwnershipMW = require("../middlewares/membership/handOverOwnership");
 
 const DeveloperModel = require("../models/developer");
 const ProjectModel = require("../models/project");
@@ -43,8 +43,11 @@ module.exports = function (app) {
         renderMW(objectRepository, "project_editnew")
     );
 
-    app.post("/projects/delete/:projID",
+    app.get("/projects/delete/:projID",
         authMW(objectRepository),
+        getProjectMW(objectRepository),
+        getMemberListMW(objectRepository),
+        getMilestoneListByProjIDMW(objectRepository),
         deleteProjectMW(objectRepository),
     );
 
@@ -62,7 +65,7 @@ module.exports = function (app) {
     app.get("/projects/handover/:memshipID",
         authMW(objectRepository),
         getMembershipMW(objectRepository),
-        handOverLeadershipMW(objectRepository)
+        handOverOwnershipMW(objectRepository)
     );
 
     app.use("/projects/editrank/:memshipID",
@@ -90,7 +93,7 @@ module.exports = function (app) {
         getDeveloperListMW(objectRepository),
         getMemberListMW(objectRepository),
         trimDeveloperListMW(objectRepository),
-        getMilestoneListMW(objectRepository),
+        getMilestoneListByProjIDMW(objectRepository),
         renderMW(objectRepository, "project_inspect")
     );
 };

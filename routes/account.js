@@ -9,34 +9,37 @@ const checkPasswordsMW = require("../middlewares/account/checkPasswords");
 const changePasswordMW = require("../middlewares/account/changePassword");
 const redirectWithUserIDMW = require("../middlewares/account/redirectWithUserID");
 const getDeveloperByEmailMW = require("../middlewares/developer/getDeveloperByEmail");
+const getMilestoneListByDevIDMW = require("../middlewares/milestone/getMilestoneListByDevID");
 const checkEditAccountMW = require("../middlewares/account/checkEditAccount");
+const getMembershipListMW = require("../middlewares/membership/getMembershipList");
 
 const DeveloperModel = require("../models/developer");
 const MilestoneModel = require("../models/milestone");
 const MembershipModel = require("../models/membership");
+const ProjectModel = require("../models/project");
 
 module.exports = function (app) {
     var objectRepository = {
         DeveloperModel: DeveloperModel,
         MilestoneModel: MilestoneModel,
-        MembershipModel: MembershipModel
+        MembershipModel: MembershipModel,
+        ProjectModel: ProjectModel
     };
 
     app.use("/account/edit",
         authMW(objectRepository),
         getDeveloperByEmailMW(objectRepository),
         checkEditAccountMW(objectRepository),
-        (req, res, next) => {
-            req.params.devID = req.session.userID;
-            next();
-        },
         getDeveloperByIDMW(objectRepository),
         editAccountMW(objectRepository),
         renderMW(objectRepository, "account_edit")
     );
 
-    app.post("/account/delete",
+    app.get("/account/delete",
         authMW(objectRepository),
+        getDeveloperByIDMW(objectRepository),
+        getMembershipListMW(objectRepository),
+        getMilestoneListByDevIDMW(objectRepository),
         deleteAccountMW(objectRepository),
         removeRelationsMW(objectRepository),
         logoutMW(objectRepository)

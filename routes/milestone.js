@@ -29,8 +29,9 @@ module.exports = function (app) {
         renderMW(objectRepository, "milestone_editnew")
     );
 
-    app.post("/milestone/delete/:msID",
+    app.get("/milestone/delete/:msID",
         authMW(objectRepository),
+        getMilestoneMW(objectRepository),
         deleteMilestoneMW(objectRepository),
     );
 };

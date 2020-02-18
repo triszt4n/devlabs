@@ -4,25 +4,32 @@
 <div class="container">
     <div class="row">
         <div class="col-12 text-center">
-            <h2 style="margin: 1em 0 1em 0;">View Developer</h2>
+            <h2 style="margin: 1em 0 1em 0;">Developer's details</h2>
         </div>
     </div>
 
     <div class="row">
         <div class="col-12">
-            <span class="h2">
+            <h2>
                 <%= dev.name %>
-            </span>
+            </h2>
         </div>
         <div style="margin-left: 20px; margin-top: 10px;" class="col-12">
-            <ion-icon name="at-outline"></ion-icon>&nbsp;<%= dev.email %>
-        </div>
-        <% if (dev.phone !== "") { %>
-            <div style="margin-left: 20px;" class="col-12">
+            <p style="margin: 0;">
+                Personal information:
+            </p>
+            <p style="margin: 0;">
+                <ion-icon name="at-outline"></ion-icon>&nbsp;<%= dev.email %>
+            </p>
+            <p style="margin: 0;">
+                <% if (dev.phone !== "") { %>
                 <ion-icon name="call-outline"></ion-icon>&nbsp;<%= dev.phone %>
-            </div>
-        <% } %>
+                <% } %>
+            </p>
+        </div>
     </div>
+
+    <% if (dev.memberships.length > 0) { %>
     <div style="margin: 40px 0 10px 0;" class="row">
         <div class="col-12">
             Memberships:
@@ -33,7 +40,7 @@
             <tr>
                 <th class="text-center" scope="col">#</th>
                 <th scope="col">Project</th>
-                <th scope="col">Leader</th>
+                <th scope="col">Owner</th>
                 <th scope="col">Rank</th>
                 <th class="d-none d-lg-block text-right" scope="col">Joined on</th>
                 <th class="text-right" scope="col"> </th>
@@ -44,7 +51,12 @@
             <tr>
                 <th class="text-center" scope="row"><%= dev.memberships.length - index %></th>
                 <td><%= membership._proj.title %></td>
-                <td><%= membership._proj._leader.name %></td>
+                <td>
+                    <%= membership._proj._owner.name %>
+                    <% if (membership._proj._owner._id == userID) { %>
+                    <span class="badge badge-success align-top">You!</span>
+                    <% } %>
+                </td>
                 <td><%= membership.rank %></td>
                 <td class="d-none d-lg-block text-right"><%= membership.joinDateString %></td>
                 <td class="text-right">
@@ -53,26 +65,33 @@
                         <a href="/projects/<%= membership._proj._id %>" class="dropdown-item">
                             <ion-icon name="search-outline"></ion-icon>&nbsp;View Project
                         </a>
-                        <%# User can quit projects that they are not leader of: %> 
-                        <% if (dev._id == userID && membership._proj._leader._id != userID) { %>
-                            <div class="dropdown-divider"></div>
-                            <a href="/projects/kick/<%= membership._id %>" class="dropdown-item">
-                                <ion-icon name="walk-outline"></ion-icon>&nbsp;Quit Project
-                            </a>
-                        <% } %>                        
+                        <%# User can quit projects that they are not owner of: %>
+                        <% if (dev._id == userID && membership._proj._owner._id != userID) { %>
+                        <div class="dropdown-divider"></div>
+                        <a href="/projects/kick/<%= membership._id %>" class="dropdown-item">
+                            <ion-icon name="walk-outline"></ion-icon>&nbsp;Quit Project
+                        </a>
+                        <% } %>
                     </div>
                 </td>
             </tr>
             <% }); %>
         </tbody>
     </table>
+    <% } %>
 
-    <div class="row">
-        <div class="col-12">
-            <a href="javascript:history.back()" class="btn btn-danger">
-                <ion-icon name="arrow-back-outline"></ion-icon>&nbsp;Back
-            </a>
-        </div>
+    <% if (dev._id == userID) { %>
+    <div class="row justify-content-center" style="margin: 1rem 0 1rem 0;">
+        <a href="/projects/new" class="col-12 col-lg-6 btn btn-primary btn-block">
+            <ion-icon name="add-outline"></ion-icon>&nbsp;Start Project
+        </a>
+    </div>
+    <% } %>
+
+    <div style="margin: 1rem 0 1rem 0;">
+        <a href="javascript:history.back()" class="btn btn-danger">
+            <ion-icon name="arrow-back-outline"></ion-icon>&nbsp;Back
+        </a>
     </div>
 </div>
 

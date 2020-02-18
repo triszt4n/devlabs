@@ -39,7 +39,7 @@ module.exports = function (objectRepository) {
         project.desc = req.body.desc;
         project.reward = (req.body.reward === "")? 0 : parseFloat(req.body.reward);
         project.isSuccess = (typeof req.body.isSuccess === 'undefined' || req.body.isSuccess === false)? false : true;
-        project._leader = req.session.userID;
+        project._owner = req.session.userID;
 
         project.save((err, result) => {
             if (err) {

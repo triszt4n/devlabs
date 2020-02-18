@@ -22,9 +22,9 @@ module.exports = function (objectRepository) {
 
         milestone.save((err) => {
             if (err) {
-                req.session.message = "An error occured while applying changes. Try again.";
+                req.session.message = "An error occured while creating milestone. Try again.";
                 console.log(err);
-                return res.redirect(`/milestone/edit/${req.params.msID}`);
+                return res.redirect(`/milestone/new/${req.params.projID}`);
             }
 
             return res.redirect(`/projects/${req.params.projID}`);

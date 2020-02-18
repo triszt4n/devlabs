@@ -15,12 +15,18 @@ module.exports = function (objectRepository) {
                 return next(err);
             }
 
+            let iAmMember = false;
             //Remapping to be easier to use:
-            result.forEach((item) => {
-                item.joinDateString = moment(item.joinDate).format("YYYY/MM/DD");
+            result.forEach((member) => {
+                member.joinDateString = moment(member.joinDate).format("YYYY/MM/DD");
+                //check if user is member in project
+                if (!iAmMember && (member._dev._id == req.session.userID)) {
+                    iAmMember = true;
+                }
             });
             
             res.locals.project.members = result;
+            res.locals.project.iAmMember = iAmMember;
             return next();
         });
     };  

@@ -28,7 +28,7 @@ GET /projects/:projID
     getDeveloperListMW
     getMemberListMW
     getMilestoneListMW
-    checkIfLeaderMW
+    checkIfOwnerMW
     renderMW(project_inspect)
 GET, POST /projects/edit/:projID
     authMW

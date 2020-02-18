@@ -12,7 +12,7 @@ module.exports = function (objectRepository) {
 
         ProjectModel.find({
             isSuccess: true
-        }).populate('_leaderID').sort('-reward').limit(3).exec((err, projRes) => {
+        }).populate('_owner').sort('-reward').limit(3).exec((err, projRes) => {
             if (err) {
                 return next(err);
             }

@@ -17,7 +17,7 @@ module.exports = function (objectRepository) {
                 req.session.message = "Error occured while applying changes to Member's details. Try again.";
                 return res.redirect(`/projects/rankedit/${membership._id}`);
             }
-            return res.redirect(`/projects/${membership._proj}`);
+            return res.redirect(`/projects/${membership._proj._id}`);
         });
     };
 };

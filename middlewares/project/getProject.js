@@ -12,7 +12,7 @@ module.exports = function (objectRepository) {
 
         ProjectModel.findOne({
             _id: req.params.projID
-        }).populate('_leader').exec((err, result) => {
+        }).populate('_owner').exec((err, result) => {
             if (err) {
                 return next(err);
             }
@@ -34,7 +34,7 @@ module.exports = function (objectRepository) {
                 res.locals.project.isEnded = false;
             }
 
-            res.locals.iAmLeader = (result._leader._id == req.session.userID);
+            res.locals.iAmOwner = (result._owner._id == req.session.userID);
             return next();
         });
     };  
