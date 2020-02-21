@@ -18,13 +18,16 @@ module.exports = function (objectRepository) {
         dev.email = req.body.email;
         dev.pw = req.body.pw;
         dev.phone = req.body.phone;
+        dev.githubUsername = req.body.githubUsername;
 
         dev.save((err) => {
             if (err) {
-                //req.session.message = err;
+                req.session.message = "Error occured in our server while registering.";
                 console.log(err);
                 return res.redirect("/register");
             }
+            req.session.message = "Account successfully created.";
+            req.session.messageColor = "green";
             return res.redirect("/");
         });
     };

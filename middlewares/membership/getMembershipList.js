@@ -27,7 +27,7 @@ module.exports = function (objectRepository) {
                     if (err) {
                         return callback(err);
                     }
-                    if (memship._proj._owner._id.equals(req.session.userID)) {
+                    if ((memship._proj._owner != null) && memship._proj._owner._id.equals(req.session.userID)) {
                         memshipRes.iHaveOwnership = true;
                     }
                     return callback();

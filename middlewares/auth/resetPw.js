@@ -24,6 +24,7 @@ module.exports = function (objectRepository) {
             }
 
             req.session.message = "New password: " + dev.pw;
+            req.session.messageColor = "green";
             return res.redirect("/");
         });
     };

@@ -8,7 +8,7 @@ module.exports = function (objectRepository) {
         }
 
         if (req.body.newpw1 === "" || req.body.newpw2 === "" || req.body.oldpw === "") {
-            req.session.message = "Please fill in all queries.";
+            req.session.message = "Please fill in all required queries.";
             return res.redirect("/account/pw");
         }
 

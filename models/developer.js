@@ -5,7 +5,8 @@ const Developer = db.model('Developer', {
     email: String,
     pw: String,
     name: String,
-    phone: String
+    phone: String,
+    githubUsername: String
 });
 
 module.exports = Developer;

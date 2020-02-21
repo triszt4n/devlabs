@@ -16,6 +16,7 @@ module.exports = function (objectRepository) {
             if (err) {
                 return next(err);
             }
+            console.log("es", result);
 
             if (result === null) {
                 console.log("Can't find project by ID.");
@@ -34,7 +35,7 @@ module.exports = function (objectRepository) {
                 res.locals.project.isEnded = false;
             }
 
-            res.locals.iAmOwner = (result._owner._id == req.session.userID);
+            res.locals.iAmOwner = ((result._owner != null) && (result._owner._id == req.session.userID));
             return next();
         });
     };  

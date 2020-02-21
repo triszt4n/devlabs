@@ -8,6 +8,7 @@ const Project = db.model('Project', {
     isSuccess: Boolean,
     reward: Number,
     desc: String,
+    githubRepoPath: String,
     _owner: {
         type: Schema.Types.ObjectId,
         ref: 'Developer'

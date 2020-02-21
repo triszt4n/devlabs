@@ -21,6 +21,10 @@
                         <a href="/projects/edit/<%= project._id %>" class="dropdown-item">
                             <ion-icon name="create-outline"></ion-icon>&nbsp;Edit Project
                         </a>
+                        <div class="dropdown-divider"></div>
+                        <a href="/projects/archive/<%= project._id %>" class="dropdown-item">
+                            <ion-icon name="archive-outline"></ion-icon>&nbsp;Archive Project
+                        </a>
                         <a href="/projects/delete/<%= project._id %>" class="dropdown-item">
                             <ion-icon name="trash-outline"></ion-icon>&nbsp;Delete Project
                         </a>
@@ -35,9 +39,24 @@
     <%# Main details of project %>
     <div class="row ml-lg-3">
         <div class="col-12 col-lg-4">
+            <% if ((typeof project.githubRepoPath !== 'undefined') && (project.githubRepoPath !== "")) { %>
+            <div>
+                <ion-icon name="git-branch-outline"></ion-icon>
+                <a href="https://github.com/<%= project.githubRepoPath %>" target="_blank">
+                    <%= project.githubRepoPath %>
+                </a>
+            </div>
+            <% } %>
+            <% if (typeof project._owner === 'undefined') { %>
+            <div>
+                <ion-icon name="archive-outline"></ion-icon>
+                <span class="text-muted">Archived</span>
+            </div>
+            <% } else { %>
             <div>
                 <ion-icon name="shield-checkmark-outline"></ion-icon>&nbsp;<%= project._owner.name %>
             </div>
+            <% } %>
             <% if (project.startDateString !== "" || project.endDateString !== "") { %>
             <div>
                 <ion-icon name="calendar-outline"></ion-icon>&nbsp;<%= project.startDateString %> -
@@ -60,6 +79,11 @@
         <div class="col-12 col-lg-8">
             <u>Description:</u><br />
             <%= project.desc %>
+            <% if (project.desc === "") { %>
+            <p class="small text-muted" style="font-style: italic;">
+                No description given.
+            </p>
+            <% } %>
         </div>
     </div>
 
@@ -71,6 +95,7 @@
             </div>
         </div>
 
+        <% if (project.members.length > 0) { %>
         <table class="table">
             <thead>
                 <tr>
@@ -109,7 +134,7 @@
                             <a href="/projects/kick/<%= member._id %>" class="dropdown-item">
                                 <ion-icon name="person-remove-outline"></ion-icon>&nbsp;Kick Member
                             </a>
-                            <% } else if (member._dev._id == userID) { %>
+                            <% } else if ((member._dev._id == userID) && (typeof project._owner !== 'undefined')) { %>
                             <div class="dropdown-divider"></div>
                             <a href="/projects/kick/<%= member._id %>" class="dropdown-item">
                                 <ion-icon name="person-remove-outline"></ion-icon>&nbsp;Quit Project
@@ -121,6 +146,7 @@
                 <% }); %>
             </tbody>
         </table>
+        <% } %>
 
         <% if (iAmOwner && (project.nonMembers.length > 0)) { %>
         <div class="card-body">
@@ -170,7 +196,7 @@
                     <td><%= (milestone._dev == null)? '[deleted]': milestone._dev.name %></td>
                     <td class="text-right"><%= milestone.addedDateString %></td>
                     <td class="text-right">
-                        <% if ((milestone._dev != null) && milestone._dev._id == userID || iAmOwner) { %>
+                        <% if (((milestone._dev != null) && project.iAmMember && (milestone._dev._id == userID)) || iAmOwner) { %>
                         <button class="btn btn-primary dropdown-toggle" data-toggle="dropdown"></button>
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="btnGroupDrop1">
                             <a href="/milestone/edit/<%= milestone._id %>" class="dropdown-item">
@@ -190,16 +216,16 @@
         <% } %>
 
         <% if (project.iAmMember) { %>
-            <div class="card-body">
-                <div class="row justify-content-center">
-                    <div class="col-10">
-                        <a href="/milestone/new/<%= project._id %>" class="btn btn-primary btn-block">
-                            <ion-icon name="golf-outline"></ion-icon>&nbsp;New Milestone
-                        </a>
-                    </div>
+        <div class="card-body">
+            <div class="row justify-content-center">
+                <div class="col-10">
+                    <a href="/milestone/new/<%= project._id %>" class="btn btn-primary btn-block">
+                        <ion-icon name="golf-outline"></ion-icon>&nbsp;New Milestone
+                    </a>
                 </div>
             </div>
-        <% } %>        
+        </div>
+        <% } %>
     </div>
 
     <a href="javascript:history.back()" class="btn btn-danger" style="margin-top: 20px;">

@@ -26,6 +26,14 @@
                 <ion-icon name="call-outline"></ion-icon>&nbsp;<%= dev.phone %>
                 <% } %>
             </p>
+            <p style="margin: 0;">
+                <% if (dev.githubUsername !== "") { %>
+                <ion-icon name="logo-github" style="color: white !important;"></ion-icon>
+                <a href="https://github.com/<%= dev.githubUsername %>" target="_blank">
+                    <%= dev.githubUsername %>
+                </a>
+                <% } %>
+            </p>
         </div>
     </div>
 
@@ -51,12 +59,20 @@
             <tr>
                 <th class="text-center" scope="row"><%= dev.memberships.length - index %></th>
                 <td><%= membership._proj.title %></td>
+
+                <% if (typeof membership._proj._owner === 'undefined') { %>
+                <td class="text-muted">
+                    Archived
+                </td>
+                <% } else { %>
                 <td>
                     <%= membership._proj._owner.name %>
                     <% if (membership._proj._owner._id == userID) { %>
                     <span class="badge badge-success align-top">You!</span>
                     <% } %>
                 </td>
+                <% } %>
+
                 <td><%= membership.rank %></td>
                 <td class="d-none d-lg-block text-right"><%= membership.joinDateString %></td>
                 <td class="text-right">
@@ -66,7 +82,7 @@
                             <ion-icon name="search-outline"></ion-icon>&nbsp;View Project
                         </a>
                         <%# User can quit projects that they are not owner of: %>
-                        <% if (dev._id == userID && membership._proj._owner._id != userID) { %>
+                        <% if ((typeof membership._proj._owner !== 'undefined') && (dev._id == userID) && (membership._proj._owner._id != userID)) { %>
                         <div class="dropdown-divider"></div>
                         <a href="/projects/kick/<%= membership._id %>" class="dropdown-item">
                             <ion-icon name="walk-outline"></ion-icon>&nbsp;Quit Project
@@ -88,7 +104,7 @@
     </div>
     <% } %>
 
-    <div style="margin: 1rem 0 1rem 0;">
+    <div style="margin: 2rem 0 1rem 0;">
         <a href="javascript:history.back()" class="btn btn-danger">
             <ion-icon name="arrow-back-outline"></ion-icon>&nbsp;Back
         </a>

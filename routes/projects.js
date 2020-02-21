@@ -15,6 +15,7 @@ const getMilestoneListByProjIDMW = require("../middlewares/milestone/getMileston
 const editMembershipMW = require("../middlewares/membership/editMembership");
 const getMembershipMW = require("../middlewares/membership/getMembership");
 const handOverOwnershipMW = require("../middlewares/membership/handOverOwnership");
+const archiveProjectMW = require("../middlewares/project/archiveProject");
 
 const DeveloperModel = require("../models/developer");
 const ProjectModel = require("../models/project");
@@ -41,6 +42,12 @@ module.exports = function (app) {
         newProjectMW(objectRepository),
         inviteMemberMW(objectRepository),
         renderMW(objectRepository, "project_editnew")
+    );
+
+    app.get("/projects/archive/:projID",
+        authMW(objectRepository),
+        getProjectMW(objectRepository),
+        archiveProjectMW(objectRepository),
     );
 
     app.get("/projects/delete/:projID",

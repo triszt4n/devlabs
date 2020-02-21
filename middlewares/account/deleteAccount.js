@@ -5,7 +5,7 @@ module.exports = function (objectRepository) {
     return function (req, res, next) {
         if (res.locals.dev.memberships.iHaveOwnership) {
             console.log("Couldn't delete yet.");
-            req.session.message = "ATTENTION: Can't delete account yet. Please hand over the control of your own projects to other Members.";
+            req.session.message = "ATTENTION: Can't delete account yet. Please hand over the control of your own projects to other Members. Or archive them manually.";
             return res.redirect(`/error`);
         }
 

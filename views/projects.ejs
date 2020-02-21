@@ -20,15 +20,29 @@
             </div>
             <div class="card-title">
                 <%= project.title %>
+                <% if ((typeof project.githubRepoPath !== 'undefined') && (project.githubRepoPath !== "")) { %>
+                <br />
+                <ion-icon name="git-branch-outline"></ion-icon>
+                <a href="https://github.com/<%= project.githubRepoPath %>" target="_blank">
+                    <%= project.githubRepoPath %>
+                </a>
+                <% } %>
             </div>
         </div>
 
-        <%# Details of project %> 
+        <%# Details of project %>
         <div class="card-body">
             <div class="row">
+                <% if (typeof project._owner === 'undefined') { %>
+                <div class="col-12 col-lg-5">
+                    <ion-icon name="archive-outline"></ion-icon>
+                    <span class="text-muted">Archived</span>
+                </div>
+                <% } else { %>
                 <div class="col-12 col-lg-5">
                     <ion-icon name="shield-checkmark-outline"></ion-icon>&nbsp;<%= project._owner.name %>
                 </div>
+                <% } %>
                 <div class="col-12 col-lg-7 text-lg-right">
                     <ion-icon name="calendar-outline"></ion-icon>&nbsp;<%= project.startDateString %> -
                     <%= project.endDateString %>
@@ -52,30 +66,30 @@
             </div>
         </div>
 
-        <%# Last 5 Milestones %> 
+        <%# Last 5 Milestones %>
         <% if (project.milestones.length > 0) { %>
-            <table class="card-table table">
-                <thead>
-                    <tr>
-                        <th class="d-none d-lg-block text-center" scope="col">#</th>
-                        <th scope="col">Description</th>
-                        <th class="d-none d-lg-block" scope="col">Added by</th>
-                        <th class="text-right" scope="col">Added on</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <% project.milestones.forEach( function(milestone, index) { %>
-                    <tr>
-                        <th class="d-none d-lg-block text-center" scope="row"><%= project.milestones.length - index %>
-                        </th>
-                        <td><%= milestone.desc %></td>
-                        <td class="d-none d-lg-block"><%= (milestone._dev == null)? '[deleted]': milestone._dev.name %></td>
-                        <td class="text-right"><%= milestone.addedDateString %></td>
-                    </tr>
-                    <% }); %>
-                </tbody>
-            </table>
-        <% } %>        
+        <table class="card-table table">
+            <thead>
+                <tr>
+                    <th class="d-none d-lg-block text-center" scope="col">#</th>
+                    <th scope="col">Description</th>
+                    <th class="d-none d-lg-block" scope="col">Added by</th>
+                    <th class="text-right" scope="col">Added on</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% project.milestones.forEach( function(milestone, index) { %>
+                <tr>
+                    <th class="d-none d-lg-block text-center" scope="row"><%= project.milestones.length - index %>
+                    </th>
+                    <td><%= milestone.desc %></td>
+                    <td class="d-none d-lg-block"><%= (milestone._dev == null)? '[deleted]': milestone._dev.name %></td>
+                    <td class="text-right"><%= milestone.addedDateString %></td>
+                </tr>
+                <% }); %>
+            </tbody>
+        </table>
+        <% } %>
     </div>
     <% }); %>
 

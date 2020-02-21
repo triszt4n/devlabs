@@ -8,7 +8,7 @@ module.exports = function (objectRepository) {
         }
 
         if (req.body.email === "" || req.body.pw === "") {
-            req.session.message = "Please fill in all queries.";
+            req.session.message = "Please fill in all required queries.";
             return res.redirect("/");
         }
 

@@ -30,15 +30,16 @@ module.exports = function (objectRepository) {
         var project = new ProjectModel();
 
         let startDateMoment = moment(req.body.startDate);
-        if (typeof req.body.isEnded !== 'undefined' && req.body.isEnded) {
+        if ((typeof req.body.isEnded !== 'undefined') && (req.body.isEnded == "on")) {
             let endDateMoment = moment(req.body.endDate);
             project.endDate = (startDateMoment.isValid() && req.body.endDate !== "")? endDateMoment.toDate() : new Date();
         }
         project.startDate = (startDateMoment.isValid() && req.body.startDate !== "")? startDateMoment.toDate() : new Date();
         project.title = req.body.title;
         project.desc = req.body.desc;
+        project.githubRepoPath = req.body.githubRepoPath;
         project.reward = (req.body.reward === "")? 0 : parseFloat(req.body.reward);
-        project.isSuccess = (typeof req.body.isSuccess === 'undefined' || req.body.isSuccess === false)? false : true;
+        project.isSuccess = ((typeof req.body.isSuccess !== 'undefined') && (req.body.isSuccess == "on"));
         project._owner = req.session.userID;
 
         project.save((err, result) => {

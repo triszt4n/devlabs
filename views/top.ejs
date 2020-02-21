@@ -7,7 +7,7 @@
             <h2 style="margin: 1em 0 0.5em 0;">Top 3 Projects</h2>
             <p>Introducing the three most rewarding successful Projects.</p>
             <% if (tops.length === 0) { %>
-                <h5 class="text-muted" style="margin: 2em 0 1em 0;">Nothing to find here yet</h5>
+            <h5 class="text-muted" style="margin: 2em 0 1em 0;">Nothing to find here yet</h5>
             <% } %>
         </div>
     </div>
@@ -24,27 +24,39 @@
                             <%= project.title %>
                         </div>
                         <div class="col-1 col-lg-1 order-lg-last text-right">
-                            <a href="/projects/<%= project.projID %>" class="btn btn-info btn-sm">
+                            <a href="/projects/<%= project._id %>" class="btn btn-info btn-sm">
                                 <ion-icon name="search" style="font-size: 12px;"></ion-icon>
                             </a>
                         </div>
+
+                        <% if (typeof project._owner === 'undefined') { %>
                         <div class="col-6 col-lg-3">
-                            <ion-icon name="shield-checkmark-outline"></ion-icon>&nbsp;<%= project.ownerName %>
+                            <ion-icon name="archive-outline"></ion-icon>
+                            <span class="text-muted">Archived</span>
                         </div>
+                        <% } else { %>
+                        <div class="col-6 col-lg-3">
+                            <ion-icon name="shield-checkmark-outline"></ion-icon>&nbsp;<%= project._owner.name %>
+                        </div>
+                        <% } %>
+
                         <div class="col-6 col-lg-3 text-lg-right">
-                            <ion-icon name="cash-outline"></ion-icon>&nbsp;<%= project.reward %>
+                            <ion-icon name="cash-outline"></ion-icon>&nbsp;$<%= project.reward %>
                         </div>
                     </div>
-                    <div class="row p-3">
+                    <div class="row p-1">
                         <div class="col-12 col-lg-5">
-                            <ion-icon name="calendar-outline"></ion-icon>&nbsp;<%= project.startDate %> -
-                            <%= project.endDate %>
+                            <ion-icon name="calendar-outline"></ion-icon>&nbsp;<%= project.startDateString %> -
+                            <%= project.endDateString %>
                         </div>
                         <div class="col-6 col-lg-3">
                             <ion-icon name="timer-outline"></ion-icon>&nbsp;<%= project.runTime %>
                         </div>
                         <div class="col-6 col-lg-3 text-lg-right">
-                            #<ion-icon name="people-outline"></ion-icon>:&nbsp;<%= project.numOfDevs %>
+                            <ion-icon name="git-branch-outline"></ion-icon>
+                            <a href="https://github.com/<%= project.githubRepoPath %>" target="_blank">
+                                <%= project.githubRepoPath %>
+                            </a>
                         </div>
                     </div>
                 </td>

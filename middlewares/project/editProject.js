@@ -21,18 +21,20 @@ module.exports = function (objectRepository) {
         if (startDateMoment.isValid())
             project.startDate = startDateMoment.toDate();
 
-        if (req.body.isEnded) {
+        project.endDate = undefined;
+        if ((typeof req.body.isEnded !== 'undefined') && (req.body.isEnded == "on")) {
             let endDateMoment = moment(req.body.endDate);
             if (endDateMoment.isValid())
                 project.endDate = endDateMoment.toDate();
             else
                 project.endDate = (typeof res.locals.endDate !== 'undefined') ? res.locals.endDate : new Date();
 
-            project.isSuccess = req.body.isSuccess;
+            project.isSuccess = ((typeof req.body.isSuccess !== 'undefined') && (req.body.isSuccess == "on"));
         }
         if (req.body.title !== "")
             project.title = req.body.title;
         project.desc = req.body.desc;
+        project.githubRepoPath = req.body.githubRepoPath;
         project.reward = (req.body.reward === "")? 0 : parseFloat(req.body.reward);
 
         project.save((err, result) => {

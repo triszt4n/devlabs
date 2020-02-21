@@ -8,8 +8,13 @@ module.exports = function (objectRepository) {
             return next();
         }
 
-        if (req.body.email === "" || req.body.pw === "") {
-            req.session.message = "Please fill in all queries.";
+        if (req.body.email === "" || req.body.pw === "" || req.body.repeatpw === "") {
+            req.session.message = "Please fill in all required queries.";
+            return res.redirect("/register");
+        }
+
+        if (req.body.pw !== req.body.repeatpw) {
+            req.session.message = "Passwords not identical.";
             return res.redirect("/register");
         }
 

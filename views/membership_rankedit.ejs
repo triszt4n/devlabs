@@ -12,11 +12,7 @@
     <div class="row justify-content-center">
         <div class="col-lg-6">
             <form method="POST">
-                <% if (typeof message !== 'undefined') { %>
-                <p style="color: red;">
-                    <%= message %>
-                </p>
-                <% } %>
+                <%- include('includes/message', {message: message, messageColor: messageColor}) %>
                 <div class="form-group">
                     <label for="name">Member's name</label>
                     <input readonly type="text" class="form-control" id="name" name="name"

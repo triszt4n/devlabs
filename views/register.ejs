@@ -12,11 +12,7 @@
     <div class="row justify-content-center">
         <div class="col-lg-6">
             <form method="POST">
-                <% if (typeof message !== 'undefined') { %>
-                    <p style="color: red;">
-                        <%= message %>
-                    </p>
-                <% } %>
+                <%- include('includes/message', {message: message, messageColor: messageColor}) %>
                 <div class="form-group">
                     <label for="email">Email address*</label>
                     <input type="text" class="form-control" id="email" name="email">
@@ -31,16 +27,27 @@
                         *required
                     </small>
                 </div>
+                <div class="form-group">
+                    <label for="repeatpw">Repeat password*</label>
+                    <input type="password" class="form-control" id="repeatpw" name="repeatpw">
+                    <small id="repeatpw" class="form-text text-muted">
+                        *required
+                    </small>
+                </div>
                 <p style="margin: 2em 0 0.5em 0;">
                     Optional data:
                 </p>
                 <div class="form-group">
-                    <label for="name">Name:</label>
+                    <label for="name">Name</label>
                     <input type="text" class="form-control" id="name" name="name">
                 </div>
                 <div class="form-group">
-                    <label for="phone">Phone number:</label>
+                    <label for="phone">Phone number</label>
                     <input type="text" class="form-control" id="phone" name="phone">
+                </div>
+                <div class="form-group">
+                    <label for="githubUsername">Github username</label>
+                    <input type="text" class="form-control" id="githubUsername" name="githubUsername">
                 </div>
                 <button type="submit" style="float: right;" class="btn btn-success">
                     <ion-icon name="checkmark-outline"></ion-icon>&nbsp;Register

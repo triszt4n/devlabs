@@ -12,6 +12,7 @@ module.exports = function (objectRepository) {
         dev.email = req.body.email;
         dev.name = (req.body.name !== "")? req.body.name : req.body.email.split("@")[0];
         dev.phone = req.body.phone;
+        dev.githubUsername = req.body.githubUsername;
 
         dev.save((err) => {
             if (err) {
