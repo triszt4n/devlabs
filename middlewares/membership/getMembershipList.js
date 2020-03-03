@@ -1,5 +1,5 @@
 /**
- * returns all of the memberships of the developer in a list.
+ * Returns all of the memberships of the developer in a list.
  */
 const requireOption = require('../default/requireOption');
 const async = require('async');

@@ -1,5 +1,5 @@
 /**
- * checks, if changing pw with passed data is possible.
+ * Checks, if data posted is valid for changing the password.
  */
 module.exports = function (objectRepository) {
     return function (req, res, next) {

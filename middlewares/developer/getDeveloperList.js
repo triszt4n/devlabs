@@ -1,6 +1,6 @@
 /**
- * return the developers as list of objects including all attributes
- * (needed by /devs)
+ * Return the developers as list of objects including all attributes
+ * (needed by /developers)
  */
 const requireOption = require('../default/requireOption');
 

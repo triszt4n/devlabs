@@ -1,5 +1,5 @@
 /**
- * when deleting account, must change every milestone's devID to null, and
+ * When deleting account, must change every milestone's devID to null, and
  * delete every membership from db (frontend will show milestones with [deleted]).
  */
 const async = require('async');

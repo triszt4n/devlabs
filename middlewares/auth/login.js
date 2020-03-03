@@ -1,5 +1,5 @@
 /**
- * completes login with starting session, saving userID into session.
+ * Completes login with starting session, saving userID into session, and
  * finally redirect to /
  */
 module.exports = function (objectRepository) {

@@ -1,5 +1,5 @@
 /**
- * DESC
+ * Executes joining a new member to the project.
  */
 const requireOption = require('../default/requireOption');
 

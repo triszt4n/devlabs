@@ -1,9 +1,7 @@
 /**
- * create a new sprint with given data from body
- * if no data passed from body, move on.
+ * Execute creation of a new project with posted data, if no data in body, move on.
  * (note: if title not specified, Untitled is default,
- * if reward not specified, 0.00 is default,
- * dates may be NULL)
+ * if reward not specified, 0.00 is default)
  */
 const moment = require('moment');
 const requireOption = require('../default/requireOption');

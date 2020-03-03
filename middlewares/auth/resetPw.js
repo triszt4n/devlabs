@@ -1,5 +1,5 @@
 /**
- * change user's password in db to a 10-character random key, "send it to them".
+ * Change user's password in db to a 10-character random key, "send it to them", and
  * finally redirect to /
  */
 module.exports = function (objectRepository) {

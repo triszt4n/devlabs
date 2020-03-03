@@ -1,6 +1,5 @@
 /**
- * completes registration of developer/Dev with data passed by posting,
- * and redirect to /
+ * Completes registration of developer/user with data posted, and redirect to /
  */
 const requireOption = require('../default/requireOption');
 

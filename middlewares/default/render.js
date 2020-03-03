@@ -1,6 +1,6 @@
 /**
- * render the required html embedding items
- * (note: pass data from session like: message, userID, showAll, activeBase)
+ * Render with template engine.
+ * (note: session contains transmittable data like: message, userID, showAll, activeBase)
  */
 module.exports = function (objectRepository, viewName) {
     return (req, res) => {

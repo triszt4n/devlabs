@@ -1,6 +1,5 @@
 /**
- * delete task with taskID from db
- * redirect to /sprints/:sprintID in the end
+ * Delete milestone from db, redirect to /projects/:projID in the end.
  */
 module.exports = function (objectRepository) {
     return function (req, res, next) {

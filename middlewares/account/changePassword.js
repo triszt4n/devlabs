@@ -1,6 +1,6 @@
 /**
- * changes developer's password to the body.newpass1,
- * then redirect to /
+ * Post method
+ * Changes user/developer's password in db.
  */
 module.exports = function (objectRepository) {
     return function (req, res, next) {

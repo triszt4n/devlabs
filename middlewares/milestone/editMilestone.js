@@ -1,6 +1,5 @@
 /**
- * edit task's attribute with given data from body
- * if no data passed from body, move on.
+ * Execute edits of milestone's attributes with data posted. If no data in body, move on.
  */
 module.exports = function (objectRepository) {
     return function (req, res, next) {

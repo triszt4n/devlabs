@@ -1,5 +1,5 @@
 /**
- * if not logged in - according to session -, redirects to login page
+ * If not logged in - according to session -, redirects to login page
  */
 module.exports = function (objectRepository) {
     return function (req, res, next) {

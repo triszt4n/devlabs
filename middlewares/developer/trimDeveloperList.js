@@ -1,6 +1,6 @@
 /**
- * returns the developers from list of res.locals.devs which cannot be found in
- * res.locals.project.members already.
+ * Returns the developers from list of res.locals.devs which cannot be found in
+ * res.locals.project.members already. (trims down the ones in it already)
  */
 module.exports = function (objectRepository) {
     return function (req, res, next) {

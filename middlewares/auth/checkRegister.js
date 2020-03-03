@@ -1,5 +1,5 @@
 /**
- * checks, if registering is possible with the data passed. redirects with error
+ * Checks, if registering is possible with the data posted. Redirects back with error
  * message if there's problem.
  */
 module.exports = function (objectRepository) {

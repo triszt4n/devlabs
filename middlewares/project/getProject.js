@@ -1,5 +1,5 @@
 /**
- * get sprint's attributes from db with sprintID
+ * Return the project's attributes from db.
  */
 const moment = require('moment');
 const requireOption = require('../default/requireOption');

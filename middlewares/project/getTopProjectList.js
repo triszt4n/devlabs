@@ -1,7 +1,5 @@
 /**
- * return the 3 most rewarding and successful projects as list of objects including
- * title, number of developers engaged in sprint, reward, sprintID
- * (needed by /projects)
+ * Return the 3 most rewarding and successful projects as list of objects including all attributes.
  */
 const moment = require('moment');
 const requireOption = require("../default/requireOption");

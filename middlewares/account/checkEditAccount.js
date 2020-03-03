@@ -1,5 +1,5 @@
 /**
- * checks, if editing the data of account is possible
+ * Checks, if submitted data is valid for the purpose.
  */
 module.exports = function (objectRepository) {
     return function (req, res, next) {

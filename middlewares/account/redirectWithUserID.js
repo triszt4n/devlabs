@@ -1,5 +1,5 @@
 /**
- * to see user's developer details, redirect with the session's userID to
+ * Arbitrary middleware to see user/developer's details. Redirect with the session's userID to
  * the developers/:devID.
  */
 module.exports = function (objectRepository) {

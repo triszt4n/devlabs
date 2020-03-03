@@ -1,5 +1,5 @@
 /**
- * DESC
+ * Executes sacking a member from the project by deleting its membership.
  */
 module.exports = function (objectRepository) {
     return function (req, res, next) {

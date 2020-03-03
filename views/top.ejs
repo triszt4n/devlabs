@@ -52,12 +52,14 @@
                         <div class="col-6 col-lg-3">
                             <ion-icon name="timer-outline"></ion-icon>&nbsp;<%= project.runTime %>
                         </div>
-                        <div class="col-6 col-lg-3 text-lg-right">
-                            <ion-icon name="git-branch-outline"></ion-icon>
-                            <a href="https://github.com/<%= project.githubRepoPath %>" target="_blank">
-                                <%= project.githubRepoPath %>
-                            </a>
-                        </div>
+                        <% if (project.githubRepoPath != "") { %>
+                            <div class="col-6 col-lg-3 text-lg-right">
+                                <ion-icon name="git-branch-outline"></ion-icon>
+                                <a href="https://github.com/<%= project.githubRepoPath %>" target="_blank">
+                                    <%= project.githubRepoPath %>
+                                </a>
+                            </div>
+                        <% } %>                        
                     </div>
                 </td>
             </tr>

@@ -1,5 +1,6 @@
 /**
- * DESC
+ * Deletes the owner attribute of project so that noone can change project anymore.
+ * This actions translates down to "archiving" the project.
  */
 module.exports = function (objectRepository) {
     return function (req, res, next) {

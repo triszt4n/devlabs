@@ -1,5 +1,5 @@
 /**
- * return the projects' attributes as list of objects including all attributes
+ * Return the projects' attributes as list of objects including all attributes.
  */
 const requireOption = require('../default/requireOption');
 const async = require('async');

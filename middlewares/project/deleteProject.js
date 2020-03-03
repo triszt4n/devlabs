@@ -1,7 +1,6 @@
 /**
- * delete sprint with sprintID from db
- * call deleteTaskMW(taskID) for every taskID in res.locals.taskList,
- * redirect to /sprints in the end
+ * Delete project from db, plus execute deletion of milestones, memberships, and
+ * finally redirect to /projects in the end.
  */
 const async = require('async');
 

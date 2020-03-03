@@ -1,6 +1,5 @@
 /**
- * create a new task in db from given data from body
- * if no data passed from body, move on.
+ * Execute creation of milestone with data posted, if no data in body, move on.
  */
 const requireOption = require('../default/requireOption');
 

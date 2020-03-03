@@ -1,6 +1,6 @@
 /**
- * edit account with passed data, then redirect to /account.
- * if problem occurs, pass a message to session.
+ * Execute edits of account with passed data, then redirect to /account.
+ * If problem occurs, pass a message to session.
  */
 module.exports = function (objectRepository) {
     return function (req, res, next) {

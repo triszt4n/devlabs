@@ -1,6 +1,5 @@
 /**
- * return the developer's (by given devID) all tasks as list of objects (taskList)
- * each object contains taskID and title of sprint 
+ * Return the developer's all milestones as list of objects.
  */
 const requireOption = require('../default/requireOption');
 const moment = require('moment');

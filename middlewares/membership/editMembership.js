@@ -1,5 +1,5 @@
 /**
- * edit membership's rank attribute
+ * Only used for executing the edit of membership's rank attribute.
  */
 module.exports = function (objectRepository) {
     return function (req, res, next) {

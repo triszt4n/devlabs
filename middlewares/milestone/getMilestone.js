@@ -1,5 +1,5 @@
 /**
- * get task from db with taskID
+ * Get milestone and its attributes from db with msID.
  */
 const requireOption = require('../default/requireOption');
 const moment = require('moment');

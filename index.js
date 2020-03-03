@@ -42,7 +42,7 @@ app.get('*', (req, res) => {
     return res.status(400).redirect("/error");
 });
 
-const port = 3000;
+const port = 3200;
 app.listen(port, () => {
     console.log(`Listening on: http://localhost:${port}/`);
 });

@@ -1,6 +1,5 @@
 /**
- * return developer's attributes
- * get email from body, if not found, move on.
+ * Return developer's attributes. Gets email from body, if not found, moves on.
  */
 const requireOption = require('../default/requireOption');
 

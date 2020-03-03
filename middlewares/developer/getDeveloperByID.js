@@ -1,6 +1,5 @@
 /**
- * return developer's attributes
- * get ID from req.query, else move on.
+ * Return developer's attributes. Gets ID from req.query, else moves on.
  */
 const requireOption = require('../default/requireOption');
 

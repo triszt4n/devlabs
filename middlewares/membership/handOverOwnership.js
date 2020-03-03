@@ -1,5 +1,5 @@
 /**
- * edit membership's rank attribute
+ * Overwrites owner of the project to the developer posted.
  */
 module.exports = function (objectRepository) {
     return function (req, res, next) {

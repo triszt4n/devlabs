@@ -1,5 +1,5 @@
 /**
- * checks the login credentials, redirects with errormessage if there's problem.
+ * Checks the login credentials posted, redirects back with errormessage if there's problem.
  */
 module.exports = function (objectRepository) {
     return function (req, res, next) {

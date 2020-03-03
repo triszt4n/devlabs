@@ -1,5 +1,5 @@
 /**
- * ends session and redirects to login screen.
+ * Ends session and redirects to login screen.
  */
 module.exports = function (objectRepository) {
 

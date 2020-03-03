@@ -1,5 +1,5 @@
 /**
- * returns the attributes of the membership with memshipID
+ * Returns the attributes of the membership.
  */
 const requireOption = require('../default/requireOption');
 

@@ -1,5 +1,5 @@
 /**
- * returns all of the members of the project in a list.
+ * Returns all of the members of the project in a list.
  */
 const requireOption = require('../default/requireOption');
 const moment = require('moment');
