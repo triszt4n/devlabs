@@ -1,6 +1,6 @@
 {
   "name": "devlabs",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "DevLabs: Administration site for project management.",
   "main": "index.js",
   "scripts": {

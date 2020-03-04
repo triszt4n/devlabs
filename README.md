@@ -21,3 +21,8 @@ or
 ```bash
 node ./index.js
 ```
+
+## Notes
+The webapp right now does NOT handle unauthorized requests (it lets them all in).
+E.g.: anybody can delete a project only by knowing the id of a project, anybody could post
+a milestone to a foreign project just by knowing the id. Only developers are protected in this sense.

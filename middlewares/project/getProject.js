@@ -16,7 +16,6 @@ module.exports = function (objectRepository) {
             if (err) {
                 return next(err);
             }
-            console.log("es", result);
 
             if (result === null) {
                 console.log("Can't find project by ID.");
