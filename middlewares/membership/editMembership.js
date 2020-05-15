@@ -1,6 +1,8 @@
 /**
  * Only used for executing the edit of membership's rank attribute.
  */
+const { MEMSHIP_MESSAGES } = require("../../utilities/constants");
+
 module.exports = function (objectRepository) {
     return function (req, res, next) {
         //GET branch:
@@ -14,7 +16,7 @@ module.exports = function (objectRepository) {
         membership.save((err) => {
             if (err) {
                 console.log(err);
-                req.session.message = "Error occured while applying changes to Member's details. Try again.";
+                req.session.message = MEMSHIP_MESSAGES.editSaveError;
                 return res.redirect(`/projects/rankedit/${membership._id}`);
             }
             return res.redirect(`/projects/${membership._proj._id}`);

@@ -1,6 +1,8 @@
 /**
  * Execute edits of milestone's attributes with data posted. If no data in body, move on.
  */
+const { DEFAULT_MESSAGES } = require("../../utilities/constants");
+
 module.exports = function (objectRepository) {
     return function (req, res, next) {
         //GET branch:
@@ -15,7 +17,7 @@ module.exports = function (objectRepository) {
 
         milestone.save((err) => {
             if (err) {
-                req.session.message = "An error occured while applying changes. Try again.";
+                req.session.message = DEFAULT_MESSAGES.saveError;
                 console.log(err);
                 return res.redirect(`/milestone/edit/${req.params.msID}`);
             }

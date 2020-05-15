@@ -4,6 +4,7 @@
  * if reward not specified, 0.00 is default)
  */
 const moment = require('moment');
+const { DEFAULT_MESSAGES } = require("../../utilities/constants");
 
 module.exports = function (objectRepository) {
     return function (req, res, next) {
@@ -37,7 +38,7 @@ module.exports = function (objectRepository) {
 
         project.save((err, result) => {
             if (err) {
-                req.session.message = "An error occured while applying changes. Try again.";
+                req.session.message = DEFAULT_MESSAGES.saveError;
                 console.log(err);
                 return res.redirect(`/projects/edit/${req.params.projID}`);
             }

@@ -2,6 +2,7 @@
  * Return developer's attributes. Gets ID from req.query, else moves on.
  */
 const requireOption = require('../default/requireOption');
+const { DEFAULT_MESSAGES } = require("../../utilities/constants");
 
 module.exports = function (objectRepository) {
     return function (req, res, next) {
@@ -16,8 +17,7 @@ module.exports = function (objectRepository) {
             }
 
             if (result === null) {
-                console.log("Developer not found.");
-                req.session.message = "The page you're looking for is not found.";
+                req.session.message = DEFAULT_MESSAGES.pageNotFoundError;
                 return res.redirect("/error");
             }
 

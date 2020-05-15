@@ -2,6 +2,7 @@
  * Execute creation of milestone with data posted, if no data in body, move on.
  */
 const requireOption = require('../default/requireOption');
+const { MILESTONE_MESSAGES } = require("../../utilities/constants");
 
 module.exports = function (objectRepository) {
     return function (req, res, next) {
@@ -21,7 +22,7 @@ module.exports = function (objectRepository) {
 
         milestone.save((err) => {
             if (err) {
-                req.session.message = "An error occured while creating milestone. Try again.";
+                req.session.message = MILESTONE_MESSAGES.newSaveError;
                 console.log(err);
                 return res.redirect(`/milestone/new/${req.params.projID}`);
             }

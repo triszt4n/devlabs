@@ -3,6 +3,7 @@
  */
 const moment = require('moment');
 const requireOption = require('../default/requireOption');
+const { DEFAULT_MESSAGES } = require("../../utilities/constants");
 
 module.exports = function (objectRepository) {
 
@@ -19,7 +20,7 @@ module.exports = function (objectRepository) {
 
             if (result === null) {
                 console.log("Can't find project by ID.");
-                req.session.message = "The page you're looking for is not found.";
+                req.session.message = DEFAULT_MESSAGES.pageNotFoundError;
                 return res.redirect("/error");
             }
 

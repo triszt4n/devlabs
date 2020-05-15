@@ -1,6 +1,8 @@
 /**
  * Checks the login credentials posted, redirects back with errormessage if there's problem.
  */
+const { DEFAULT_MESSAGES, ACCOUNT_MESSAGES } = require("../../utilities/constants");
+
 module.exports = function (objectRepository) {
     return function (req, res, next) {
         if (req.method === "GET") {
@@ -8,22 +10,22 @@ module.exports = function (objectRepository) {
         }
 
         if (req.body.email === "" || req.body.pw === "") {
-            req.session.message = "Please fill in all required queries.";
+            req.session.message = DEFAULT_MESSAGES.emptyForm;
             return res.redirect("/");
         }
 
         if (res.locals.dev === null) {
-            req.session.message = "No developer registered under this email address.";
+            req.session.message = ACCOUNT_MESSAGES.login.cantFindError;
             return res.redirect("/");
         }
 
         if (res.locals.dev.pw !== req.body.pw) {
-            req.session.message = "Wrong email address and password combination.";
+            req.session.message = ACCOUNT_MESSAGES.login.matchError;
             return res.redirect("/");
         }
 
         if (req.body.email.match(/^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$/g) === null) {
-            req.session.message = "Not an email address.";
+            req.session.message = ACCOUNT_MESSAGES.email.invalidError;
             return res.redirect("/");
         }
 

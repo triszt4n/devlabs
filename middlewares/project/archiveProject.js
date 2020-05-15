@@ -2,6 +2,8 @@
  * Deletes the owner attribute of project so that noone can change project anymore.
  * This action translates down to "archiving" the project.
  */
+const { DEFAULT_MESSAGES } = require("../../utilities/constants");
+
 module.exports = function (objectRepository) {
     return function (req, res, next) {
         var project = res.locals.project;
@@ -14,7 +16,7 @@ module.exports = function (objectRepository) {
 
         project.save((err, result) => {
             if (err) {
-                req.session.message = "An error occured while archiving. Try again.";
+                req.session.message = DEFAULT_MESSAGES.saveError;
                 console.log(err);
                 return res.redirect(`/projects/${project._id}`);
             }

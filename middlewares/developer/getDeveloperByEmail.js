@@ -15,7 +15,6 @@ module.exports = function (objectRepository) {
             email: req.body.email
         }, (err, result) => {
             if (err) {
-                console.log(err);
                 return next(err);
             }
             

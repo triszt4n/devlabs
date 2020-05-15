@@ -2,6 +2,7 @@
  * Completes registration of developer/user with data posted, and redirect to /
  */
 const requireOption = require('../default/requireOption');
+const { DEFAULT_MESSAGES, ACCOUNT_MESSAGES } = require("../../utilities/constants");
 
 module.exports = function (objectRepository) {
     return function (req, res, next) {
@@ -21,12 +22,12 @@ module.exports = function (objectRepository) {
 
         dev.save((err) => {
             if (err) {
-                req.session.message = "Error occured in our server while registering.";
+                req.session.message = DEFAULT_MESSAGES.dbError;
                 console.log(err);
                 return res.redirect("/register");
             }
-            req.session.message = "Account successfully created.";
-            req.session.messageColor = "green";
+            req.session.message = ACCOUNT_MESSAGES.account.registerSuccess;
+            req.session.messageColor = "#00bc8c";
             return res.redirect("/");
         });
     };

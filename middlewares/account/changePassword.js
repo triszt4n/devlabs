@@ -2,6 +2,8 @@
  * Post method
  * Changes user/developer's password in db.
  */
+const { DEFAULT_MESSAGES } = require("../../utilities/constants");
+
 module.exports = function (objectRepository) {
     return function (req, res, next) {
         if (req.method === "GET") {
@@ -14,7 +16,7 @@ module.exports = function (objectRepository) {
         dev.save((err) => {
             if (err) {
                 console.error(err);
-                req.session.message = "An error occured in our database. Try again.";
+                req.session.message = DEFAULT_MESSAGES.dbError;
                 return res.redirect("/account/pw");
             }
 

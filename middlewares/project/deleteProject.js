@@ -3,6 +3,7 @@
  * finally redirect to /projects in the end.
  */
 const async = require('async');
+const { DEFAULT_MESSAGES } = require("../../utilities/constants");
 
 module.exports = function (objectRepository) {
     return function (req, res, next) {
@@ -58,7 +59,7 @@ module.exports = function (objectRepository) {
         ], (err) => {
             if (err) {
                 console.log(err);
-                req.session.message = "Error occured while deleting project.";
+                req.session.message = DEFAULT_MESSAGES.saveError;
                 return res.redirect(`/error`);
             }
             return res.redirect(`/`);

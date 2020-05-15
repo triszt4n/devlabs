@@ -2,6 +2,8 @@
  * Change user's password in db to a 10-character random key, "send it to them", and
  * finally redirect to /
  */
+const { DEFAULT_MESSAGES, ACCOUNT_MESSAGES } = require("../../utilities/constants");
+
 module.exports = function (objectRepository) {
     return function (req, res, next) {
         if (req.method === "GET") {
@@ -10,7 +12,7 @@ module.exports = function (objectRepository) {
 
         let dev = res.locals.dev;
         if (dev === null) {
-            req.session.message = "Account does not exist.";
+            req.session.message = ACCOUNT_MESSAGES.login.cantFindError;
             return res.redirect("/forgotten");
         }
 
@@ -19,7 +21,7 @@ module.exports = function (objectRepository) {
         dev.save((err) => {
             if (err) {
                 console.error(err);
-                req.session.message = "An error occured in our database. Try again.";
+                req.session.message = DEFAULT_MESSAGES.dbError;
                 return res.redirect("/forgotten");
             }
 

@@ -10,7 +10,6 @@ module.exports = function (objectRepository) {
 
         DeveloperModel.find({}, (err, result) => {
             if (err) {
-                console.log(err);
                 return next(err);
             }
 
