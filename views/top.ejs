@@ -3,11 +3,11 @@
 
 <div class="container">
     <div class="row">
-        <div class="col-12 text-center" style="margin: 0 0 2em 0;">
-            <h2 style="margin: 1em 0 0.5em 0;">Top 3 Projects</h2>
+        <div class="col-12 text-center">
+            <h2 class="my-5">Top 3 Projects</h2>
             <p>Introducing the three most rewarding successful Projects.</p>
             <% if (tops.length === 0) { %>
-            <h5 class="text-muted" style="margin: 2em 0 1em 0;">Nothing to find here yet</h5>
+            <h5 class="text-muted" class="my-5">Nothing to find here yet</h5>
             <% } %>
         </div>
     </div>
@@ -19,14 +19,9 @@
             <tr>
                 <td>
                     <div class="row p-1">
-                        <div class="col-11 col-lg-5">
+                        <div onclick="window.location.href = '/projects/<%= project._id %>';" class="h4 col-10 col-lg-6 clickable">
                             <ion-icon name="trophy" style="color: <%= trophyColors[index] %>;"></ion-icon>&nbsp;
                             <%= project.title %>
-                        </div>
-                        <div class="col-1 col-lg-1 order-lg-last text-right">
-                            <a href="/projects/<%= project._id %>" class="btn btn-info btn-sm">
-                                <ion-icon name="search" style="font-size: 12px;"></ion-icon>
-                            </a>
                         </div>
 
                         <% if (typeof project._owner === 'undefined') { %>
@@ -45,7 +40,7 @@
                         </div>
                     </div>
                     <div class="row p-1">
-                        <div class="col-12 col-lg-5">
+                        <div class="col-12 col-lg-6">
                             <ion-icon name="calendar-outline"></ion-icon>&nbsp;<%= project.startDateString %> -
                             <%= project.endDateString %>
                         </div>

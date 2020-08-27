@@ -4,30 +4,26 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-12 text-center">
-            <h2 style="margin: 1em 0 0.5em 0;">
+            <h2 class="mt-5 mb-4">
                 Projects
             </h2>
         </div>
     </div>
 
     <% projects.forEach( function(project) { %>
-    <div class="card" style="margin-bottom: 20px;">
+    <div class="card mb-3">
         <div class="card-header">
-            <div style="float: right; padding-left: 3px;">
-                <a href="/projects/<%= project._id %>" class="btn btn-info">
-                    <ion-icon name="search-outline"></ion-icon>
-                </a>
+            <div onclick="window.location.href = '/projects/<%= project._id %>';" class="card-title clickable">
+                <h4>
+                    <%= project.title %>
+                </h4>
             </div>
-            <div class="card-title">
-                <%= project.title %>
-                <% if ((typeof project.githubRepoPath !== 'undefined') && (project.githubRepoPath !== "")) { %>
-                <br />
+            <% if ((typeof project.githubRepoPath !== 'undefined') && (project.githubRepoPath !== "")) { %>
                 <ion-icon name="git-branch-outline"></ion-icon>
                 <a href="https://github.com/<%= project.githubRepoPath %>" target="_blank">
                     <%= project.githubRepoPath %>
                 </a>
-                <% } %>
-            </div>
+            <% } %>
         </div>
 
         <%# Details of project %>
@@ -60,7 +56,7 @@
                     <ion-icon name="close-outline"></ion-icon>&nbsp;Failed
                     <% }} %>
                 </div>
-                <div class="col-12" style="margin-top: 10px;">
+                <div class="col-12 mb-2">
                     Milestones: (<%= project.milestones.length %>)
                 </div>
             </div>
@@ -93,7 +89,7 @@
     </div>
     <% }); %>
 
-    <div class="row justify-content-center" style="margin: 1rem 0 1rem 0;">
+    <div class="row justify-content-center my-3">
         <a href="/projects/new" class="col-lg-6 text-center btn btn-primary btn-block">
             <ion-icon name="add-outline"></ion-icon>&nbsp;Start Project
         </a>

@@ -4,7 +4,7 @@
 <div class="container">
     <div class="row">
         <div class="col-12 text-center">
-            <h2 style="margin: 1em 0 1em 0;">Project management</h2>
+            <h2 class="my-5">Project management</h2>
         </div>
     </div>
 
@@ -13,7 +13,7 @@
         <div class="col-12">
             <h4>
                 <% if (iAmOwner) { %>
-                <div style="float: right; padding-left: 3px;">
+                <div style="float: right;" class="pl-2">
                     <button class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
                         <ion-icon name="options-outline"></ion-icon>
                     </button>
@@ -37,7 +37,7 @@
     </div>
 
     <%# Main details of project %>
-    <div class="row ml-lg-3">
+    <div class="row ml-lg-3 mt-5">
         <div class="col-12 col-lg-4">
             <% if ((typeof project.githubRepoPath !== 'undefined') && (project.githubRepoPath !== "")) { %>
             <div>
@@ -76,7 +76,7 @@
                 <% } %>
             </div>
         </div>
-        <div class="col-12 col-lg-8">
+        <div class="col-12 col-lg-8 mt-3 mt-lg-0">
             <u>Description:</u><br />
             <%= project.desc %>
             <% if (project.desc === "") { %>
@@ -88,7 +88,7 @@
     </div>
 
     <%# Members of project %>
-    <div class="card" style="margin: 20px 0 0 0">
+    <div class="card mt-5" style="overflow: auto;">
         <div class="card-header">
             <div class="card-title">
                 Members (<%= project.members.length %>)
@@ -150,16 +150,18 @@
 
         <% if (iAmOwner && (project.nonMembers.length > 0)) { %>
         <div class="card-body">
+            <label for="email" class="col-form-label-sm">
+                Invite Developer to contribute
+            </label>
             <form class="row" method="POST" action="/projects/invite/<%= project._id %>">
-                <div class="form-group col-10">
-                    <label for="email" class="col-form-label-sm">Invite Developer to contribute</label>
+                <div class="form-group col-12 col-lg-10">
                     <select class="form-control" id="email" name="devID">
                         <% project.nonMembers.forEach( function(dev) { %>
                         <option value="<%= dev._id %>"><%= dev.email %></option>
                         <% }); %>
                     </select>
                 </div>
-                <div class="col-2" style="margin-top: 36px;">
+                <div class="col-12 col-lg-2">
                     <button type="submit" class="btn btn-primary btn-block">
                         <ion-icon name="person-add-outline"></ion-icon>&nbsp;Invite
                     </button>
@@ -170,7 +172,7 @@
     </div>
 
     <%# Milestones of project %>
-    <div class="card" style="margin: 20px 0 0 0">
+    <div class="card mt-5" style="overflow: auto;">
         <div class="card-header">
             <div class="card-title">
                 Milestones (<%= project.milestones.length %>)
@@ -218,7 +220,7 @@
         <% if (project.iAmMember) { %>
         <div class="card-body">
             <div class="row justify-content-center">
-                <div class="col-10">
+                <div class="col-12 col-lg-10">
                     <a href="/milestone/new/<%= project._id %>" class="btn btn-primary btn-block">
                         <ion-icon name="golf-outline"></ion-icon>&nbsp;New Milestone
                     </a>
@@ -228,8 +230,8 @@
         <% } %>
     </div>
 
-    <a href="javascript:history.back()" class="btn btn-danger" style="margin-top: 20px;">
-        <ion-icon name="arrow-back-outline"></ion-icon>&nbsp;Back
+    <a href="/projects/" class="btn btn-danger mt-5">
+        <ion-icon name="arrow-back-outline"></ion-icon>&nbsp;Projects
     </a>
 </div>
 

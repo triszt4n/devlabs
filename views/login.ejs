@@ -4,9 +4,10 @@
 <div class="container">
     <div class="row">
         <div class="col-12 text-center">
-            <h2 style="margin: 1em 0 0.5em 0;">Welcome</h2>
-            <img src="/img/devlabs-icon.svg" style="height: 6em; margin: 0 0 1em 0;">              
+            <h2 class="my-5">Welcome</h2>
+            <img src="/img/devlabs-icon.svg" style="height: 6em;" class="mb-3">              
             <p>Enter your email address and password</p>
+
             <%- include('includes/message', {message: message, messageColor: messageColor}) %>
         </div>
     </div>
@@ -16,19 +17,17 @@
                 <div class="form-group">
                     <label for="email">Email address:</label>
                     <input class="form-control" type="text" id="email" name="email">
+                    <a href="/register">Not a member yet? Register here.</a>
                 </div>
                 <div class="form-group">
                     <label for="pw">Password:</label>
                     <input class="form-control" type="password" id="pw" name="pw">
                     <a href="/forgotten">Forgot your password?</a>
                 </div>
-                <div style="margin-top: 20px;">
-                    <button type="submit" class="btn btn-primary">
+                <div class="mt-3">
+                    <button type="submit" class="btn btn-primary" style="float: right;">
                         <ion-icon name="log-in-outline"></ion-icon>&nbsp;Log in
                     </button>
-                    <a class="btn btn-primary" style="float: right;" href="/register">
-                        <ion-icon name="person-add-outline"></ion-icon>&nbsp;Register
-                    </a>
                 </div>
             </form method="POST">
         </div>

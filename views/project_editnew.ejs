@@ -4,8 +4,8 @@
 <div class="container">
     <div class="row">
         <div class="col-12">
-            <h4 style="margin: 1em 0 0.5em 0;">
-                <%= (project.title !== "")?"Edit Project":"New Project"%>
+            <h4 class="mt-5 mb-4">
+                <%= (project.title !== "")?"Edit Project":"New Project" %>
             </h4>
             <%- include('includes/message', {message: message, messageColor: messageColor}) %>
         </div>
@@ -29,9 +29,20 @@
             <textarea class="form-control" id="desc" name="desc" rows="3"><%= project.desc %></textarea>
         </div>
 
-        <div class="row">
+        <div class="row justify-content-end">
+            <%# Checkbox for ending %>
+            <div class="form-group col-lg-6">
+                <div class="form-check pl-1">
+                    <input type="checkbox" class="magic-checkbox" id="isEnded" name="isEnded"
+                        <%= project.isEnded ? "checked" : "" %>>
+                    <label class="form-check-label" for="isEnded">Declare date of ending</label>
+                </div>
+            </div>
+        </div>
+
+        <div class="row my-3">
             <%# Input of startDateString #%>
-            <div class="form-group col-lg-6" style="margin-top: 32.5px;">
+            <div class="form-group col-lg-6">
                 <label for="startDateString">Starting date</label>
                 <input type="text" class="form-control" id="startDateString" name="startDateString" value="<%= project.startDateString %>" />
                 <small class="text-muted">Default: current date and time</small>
@@ -39,22 +50,17 @@
 
             <%# Complicated thingy %>
             <div class="form-group col-lg-6">
-                <%# First checkbox %>
-                <div class="form-check" style="margin-bottom: 10px;">
-                    <input type="checkbox" class="magic-checkbox" id="isEnded" name="isEnded"
-                        <%= project.isEnded ? "checked" : "" %>>
-                    <label class="form-check-label" for="isEnded">Declare date of ending</label>
-                </div>
+                
                 
                 <%# div for jQuery %>
-                <div id='endDateOption' style='<%= project.isEnded ? "" : "display:none;" %> margin-bottom: 10px;'>
+                <div id='endDateOption' style='<%= project.isEnded ? "" : "display:none;" %>'>
                     <label for="endDateString">Ending date</label>
                     <%# input of endDateString %>
                     <input <%= project.isEnded ? "" : "disabled='disabled'" %> type="text" class="form-control"
                         id="endDateString" name="endDateString" value="<%= project.endDateString %>">
                     
                     <%# Second checkbox %> 
-                    <div class="form-check" style="margin-top: 10px;">
+                    <div class="form-check pl-1 mt-3">
                         <input <%= project.isEnded ? "" : "disabled='disabled'" %> type="checkbox" class="magic-checkbox"
                             id="isSuccess" name="isSuccess" <%= project.isSuccess ? "checked" : "" %>>
                         <label class="form-check-label" for="isSuccess">Declare as successful Project</label>

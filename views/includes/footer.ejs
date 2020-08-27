@@ -27,5 +27,15 @@
 </script>
 <% } %>
 
+<% if (typeof userID !== 'undefined') { %>
+<script type="text/javascript">
+    function askDelete() {
+        if (confirm("Are you sure you want to delete your account on DevLabs?")) {
+            window.location.href = "/account/delete";
+        }
+    }
+</script>
+<% } %>
+
 </body>
 </html>

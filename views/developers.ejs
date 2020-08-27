@@ -4,40 +4,35 @@
 <div class="container">
     <div class="row">
         <div class="col-12 text-center">
-            <h2 style="margin: 1em 0 1em 0;">Developers</h2>
+            <h2 class="my-5">Developers</h2>
         </div>
     </div>
     <div class="card-columns">
         <% devs.forEach( function(dev, index) { %>
-        <a href="/developers/<%= dev._id %>" class="custom-card">
-            <div class="card">
-                <%# <img class="card-img-top" src="#" alt="Card image cap"> %>
-                <div class="card-body">
-                    <h4 class="card-title"><%= dev.name %></h4>
-                    <p class="card-subtitle ml-3 mb-2 text-muted">
-                        <ion-icon name="at-outline"></ion-icon>&nbsp;<%= dev.email %>
-                    </p>
-                    <% if (dev.phone !== "") { %>
-                    <p class="card-subtitle ml-3 mb-2 text-muted">
-                        <ion-icon name="call-outline"></ion-icon>&nbsp;<%= dev.phone %>
-                    </p>
-                    <% } %>
-                    <% if (dev.githubUsername !== "") { %>
-                    <p class="card-subtitle ml-3 text-muted">
-                        <ion-icon name="logo-github"></ion-icon>
-                        <a href="https://github.com/<%= dev.githubUsername %>" target="_blank">
-                            <%= dev.githubUsername %>
-                        </a>
-                    </p>
-                    <% } %>
-                    <p style="margin-top: 20px; float: right;">
-                        <a href="/developers/<%= dev._id %>" class="card-link">
-                            <ion-icon name="person"></ion-icon>&nbsp;Details
-                        </a>
-                    </p>
-                </div>
+        <div class="card">
+            <%# <img class="card-img-top" src="#" alt="Card image cap"> %>
+            <div class="card-body">
+                <h4 onclick="window.location.href = '/developers/<%= dev._id %>'" class="card-title clickable mb-3">
+                    <%= dev.name %>
+                </h4>
+                <p class="card-subtitle ml-3 mb-2 text-muted">
+                    <ion-icon name="at-outline"></ion-icon>&nbsp;<%= dev.email %>
+                </p>
+                <% if (dev.phone !== "") { %>
+                <p class="card-subtitle ml-3 mb-2 text-muted">
+                    <ion-icon name="call-outline"></ion-icon>&nbsp;<%= dev.phone %>
+                </p>
+                <% } %>
+                <% if (dev.githubUsername !== "") { %>
+                <p class="card-subtitle ml-3 text-muted">
+                    <ion-icon name="logo-github"></ion-icon>
+                    <a href="https://github.com/<%= dev.githubUsername %>" target="_blank">
+                        <%= dev.githubUsername %>
+                    </a>
+                </p>
+                <% } %>
             </div>
-        </a>
+        </div>
         <% }); %>
     </div>
 </div>

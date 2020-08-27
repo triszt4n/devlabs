@@ -4,7 +4,7 @@
 <div class="container">
     <div class="row">
         <div class="col-12 text-center">
-            <h2 style="margin: 1em 0 1em 0;">Developer's details</h2>
+            <h2 class="my-5">Developer's details</h2>
         </div>
     </div>
 
@@ -14,19 +14,19 @@
                 <%= dev.name %>
             </h2>
         </div>
-        <div style="margin-left: 20px; margin-top: 10px;" class="col-12">
-            <p style="margin: 0;">
+        <div class="col-12 pl-3 pt-2">
+            <p class="m-0">
                 Personal information:
             </p>
-            <p style="margin: 0;">
+            <p class="m-0">
                 <ion-icon name="at-outline"></ion-icon>&nbsp;<%= dev.email %>
             </p>
-            <p style="margin: 0;">
+            <p class="m-0">
                 <% if (dev.phone !== "") { %>
                 <ion-icon name="call-outline"></ion-icon>&nbsp;<%= dev.phone %>
                 <% } %>
             </p>
-            <p style="margin: 0;">
+            <p class="m-0">
                 <% if (dev.githubUsername !== "") { %>
                 <ion-icon name="logo-github" style="color: white !important;"></ion-icon>
                 <a href="https://github.com/<%= dev.githubUsername %>" target="_blank">
@@ -38,75 +38,76 @@
     </div>
 
     <% if (dev.memberships.length > 0) { %>
-    <div style="margin: 40px 0 10px 0;" class="row">
-        <div class="col-12">
+    <div style="overflow: auto;" class="row mt-4">
+        <div class="col-12 pb-2">
             Memberships:
         </div>
-    </div>
-    <table class="table">
-        <thead>
-            <tr>
-                <th class="text-center" scope="col">#</th>
-                <th scope="col">Project</th>
-                <th scope="col">Owner</th>
-                <th scope="col">Rank</th>
-                <th class="d-none d-lg-block text-right" scope="col">Joined on</th>
-                <th class="text-right" scope="col"> </th>
-            </tr>
-        </thead>
-        <tbody>
-            <% dev.memberships.forEach( function(membership, index) { %>
-            <tr>
-                <th class="text-center" scope="row"><%= dev.memberships.length - index %></th>
-                <td><%= membership._proj.title %></td>
+    
+        <table class="table">
+            <thead>
+                <tr>
+                    <th class="text-center" scope="col">#</th>
+                    <th scope="col">Project</th>
+                    <th scope="col">Owner</th>
+                    <th scope="col">Rank</th>
+                    <th class="d-none d-lg-block text-right" scope="col">Joined on</th>
+                    <th class="text-right" scope="col"> </th>
+                </tr>
+            </thead>
+            <tbody>
+                <% dev.memberships.forEach( function(membership, index) { %>
+                <tr>
+                    <th class="text-center" scope="row"><%= dev.memberships.length - index %></th>
+                    <td><%= membership._proj.title %></td>
 
-                <% if (typeof membership._proj._owner === 'undefined') { %>
-                <td class="text-muted">
-                    Archived
-                </td>
-                <% } else { %>
-                <td>
-                    <%= membership._proj._owner.name %>
-                    <% if (membership._proj._owner._id == userID) { %>
-                    <span class="badge badge-success align-top">You!</span>
-                    <% } %>
-                </td>
-                <% } %>
-
-                <td><%= membership.rank %></td>
-                <td class="d-none d-lg-block text-right"><%= membership.joinDateString %></td>
-                <td class="text-right">
-                    <button class="btn btn-primary dropdown-toggle" data-toggle="dropdown"></button>
-                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="btnGroupDrop1">
-                        <a href="/projects/<%= membership._proj._id %>" class="dropdown-item">
-                            <ion-icon name="search-outline"></ion-icon>&nbsp;View Project
-                        </a>
-                        <%# User can quit projects that they are not owner of: %>
-                        <% if ((typeof membership._proj._owner !== 'undefined') && (dev._id == userID) && (membership._proj._owner._id != userID)) { %>
-                        <div class="dropdown-divider"></div>
-                        <a href="/projects/kick/<%= membership._id %>" class="dropdown-item">
-                            <ion-icon name="walk-outline"></ion-icon>&nbsp;Quit Project
-                        </a>
+                    <% if (typeof membership._proj._owner === 'undefined') { %>
+                    <td class="text-muted">
+                        Archived
+                    </td>
+                    <% } else { %>
+                    <td>
+                        <%= membership._proj._owner.name %>
+                        <% if (membership._proj._owner._id == userID) { %>
+                        <span class="badge badge-success align-top">You!</span>
                         <% } %>
-                    </div>
-                </td>
-            </tr>
-            <% }); %>
-        </tbody>
-    </table>
+                    </td>
+                    <% } %>
+
+                    <td><%= membership.rank %></td>
+                    <td class="d-none d-lg-block text-right"><%= membership.joinDateString %></td>
+                    <td class="text-right">
+                        <button class="btn btn-primary dropdown-toggle" data-toggle="dropdown"></button>
+                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="btnGroupDrop1">
+                            <a href="/projects/<%= membership._proj._id %>" class="dropdown-item">
+                                <ion-icon name="search-outline"></ion-icon>&nbsp;View Project
+                            </a>
+                            <%# User can quit projects that they are not owner of: %>
+                            <% if ((typeof membership._proj._owner !== 'undefined') && (dev._id == userID) && (membership._proj._owner._id != userID)) { %>
+                            <div class="dropdown-divider"></div>
+                            <a href="/projects/kick/<%= membership._id %>" class="dropdown-item">
+                                <ion-icon name="walk-outline"></ion-icon>&nbsp;Quit Project
+                            </a>
+                            <% } %>
+                        </div>
+                    </td>
+                </tr>
+                <% }); %>
+            </tbody>
+        </table>
+    </div>
     <% } %>
 
     <% if (dev._id == userID) { %>
-    <div class="row justify-content-center" style="margin: 1rem 0 1rem 0;">
+    <div class="row justify-content-center my-3">
         <a href="/projects/new" class="col-12 col-lg-6 btn btn-primary btn-block">
             <ion-icon name="add-outline"></ion-icon>&nbsp;Start Project
         </a>
     </div>
     <% } %>
 
-    <div style="margin: 2rem 0 1rem 0;">
-        <a href="javascript:history.back()" class="btn btn-danger">
-            <ion-icon name="arrow-back-outline"></ion-icon>&nbsp;Back
+    <div class="mt-4 mb-3">
+        <a href="/developers" class="btn btn-danger">
+            <ion-icon name="arrow-back-outline"></ion-icon>&nbsp;Developers
         </a>
     </div>
 </div>
