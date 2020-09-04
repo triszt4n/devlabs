@@ -15,11 +15,7 @@ npm i
 
 ## Running
 ```bash
-nodemon
-```
-or
-```bash
-node ./index.js
+npm start
 ```
 
 ## Notes
